@@ -10,7 +10,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       nickname: "Specnr",
       split: "Entered Fortress",
       time: 307200,
-      uuid: "3af49e58-862d-4dd8-b61a-b45e2829a0a1"
+      uuid: "3af49e58-862d-4dd8-b61a-b45e2829a0a1",
+      twitch: "specnrd"
     }
   ] as Pace[]);
 };

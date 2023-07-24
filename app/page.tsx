@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <div className="grid h-screen place-items-center">
-      <table className="table-auto">
+      <table className="table-auto text-left w-96">
         <thead>
           <tr>
             <th colSpan={2}>Player</th>
@@ -29,6 +29,7 @@ export default function Home() {
               uuid={pace.uuid}
               time={pace.time}
               split={pace.split}
+              twitch={pace.twitch}
             />
           ))}
         </tbody>

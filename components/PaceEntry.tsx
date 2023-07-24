@@ -13,7 +13,18 @@ export default function PaceEntry(props: Pace) {
           height={24}
         />
       </td>
-      <td>{props.nickname}</td>
+      <td>
+        {
+          props.twitch ? (
+            <a
+              className="text-blue-500 hover:text-blue-700"
+              target="_blank"
+              href={`https://twitch.tv/${props.twitch}`}>
+                {props.nickname}
+            </a>
+          ) : props.nickname
+        }
+      </td>
       <td>{props.split}</td>
       <td>{msToTime(props.time)}</td>
     </tr>
