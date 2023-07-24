@@ -1,5 +1,6 @@
 "use client"
 import PaceEntry from "@/components/PaceEntry";
+import TableHeader from "@/components/TableHeader";
 import Pace from "@/components/interfaces/Pace";
 import useSWR from "swr";
 
@@ -13,12 +14,12 @@ export default function Home() {
 
   return (
     <div className="grid h-screen place-items-center">
-      <table className="table-auto text-left w-96">
-        <thead>
+      <table className="table-auto text-lg text-left w-6/12 text-gray-400">
+        <thead className="text-sm uppercase bg-gray-700 text-gray-400">
           <tr>
-            <th colSpan={2}>Player</th>
-            <th>Split</th>
-            <th>Time</th>
+            <TableHeader colSpan={2}>Player</TableHeader>
+            <TableHeader>Split</TableHeader>
+            <TableHeader>Time</TableHeader>
           </tr>
         </thead>
         <tbody>
@@ -30,6 +31,7 @@ export default function Home() {
               time={pace.time}
               split={pace.split}
               twitch={pace.twitch}
+              isLast={idx === (data.length - 1)}
             />
           ))}
         </tbody>

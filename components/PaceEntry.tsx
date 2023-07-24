@@ -2,18 +2,25 @@ import { msToTime, uuidToHead } from "@/public/functions/converters";
 import Pace from "./interfaces/Pace";
 import Image from "next/image";
 
-export default function PaceEntry(props: Pace) {
+interface Props extends Pace {
+  isLast: boolean
+}
+
+export default function PaceEntry(props: Props) {
   return (
-    <tr>
-      <td>
-        <Image
-          alt="avatar"
-          src={uuidToHead(props.uuid)}
-          width={24}
-          height={24}
-        />
+    <tr className={"bg-gray-800 border-gray-700" + (!props.isLast && " border-b")}>
+      <td
+        className="pl-6 py-4"
+        scope="row"
+        width={54}>
+          <Image
+            alt="avatar"
+            src={uuidToHead(props.uuid)}
+            width={28}
+            height={28}
+          />
       </td>
-      <td>
+      <td className="pl-2 pr-6 py-4 font-medium">
         {
           props.twitch ? (
             <a
@@ -25,8 +32,8 @@ export default function PaceEntry(props: Pace) {
           ) : props.nickname
         }
       </td>
-      <td>{props.split}</td>
-      <td>{msToTime(props.time)}</td>
+      <td className="px-6 py-4">{props.split}</td>
+      <td className="px-6 py-4">{msToTime(props.time)}</td>
     </tr>
   )
 };
