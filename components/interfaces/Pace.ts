@@ -1,6 +1,6 @@
 export default interface Pace {
   nickname: string,
-  split: string,
+  split: number,
   time: number,
   uuid: string
   twitch?: string
