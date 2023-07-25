@@ -11,7 +11,6 @@ export default function Home() {
   const { data, error, isLoading } = useSWR("/api/get-runs", fetcher);
 
   if (error) return <div>failed to load</div>
-  if (isLoading) return <div>loading...</div>
 
   return (
     <>
@@ -22,28 +21,34 @@ export default function Home() {
         </p>
       </div>
       <div className="half-height overflow-y-auto w-full md:w-6/12">
-        <table className="relative text-lg text-left text-gray-400 justify-between w-full half-height">
-          <thead className="sticky top-0 text-sm uppercase bg-gray-700 text-gray-400">
-            <tr>
-              <TableHeader colSpan={2}>Player</TableHeader>
-              <TableHeader>Split</TableHeader>
-              <TableHeader>Time</TableHeader>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((pace: Pace, idx: number) => (
-              <PaceEntry
-                key={idx}
-                nickname={pace.nickname}
-                uuid={pace.uuid}
-                time={pace.time}
-                split={pace.split}
-                twitch={pace.twitch}
-                isLast={idx === (data.length - 1)}
-              />
-            ))}
-          </tbody>
-        </table>
+        {
+          isLoading ? <div>Loading...</div> : (
+            data.length === 0 ? <div>No one is currently on pace...</div> : (
+              <table className="relative text-lg text-left text-gray-400 justify-between w-full half-height">
+                <thead className="sticky top-0 text-sm uppercase bg-gray-700 text-gray-400">
+                  <tr>
+                    <TableHeader colSpan={2}>Player</TableHeader>
+                    <TableHeader>Split</TableHeader>
+                    <TableHeader>Time</TableHeader>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.map((pace: Pace, idx: number) => (
+                    <PaceEntry
+                      key={idx}
+                      nickname={pace.nickname}
+                      uuid={pace.uuid}
+                      time={pace.time}
+                      splitName={pace.splitName}
+                      twitch={pace.twitch}
+                      isLast={idx === (data.length - 1)}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            )
+          )
+        }
       </div>
       <p className="text-xs invisible md:visible">
         Install <Link link="https://google.com">the mod</Link> on your speedrunning instances to show up here

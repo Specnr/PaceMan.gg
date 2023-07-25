@@ -28,7 +28,7 @@ export default function PaceEntry(props: Props) {
           ) : props.nickname
         }
       </td>
-      <td className="px-6 py-4">{props.split}</td>
+      <td className="px-6 py-4">{props.splitName}</td>
       <td className="px-6 py-4">{msToTime(props.time)}</td>
     </tr>
   )

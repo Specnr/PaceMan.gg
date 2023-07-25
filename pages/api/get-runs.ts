@@ -1,4 +1,3 @@
-import Pace from "@/components/interfaces/Pace";
 import { apiToPace, paceSort } from "@/public/functions/converters";
 import { NextApiRequest, NextApiResponse } from "next";
 
