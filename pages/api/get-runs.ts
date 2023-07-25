@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // TODO: Get the runs from paceman
+  // TODO: Filter and sort the runs
   // TODO: Format them how we want in frontend
 
   res.status(200).json([

@@ -16,14 +16,14 @@ export default function Home() {
   return (
     <>
       <div className="pt-8">
-        <h1 className="text-7xl">MCSR PaceMan</h1>
+        <h1 className="px-4 text-5xl md:text-7xl font-semibold">MCSR PaceMan</h1>
         <p className="pt-4 invisible md:visible">
           The best Minecraft Speedrunning pace updating in real-time
         </p>
       </div>
       <div className="half-height overflow-y-auto w-full md:w-6/12">
-        <table className="text-lg text-left text-gray-400 justify-between overflow-y-scroll w-full half-height">
-          <thead className="text-sm sticky uppercase bg-gray-700 text-gray-400">
+        <table className="relative text-lg text-left text-gray-400 justify-between w-full half-height">
+          <thead className="sticky top-0 text-sm uppercase bg-gray-700 text-gray-400">
             <tr>
               <TableHeader colSpan={2}>Player</TableHeader>
               <TableHeader>Split</TableHeader>

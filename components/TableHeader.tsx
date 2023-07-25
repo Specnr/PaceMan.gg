@@ -1,7 +1,5 @@
-import { ReactNode } from "react";
-
 interface Props {
-  children: ReactNode
+  children: React.ReactNode
   colSpan?: number
 }
 
