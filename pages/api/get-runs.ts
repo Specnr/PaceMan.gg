@@ -25,6 +25,96 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       split: "Entered Nether",
       time: 107200,
       uuid: "19e7a6dc-6798-4dc4-ba13-7200c611e743"
+    },
+    {
+      nickname: "Crookst",
+      split: "Entered Nether",
+      time: 107200,
+      uuid: "19e7a6dc-6798-4dc4-ba13-7200c611e743"
+    },
+    {
+      nickname: "Crookst",
+      split: "Entered Nether",
+      time: 107200,
+      uuid: "19e7a6dc-6798-4dc4-ba13-7200c611e743"
+    },
+    {
+      nickname: "Crookst",
+      split: "Entered Nether",
+      time: 107200,
+      uuid: "19e7a6dc-6798-4dc4-ba13-7200c611e743"
+    },
+    {
+      nickname: "Crookst",
+      split: "Entered Nether",
+      time: 107200,
+      uuid: "19e7a6dc-6798-4dc4-ba13-7200c611e743"
+    },
+    {
+      nickname: "Crookst",
+      split: "Entered Nether",
+      time: 107200,
+      uuid: "19e7a6dc-6798-4dc4-ba13-7200c611e743"
+    },
+    {
+      nickname: "Crookst",
+      split: "Entered Nether",
+      time: 107200,
+      uuid: "19e7a6dc-6798-4dc4-ba13-7200c611e743"
+    },
+    {
+      nickname: "Crookst",
+      split: "Entered Nether",
+      time: 107200,
+      uuid: "19e7a6dc-6798-4dc4-ba13-7200c611e743"
+    },
+    {
+      nickname: "Crookst",
+      split: "Entered Nether",
+      time: 107200,
+      uuid: "19e7a6dc-6798-4dc4-ba13-7200c611e743"
+    },
+    {
+      nickname: "Crookst",
+      split: "Entered Nether",
+      time: 107200,
+      uuid: "19e7a6dc-6798-4dc4-ba13-7200c611e743"
+    },
+    {
+      nickname: "Crookst",
+      split: "Entered Nether",
+      time: 107200,
+      uuid: "19e7a6dc-6798-4dc4-ba13-7200c611e743"
+    },
+    {
+      nickname: "Crookst",
+      split: "Entered Nether",
+      time: 107200,
+      uuid: "19e7a6dc-6798-4dc4-ba13-7200c611e743"
+    },
+    {
+      nickname: "Crookst",
+      split: "Entered Nether",
+      time: 107200,
+      uuid: "19e7a6dc-6798-4dc4-ba13-7200c611e743"
+    },
+    {
+      nickname: "Crookst",
+      split: "Entered Nether",
+      time: 107200,
+      uuid: "19e7a6dc-6798-4dc4-ba13-7200c611e743"
+    },
+    {
+      nickname: "Crookst",
+      split: "Entered Nether",
+      time: 107200,
+      uuid: "19e7a6dc-6798-4dc4-ba13-7200c611e743"
+    },
+    {
+      nickname: "Crookst",
+      split: "Entered Nether",
+      time: 107200,
+      uuid: "19e7a6dc-6798-4dc4-ba13-7200c611e743"
     }
   ] as Pace[]);
 };

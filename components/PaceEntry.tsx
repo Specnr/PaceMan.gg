@@ -1,6 +1,7 @@
 import { msToTime, uuidToHead } from "@/public/functions/converters";
 import Pace from "./interfaces/Pace";
 import Image from "next/image";
+import Link from "./Link";
 
 interface Props extends Pace {
   isLast: boolean
@@ -8,9 +9,9 @@ interface Props extends Pace {
 
 export default function PaceEntry(props: Props) {
   return (
-    <tr className={"bg-gray-800 border-gray-700" + (!props.isLast && " border-b")}>
+    <tr className={"bg-gray-800 border-gray-700 " + (!props.isLast && " border-b")}>
       <td
-        className="pl-6 py-4"
+        className="pl-4 h-0 w-0 md:h-14 md:w-14 md:pl-6 md:py-4"
         scope="row"
         width={54}>
           <Image
@@ -23,12 +24,7 @@ export default function PaceEntry(props: Props) {
       <td className="pl-2 pr-6 py-4 font-medium">
         {
           props.twitch ? (
-            <a
-              className="text-blue-500 hover:text-blue-700"
-              target="_blank"
-              href={`https://twitch.tv/${props.twitch}`}>
-                {props.nickname}
-            </a>
+            <Link link={`https://twitch.tv/${props.twitch}`}>{props.nickname}</Link>
           ) : props.nickname
         }
       </td>

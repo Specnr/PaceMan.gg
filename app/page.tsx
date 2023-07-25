@@ -1,4 +1,5 @@
 "use client"
+import Link from "@/components/Link";
 import PaceEntry from "@/components/PaceEntry";
 import TableHeader from "@/components/TableHeader";
 import Pace from "@/components/interfaces/Pace";
@@ -13,29 +14,40 @@ export default function Home() {
   if (isLoading) return <div>loading...</div>
 
   return (
-    <div className="grid h-screen place-items-center">
-      <table className="table-auto text-lg text-left w-6/12 text-gray-400">
-        <thead className="text-sm uppercase bg-gray-700 text-gray-400">
-          <tr>
-            <TableHeader colSpan={2}>Player</TableHeader>
-            <TableHeader>Split</TableHeader>
-            <TableHeader>Time</TableHeader>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((pace: Pace, idx: number) => (
-            <PaceEntry
-              key={idx}
-              nickname={pace.nickname}
-              uuid={pace.uuid}
-              time={pace.time}
-              split={pace.split}
-              twitch={pace.twitch}
-              isLast={idx === (data.length - 1)}
-            />
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <>
+      <div className="pt-8">
+        <h1 className="text-7xl">MCSR PaceMan</h1>
+        <p className="pt-4 invisible md:visible">
+          The best Minecraft Speedrunning pace updating in real-time
+        </p>
+      </div>
+      <div className="half-height overflow-y-auto w-full md:w-6/12">
+        <table className="text-lg text-left text-gray-400 justify-between overflow-y-scroll w-full half-height">
+          <thead className="text-sm sticky uppercase bg-gray-700 text-gray-400">
+            <tr>
+              <TableHeader colSpan={2}>Player</TableHeader>
+              <TableHeader>Split</TableHeader>
+              <TableHeader>Time</TableHeader>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((pace: Pace, idx: number) => (
+              <PaceEntry
+                key={idx}
+                nickname={pace.nickname}
+                uuid={pace.uuid}
+                time={pace.time}
+                split={pace.split}
+                twitch={pace.twitch}
+                isLast={idx === (data.length - 1)}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="text-xs invisible md:visible">
+        Install <Link link="https://google.com">the mod</Link> on your speedrunning instances to show up here
+      </p>
+    </>
   );
 };

@@ -1,3 +1,29 @@
 @tailwind base;
+
+.half-height {
+  max-height: 74vh
+}
+
+.img-container {
+  height: 54px;
+  width: 54px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a0aec0;
+}
+
+* {
+  scrollbar-width: thin;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #a0aec0;
+}
+
 @tailwind components;
 @tailwind utilities;
