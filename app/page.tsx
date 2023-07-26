@@ -8,7 +8,7 @@ import useSWR from "swr";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Home() {
-  const { data, error, isLoading } = useSWR("/api/get-runs", fetcher);
+  const { data, error, isLoading } = useSWR("/api/get-runs", fetcher, { refreshWhenHidden: true, refreshInterval: 1000 });
 
   if (error) return <div>failed to load</div>
   if (isLoading) return <div>Loading...</div>
