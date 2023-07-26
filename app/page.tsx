@@ -50,7 +50,7 @@ export default function Home() {
         }
       </div>
       <p className="text-xs invisible md:visible">
-        Install <Link link="https://google.com">the mod</Link> on your speedrunning instances to show up here
+        Install <Link link="https://github.com/RedLime/paceman.gg-client/releases/latest">the mod</Link> on your speedrunning instances to show up here
       </p>
     </>
   );
