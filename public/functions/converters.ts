@@ -77,13 +77,23 @@ export const apiToPace = (runs: any[]): Pace[] => {
       return;
     }
 
+    let latestGoodSplit = "Unknown";
+    let latestGoodSplitIdx = 0;
+    for (let i=record.timelines.length-1; i>-1; i--) {
+      let splitName: string = record.timelines[i].name;
+      if (splitName in splitToDisplayName) {
+        latestGoodSplit = splitToDisplayName.get(splitName)!;
+        latestGoodSplitIdx = i;
+      }
+    }
+
     paces.push({
       nickname: run.nicknames[0],
       uuid: run.uuids[0],
       twitch: run.twitch[0],
-      split: record.timelines.length,
-      splitName: splitToDisplayName(record.timelines[record.timelines.length - 1].name),
-      time: record.timelines[record.timelines.length - 1].igt,
+      split: latestGoodSplitIdx,
+      splitName: latestGoodSplit,
+      time: record.timelines[latestGoodSplitIdx].igt,
     });
   });
   return paces;
@@ -105,26 +115,12 @@ export const paceSort = (a: Pace, b: Pace) => {
   }
 }
 
-export const splitToDisplayName = (splitName: string) => {
-  switch (splitName) {
-    case "enter_nether":
-      return "Enter Nether";
-    case "enter_fortress":
-      return "Enter Fortress";
-    case "enter_bastion":
-      return "Enter Bastion";
-    case "nether_travel":
-      return "Blind Travel";
-    case "enter_stronghold":
-      return "Enter Stronghold";
-    // TODO: Figure out what this is
-    case "portal_no_1":
-      return "???";
-    case "enter_end":
-      return "Enter End";
-    case "kill_ender_dragon":
-      return "Finish";
-    default:
-      return "Unknown";
-  }
-}
+export const splitToDisplayName = new Map<string, string>([
+  ["enter_nether", "Enter Nether"],
+  ["enter_fortress", "Enter Fortress"],
+  ["enter_bastion", "Enter Bastion"],
+  ["nether_travel", "Nether Travel"],
+  ["nether_travel_blind", "Nether Travel"],
+  ["enter_stronghold", "Enter Stronghold"],
+  ["enter_end", "Enter End"]
+]);
