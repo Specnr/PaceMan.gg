@@ -81,9 +81,10 @@ export const apiToPace = (runs: any[]): Pace[] => {
     let latestGoodSplitIdx = 0;
     for (let i=record.timelines.length-1; i>-1; i--) {
       let splitName: string = record.timelines[i].name;
-      if (splitName in splitToDisplayName) {
+      if (splitToDisplayName.has(splitName)) {
         latestGoodSplit = splitToDisplayName.get(splitName)!;
         latestGoodSplitIdx = i;
+        break;
       }
     }
 
