@@ -1,4 +1,5 @@
 import Pace from "@/components/interfaces/Pace";
+import { getLiveUserIfExists } from "./twitchIntegration";
 
 export const msToTime = (ms: number, keepMs=false): string => {
   let milliseconds = Math.floor((ms % 1000) / 100),
@@ -34,28 +35,28 @@ const INVALID_MODS = new Set([
   "789"
 ]);
 
-export const apiToPace = (runs: any[]): Pace[] => {
+export const apiToPace = async (runs: any[]): Promise<Pace[]> => {
   const paces: Pace[] = [];
-  runs.forEach(run => {
+  for (const run of runs) {
     // Ensure run and record exist
     if (!run || !run.record) {
-      return;
+      continue;
     }
     const record = run.record;
 
     // Ensure correct version (can split in future)
     if (!record.mc_version || record.mc_version !== "1.16.1") {
-      return;
+      continue;
     }
 
     // Ensure correct category (can split in future)
     if (!record.category || record.category != "ANY" || !record.run_type || record.run_type !== "random_seed") {
-      return;
+      continue;
     }
 
     // Ensure valid modlist
     if (!run.modlist) {
-      return;
+      continue;
     }
     let validMods = true;
     run.modlist.forEach((mod: string) => {
@@ -64,17 +65,17 @@ export const apiToPace = (runs: any[]): Pace[] => {
       }
     })
     if (!validMods) {
-      return;
+      continue;
     }
 
     // Ensure valid metadata
     if (!record.timelines || !run.nicknames || !run.uuids || !run.twitch || !run.alt) {
-      return;
+      continue;
     }
 
     // Ensure there are enough things to show
     if (record.timelines.length === 0 || run.nicknames.length === 0 || run.uuids.length === 0 || run.twitch.length === 0 || run.alt.length === 0) {
-      return;
+      continue;
     }
 
     let latestGoodSplit = "Unknown";
@@ -91,12 +92,12 @@ export const apiToPace = (runs: any[]): Pace[] => {
     paces.push({
       nickname: run.nicknames[0],
       uuid: run.uuids[0],
-      twitch: run.twitch[0],
+      twitch: await getLiveUserIfExists(run.twitch[0], run.alt[0]),
       split: latestGoodSplitIdx,
       splitName: latestGoodSplit,
       time: record.timelines[latestGoodSplitIdx].igt,
     });
-  });
+  }
   return paces;
 }
 
@@ -125,3 +126,4 @@ export const splitToDisplayName = new Map<string, string>([
   ["enter_stronghold", "Enter Stronghold"],
   ["enter_end", "Enter End"]
 ]);
+
