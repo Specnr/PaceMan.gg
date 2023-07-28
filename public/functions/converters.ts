@@ -79,7 +79,7 @@ export const apiToPace = async (runs: any[]): Promise<Pace[]> => {
     }
 
     let latestGoodSplit = "Unknown";
-    let latestGoodSplitIdx = 0;
+    let latestGoodSplitIdx = -1;
     for (let i=record.timelines.length-1; i>-1; i--) {
       let splitName: string = record.timelines[i].name;
       if (splitToDisplayName.has(splitName)) {
@@ -87,6 +87,10 @@ export const apiToPace = async (runs: any[]): Promise<Pace[]> => {
         latestGoodSplitIdx = i;
         break;
       }
+    }
+
+    if (latestGoodSplitIdx === -1) {
+      continue;
     }
 
     paces.push({
