@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/update-bans",
+      "schedule": "0 * * * *"
+    }
+  ]
+}
