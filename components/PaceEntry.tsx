@@ -1,4 +1,4 @@
-import { msToTime, uuidToHead } from "@/public/functions/converters";
+import { msToTime, uuidToHead } from "@/public/functions/frontendConverters";
 import Pace from "./interfaces/Pace";
 import Image from "next/image";
 import Link from "./Link";

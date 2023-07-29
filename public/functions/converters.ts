@@ -1,34 +1,7 @@
 import Pace from "@/components/interfaces/Pace";
 import { getLiveUserIfExists } from "./twitchIntegration";
+import { isUserBanned } from "./bannedUsers";
 
-export const msToTime = (ms: number, keepMs=false): string => {
-  let milliseconds = Math.floor((ms % 1000) / 100),
-    seconds = Math.floor((ms / 1000) % 60),
-    minutes = Math.floor((ms / (1000 * 60)) % 60);
-
-  if (milliseconds >= 5) {
-    seconds = (seconds + 1) % 60;
-    if (seconds === 0) {
-      minutes = (minutes + 1);
-    }
-  }
-
-  const minutesStr = (minutes < 10) ? "0" + minutes : minutes;
-  const secondsStr = (seconds < 10) ? "0" + seconds : seconds;
-
-  let ret =  minutesStr + ":" + secondsStr;
-  if (keepMs) {
-    ret += "." + milliseconds;
-  }
-  return ret;
-};
-
-export const uuidToHead = (uuid: string): string => {
-  const endpoint = "https://mc-heads.net/avatar/";
-  return `${endpoint}${uuid}.png`
-};
-
-// TODO: Add these
 const INVALID_MODS = new Set([
   "pogloot",
   "pogworld",
@@ -90,6 +63,17 @@ export const apiToPace = async (runs: any[]): Promise<Pace[]> => {
     }
 
     if (latestGoodSplitIdx === -1) {
+      continue;
+    }
+
+    // Ensure no banned players
+    let foundBanned = false;
+    for (const uuid of run.uuids) {
+      if (await isUserBanned(uuid)) {
+        foundBanned = true;
+      }
+    }
+    if (foundBanned) {
       continue;
     }
 
