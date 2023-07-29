@@ -30,9 +30,9 @@ export const uuidToHead = (uuid: string): string => {
 
 // TODO: Add these
 const INVALID_MODS = new Set([
-  "123",
-  "456",
-  "789"
+  "pogloot",
+  "pogworld",
+  "peepopractice"
 ]);
 
 export const apiToPace = async (runs: any[]): Promise<Pace[]> => {
