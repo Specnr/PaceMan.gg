@@ -14,4 +14,16 @@ export const refreshBannedUserCache = async () => {
   bans.forEach(ban => bannedUserCache.add(ban.uuid));
 };
 
-export const isUserBanned = async (uuid: string) => bannedUserCache.has(uuid);
+export const isUserBanned = async (uuid: string) => {
+  // If cache is empty, refresh it
+  if (bannedUserCache.size === 0) {
+    await refreshBannedUserCache()
+  }
+  return bannedUserCache.has(uuid)
+};
+
+export const banUser = async (uuid: string, reason: string) => {
+  await BannedUsersCol.updateOne({ uuid }, { $set: { uuid, reason, timestamp: Date.now() } }, { upsert: true });
+  // Add to cache
+  bannedUserCache.add(uuid);
+};
