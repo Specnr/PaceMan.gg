@@ -27,3 +27,9 @@ export const banUser = async (uuid: string, reason: string) => {
   // Add to cache
   bannedUserCache.add(uuid);
 };
+
+export const unbanUser = async (uuid: string) => {
+  await BannedUsersCol.deleteOne({ uuid });
+  // Remove from cache
+  bannedUserCache.delete(uuid);
+};
