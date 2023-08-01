@@ -110,7 +110,6 @@ export const splitToDisplayName = new Map<string, string>([
   ["enter_fortress", "Enter Fortress"],
   ["enter_bastion", "Enter Bastion"],
   ["nether_travel", "Nether Travel"],
-  ["nether_travel_blind", "Nether Travel"],
   ["enter_stronghold", "Enter Stronghold"],
   ["enter_end", "Enter End"],
   ["kill_ender_dragon", "Finish"]
