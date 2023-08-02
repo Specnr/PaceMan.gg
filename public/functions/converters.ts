@@ -1,6 +1,5 @@
 import Pace from "@/components/interfaces/Pace";
 import { getLiveUserIfExists } from "./twitchIntegration";
-import { isUserBanned } from "./bannedUsers";
 
 const INVALID_MODS = new Set([
   "pogloot",
@@ -63,17 +62,6 @@ export const apiToPace = async (runs: any[]): Promise<Pace[]> => {
     }
 
     if (latestGoodSplitIdx === -1) {
-      continue;
-    }
-
-    // Ensure no banned players
-    let foundBanned = false;
-    for (const uuid of run.uuids) {
-      if (await isUserBanned(uuid)) {
-        foundBanned = true;
-      }
-    }
-    if (foundBanned) {
       continue;
     }
 
