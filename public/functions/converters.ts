@@ -1,6 +1,5 @@
 import Pace from "@/components/interfaces/Pace";
 import { getLiveUserIfExists } from "./twitchIntegration";
-import { isUserBanned } from "./bannedUsers";
 
 const INVALID_MODS = new Set([
   "pogloot",
@@ -66,17 +65,6 @@ export const apiToPace = async (runs: any[]): Promise<Pace[]> => {
       continue;
     }
 
-    // Ensure no banned players
-    let foundBanned = false;
-    for (const uuid of run.uuids) {
-      if (await isUserBanned(uuid)) {
-        foundBanned = true;
-      }
-    }
-    if (foundBanned) {
-      continue;
-    }
-
     paces.push({
       nickname: run.nicknames[0],
       uuid: run.uuids[0],
@@ -110,7 +98,6 @@ export const splitToDisplayName = new Map<string, string>([
   ["enter_fortress", "Enter Fortress"],
   ["enter_bastion", "Enter Bastion"],
   ["nether_travel", "Nether Travel"],
-  ["nether_travel_blind", "Nether Travel"],
   ["enter_stronghold", "Enter Stronghold"],
   ["enter_end", "Enter End"],
   ["kill_ender_dragon", "Finish"]
