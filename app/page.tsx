@@ -3,6 +3,7 @@ import Link from "@/components/Link";
 import PaceEntry from "@/components/PaceEntry";
 import TableHeader from "@/components/TableHeader";
 import Pace from "@/components/interfaces/Pace";
+import { getTwitchOAuthURL } from "@/components/twitch/Twitch-OAuth";
 import useSWR from "swr";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -49,9 +50,16 @@ export default function Home() {
           )
         }
       </div>
-      <p className="text-xs invisible md:visible">
-        Install <Link link="https://github.com/RedLime/paceman.gg-client/releases/latest">the mod</Link> on your speedrunning instances to show up here
-      </p>
+      <div className="text-xs invisible md:visible">
+        <div className="mb-4">
+          <a
+            className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 border border-purple-700 rounded"
+            href={getTwitchOAuthURL("1234").href}>
+            Generate Access Token
+          </a>
+        </div>
+        <p>Follow <Link link="https://www.google.com/">this tutorial</Link> for your runs to show up here</p>
+      </div>
     </>
   );
 };
