@@ -7,6 +7,5 @@ export const getTwitchOAuthURL = (mcToken: string) => {
     force_verify: "true",
     state: mcToken
   });
-  console.log((new URL(`https://id.twitch.tv/oauth2/authorize?${decodeURIComponent(params.toString())}`)).href)
   return new URL(`https://id.twitch.tv/oauth2/authorize?${decodeURIComponent(params.toString())}`);
 };

@@ -30,17 +30,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const user = await getUserWithToken(tokenData.data.access_token);
   if (!user || !user.data.data || user.data.data.length !== 1) return res.send(400);
 
-  const twitchId = user.data.data[0].login;
+  const twitchId = user.data.data[0].id;
   const accessCode = randomstring.generate()
 
   // Get uuid with mcToken
   const uuid = await getMcUUIDWithToken(mcToken as string);
-  if (!uuid) return res.send(400);
+  if (!uuid) return res.send(401);
 
   console.log(accessCode, uuid, twitchId)
   // Store access code, uuid and twitch id in db
-  // await upsertUser(twitchId, uuid, accessCode);
+  await upsertUser(twitchId, uuid, accessCode);
   // Show the code to the user
 
-  res.redirect(process.env.BASE_URL || "https://paceman.gg/");
-}
+  res.redirect(process.env.NEXT_PUBLIC_BASE_URL ? process.env.NEXT_PUBLIC_BASE_URL + accessCode : `https://paceman.gg/${accessCode}`);
+};
