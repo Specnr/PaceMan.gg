@@ -22,7 +22,7 @@ export default function Home() {
       <div className="pt-8">
         <h1 className="px-4 text-5xl md:text-7xl font-semibold">MCSR PaceMan</h1>
         <p className="pt-4 invisible md:visible">
-          The best Minecraft Speedrunning pace updating in real-time
+          The best real-time Minecraft Speedrunning pace
         </p>
       </div>
       <div className="half-height overflow-y-auto w-full md:w-6/12">
