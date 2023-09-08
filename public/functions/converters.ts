@@ -1,5 +1,9 @@
 import Pace from "@/components/interfaces/Pace";
 import { getLiveUserIfExists } from "./twitchIntegration";
+import Completion from "@/components/interfaces/Completion";
+import axios from "axios";
+
+export const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const INVALID_MODS = new Set([
   "pogloot",
@@ -103,3 +107,22 @@ export const splitToDisplayName = new Map<string, string>([
   ["kill_ender_dragon", "Finish"]
 ]);
 
+export const uuidToName = async (uuid: string): Promise<string> => {
+  const endpoint = `https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`;
+  const data = (await axios.get(endpoint)).data;
+  if (data.errorMessage) return "UNKNOWN";
+
+  return data.name
+};
+
+export const apiToCompletion = async (completions: any[]): Promise<Completion[]> => {
+  const formattedCompletions: Completion[] = [];
+  for (const completion of completions) {
+    formattedCompletions.push({
+      ...completion,
+      nickname: await uuidToName(completion.uuid)
+    })
+  }
+
+  return formattedCompletions;
+};

@@ -42,5 +42,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   await upsertUser(twitchId, uuid, accessCode);
 
   // Show the code to the user
-  res.redirect(process.env.NEXT_PUBLIC_BASE_URL ? process.env.NEXT_PUBLIC_BASE_URL + accessCode : `https://paceman.gg/${accessCode}`);
+  res.redirect(process.env.NEXT_PUBLIC_BASE_URL ? process.env.NEXT_PUBLIC_BASE_URL + "token/" + accessCode : `https://paceman.gg/token/${accessCode}`);
 };
