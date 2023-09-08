@@ -29,17 +29,16 @@ export default function Events() {
   return (
     <>
       <div className="pt-8">
-        {selectedEvent && (
-          <div className="pb-2 max-w-md">
-            <h1 className="px-4 text-5xl md:text-7xl font-semibold">{selectedEvent.name}</h1>
-            <p className="pt-4 invisible md:visible">
-              {(new Date(selectedEvent.starts[0] * 1000)).toLocaleDateString("en-us")} - {(new Date(selectedEvent.ends[selectedEvent.ends.length-1] * 1000)).toLocaleDateString("en-us")}
-            </p>
+          <div className="pb-2">
+            <h1 className="px-4 pb-4 text-5xl md:text-7xl font-semibold">{selectedEvent? selectedEvent.name : "MCSR PaceMan"}</h1>
+            {selectedEvent && (
+              <p className="invisible md:visible">
+                {(new Date(selectedEvent.starts[0] * 1000)).toLocaleDateString("en-us")} - {(new Date(selectedEvent.ends[selectedEvent.ends.length-1] * 1000)).toLocaleDateString("en-us")}
+              </p>
+            )}
           </div>
-        )}
         <div>
           <select
-            placeholder="Choose a tournament"
             onChange={evt => setSelectedEvent(events.filter((e: any) => e._id === evt.target.value)[0])}
             className="
               bg-gray-50 border border-gray-300
@@ -47,13 +46,14 @@ export default function Events() {
               block w-full p-2.5 dark:bg-gray-700
               dark:border-gray-600 dark:placeholder-gray-400
               dark:text-white">
+              <option selected>Choose an event</option>
             {
               events.map(e => (<option value={e._id} key={e._id}>{e.name}</option>))
             }
           </select>
         </div>
       </div>
-      { !selectedEvent ? <p>Please select an event.</p> : <EventTable event={selectedEvent} /> }
+      { !selectedEvent ? <p>No event selected...</p> : <EventTable event={selectedEvent} /> }
       <Footer>
         <p>Contact Specnr on Discord to host an event</p>
       </Footer>

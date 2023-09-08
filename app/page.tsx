@@ -62,7 +62,7 @@ export default function Home() {
               Generate Access Token
             </button>
           </div>
-          <p>Follow <Link link="https://www.google.com/">this tutorial</Link> for your runs to show up here</p>
+          <p>Follow <Link link="https://docs.google.com/document/d/1RgHUJhLvnUp0KtnCcdJEHCi6rn7naUqWwfe-0ntTAlo">this tutorial</Link> for your runs to show up here</p>
         </>
       </Footer>
       

@@ -1,3 +1,4 @@
+import NavBar from '@/components/NavBar';
 import '../public/globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -17,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className + " bg-gray-900 text-white text-center"}>
+        <div className="top-2 left-3 absolute"><NavBar/></div>
         <div className="grid h-screen place-items-center">
           {children}
         </div>
