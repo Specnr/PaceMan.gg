@@ -4,9 +4,9 @@ import Link from "@/components/Link";
 import PaceEntry from "@/components/PaceEntry";
 import TableHeader from "@/components/TableHeader";
 import Pace from "@/components/interfaces/Pace";
-import { getTwitchOAuthURL } from "@/components/twitch/Twitch-OAuth";
 import useSWR from "swr";
 import Modal from "@/components/Modal";
+import Footer from "@/components/Footer";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -22,7 +22,7 @@ export default function Home() {
       <div className="pt-8">
         <h1 className="px-4 text-5xl md:text-7xl font-semibold">MCSR PaceMan</h1>
         <p className="pt-4 invisible md:visible">
-          The best Minecraft Speedrunning pace updating in real-time
+          The best real-time Minecraft Speedrunning pace
         </p>
       </div>
       <div className="half-height overflow-y-auto w-full md:w-6/12">
@@ -53,16 +53,18 @@ export default function Home() {
           )
         }
       </div>
-      <div className="text-xs invisible md:visible">
-        <div className="mb-4">
-          <button
-            className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 border border-purple-700 rounded"
-            onClick={() => setShowAuthModal(true)}>
-            Generate Access Token
-          </button>
-        </div>
-        <p>Follow <Link link="https://www.google.com/">this tutorial</Link> for your runs to show up here</p>
-      </div>
+      <Footer>
+        <>
+          <div className="mb-4">
+            <button
+              className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 border border-purple-700 rounded"
+              onClick={() => setShowAuthModal(true)}>
+              Generate Access Token
+            </button>
+          </div>
+          <p>Follow <Link link="https://docs.google.com/document/d/1RgHUJhLvnUp0KtnCcdJEHCi6rn7naUqWwfe-0ntTAlo">this tutorial</Link> for your runs to show up here</p>
+        </>
+      </Footer>
       
       {
         showAuthModal && (
