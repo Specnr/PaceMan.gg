@@ -10,7 +10,6 @@ interface Props {
 }
 
 export default function CompletionEntry(props: Props) {
-  console.log(props.time)
   const placementStyle = {
     color: placeToColor(props.placement),
     fontWeight: "bold",
