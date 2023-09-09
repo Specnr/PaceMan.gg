@@ -97,6 +97,8 @@ export const paceSort = (a: Pace, b: Pace) => {
   }
 }
 
+export const completionSort = (a: Completion, b: Completion) => a.time - b.time
+
 export const splitToDisplayName = new Map<string, string>([
   ["enter_nether", "Enter Nether"],
   ["enter_fortress", "Enter Fortress"],

@@ -12,15 +12,15 @@ export default function EventTable({ event }: { event: Event }) {
   if (isLoading) return <div>Loading...</div>
 
   return (
-    <div className="half-height overflow-y-auto w-full md:w-4/12">
+    <div className="half-height overflow-y-auto w-full md:w-2/4">
       {
         (error || !data || data.length === 0) ? <div>There are no completions yet...</div> : (
           <table className="relative text-lg text-left text-gray-400 justify-between w-full half-height">
             <thead className="sticky top-0 text-sm uppercase bg-gray-700 text-gray-400">
               <tr>
-                <TableHeader width={1}>Placement</TableHeader>
+                <TableHeader>Placement</TableHeader>
                 <TableHeader colSpan={2}>Player</TableHeader>
-                <TableHeader width={1}>Time</TableHeader>
+                <TableHeader>Time</TableHeader>
               </tr>
             </thead>
             <tbody>
