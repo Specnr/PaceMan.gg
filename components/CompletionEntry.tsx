@@ -18,7 +18,7 @@ export default function CompletionEntry(props: Props) {
 
   return (
     <tr className={"bg-gray-800 border-gray-700 " + (!props.isLast && " border-b")}>
-      <td className="pl-2 pr-6 py-4 font-medium">
+      <td className="pl-2 pr-6 py-4 font-medium w-1">
         <p className="pl-4" style={placementStyle}>
           { ordinalSuffix(props.placement) }
           </p>
