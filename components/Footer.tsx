@@ -18,7 +18,8 @@ const Footer = () => {
           </button>
         </div>
         <Link link="https://docs.google.com/document/d/1RgHUJhLvnUp0KtnCcdJEHCi6rn7naUqWwfe-0ntTAlo">Tutorial</Link>{" • "}
-        <Link link="">Privacy Policy</Link>
+        <Link link="https://docs.google.com/document/d/1vybBwJT2vM7MWHP9Oc544a8WdGhjQWVA34o5Cx7N7YM">Privacy Policy</Link>{" • "}
+        <Link link="https://discord.com/invite/tXxwrYw">Help</Link>
       </div>
       {
         showAuthModal && (
