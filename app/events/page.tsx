@@ -6,7 +6,6 @@ import useSWR from "swr";
 
 import Event from "@/components/interfaces/Event"
 import EventTable from "@/components/Events/EventTable";
-import Footer from "@/components/Footer";
 
 export default function Events() {
   const { data: events, error, isLoading } = useSWR<Event[]>("/api/get-events", fetcher)
@@ -54,9 +53,6 @@ export default function Events() {
         </div>
       </div>
       { !selectedEvent ? <p>No event selected...</p> : <EventTable event={selectedEvent} /> }
-      <Footer>
-        <p>Contact Specnr on Discord to host an event</p>
-      </Footer>
     </>
   );
 }
