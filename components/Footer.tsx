@@ -9,7 +9,7 @@ const Footer = () => {
 
   return (     
     <>
-      <div className="text-xs">
+      <div className="text-xs pb-1">
         <div className="mb-2 invisible md:visible">
           <button
             className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 border border-purple-700 rounded"

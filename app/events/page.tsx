@@ -27,15 +27,13 @@ export default function Events() {
 
   return (
     <>
-      <div className="pt-8">
-          <div className="pb-2">
-            <h1 className="px-4 pb-4 text-5xl md:text-7xl font-semibold">{selectedEvent? selectedEvent.name : "MCSR PaceMan"}</h1>
-            {selectedEvent && (
-              <p className="invisible md:visible">
-                {(new Date(selectedEvent.starts[0] * 1000)).toLocaleDateString("en-us")} - {(new Date(selectedEvent.ends[selectedEvent.ends.length-1] * 1000)).toLocaleDateString("en-us")}
-              </p>
-            )}
-          </div>
+      <div className="pt-10">
+          <h1 className="px-4 text-5xl md:text-7xl font-semibold">{selectedEvent? selectedEvent.name : "MCSR PaceMan"}</h1>
+          {selectedEvent && (
+            <p className="invisible md:visible md:pb-2">
+              {(new Date(selectedEvent.starts[0] * 1000)).toLocaleDateString("en-us")} - {(new Date(selectedEvent.ends[selectedEvent.ends.length-1] * 1000)).toLocaleDateString("en-us")}
+            </p>
+          )}
         <div>
           <select
             onChange={evt => setSelectedEvent(events.filter((e: any) => e._id === evt.target.value)[0])}
