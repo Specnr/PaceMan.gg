@@ -2,6 +2,7 @@ import NavBar from '@/components/NavBar';
 import '../public/globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
         <div className="top-2 left-3 absolute"><NavBar/></div>
         <div className="grid h-screen place-items-center">
           {children}
+          <Footer />
         </div>
       </body>
     </html>
