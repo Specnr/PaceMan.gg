@@ -22,15 +22,6 @@ const sendTwitchRequest = async (endpoint: string) => {
   return await data.json();
 };
 
-export const getLiveUserIfExists = async (user: string, alt?: string) => {
-  const { data } = await sendTwitchRequest(`https://api.twitch.tv/helix/streams?user_login=${user}${alt ? `&user_login=${alt}` : ""}`);
-  
-  if (data && data.length > 0) {
-    return data[0].user_login;
-  }
-  return "";
-}
-
 export const sendTwitchAuthCode = (code: any) => {
   const formData = new URLSearchParams({
     client_id: process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID || "",
