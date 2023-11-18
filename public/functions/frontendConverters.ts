@@ -20,6 +20,8 @@ export const msToTime = (ms: number, keepMs=false): string => {
   return ret;
 };
 
+export const msToDate = (ms: number) => (new Date(ms * 1000)).toLocaleDateString("en-us")
+
 export const uuidToHead = (uuid: string): string => {
   const endpoint = "https://mc-heads.net/avatar/";
   return `${endpoint}${uuid}.png`
