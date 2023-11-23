@@ -6,6 +6,8 @@ import useSWR from "swr";
 
 import Event from "@/components/interfaces/Event"
 import EventTable from "@/components/Events/EventTable";
+import { msToDate } from "@/public/functions/frontendConverters";
+import Title from "@/components/Title";
 
 export default function Events() {
   const { data: events, error, isLoading } = useSWR<Event[]>("/api/get-events", fetcher)
@@ -29,11 +31,12 @@ export default function Events() {
     <>
       <div className="pt-10">
         <h1 className={"px-4 text-5xl md:text-7xl font-semibold pb-2 " + (selectedEvent ? "" : "pb-4")}>
-          {selectedEvent? selectedEvent.name : "MCSR PaceMan"}
+          
+          <Title titleOverrite={selectedEvent ? selectedEvent.name : undefined} />
         </h1>
         {selectedEvent && (
           <p className="pb-2">
-            {(new Date(selectedEvent.starts[0] * 1000)).toLocaleDateString("en-us")} - {(new Date(selectedEvent.ends[selectedEvent.ends.length-1] * 1000)).toLocaleDateString("en-us")}
+            {msToDate(selectedEvent.starts[0])} - {msToDate(selectedEvent.ends[selectedEvent.ends.length-1])}
           </p>
         )}
         <div>
