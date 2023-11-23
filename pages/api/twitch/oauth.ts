@@ -41,6 +41,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // Store access code, uuid and twitch id in db
   await upsertUser(twitchId, uuid, accessCode);
 
+  const encryptedCode = Buffer.from(accessCode).toString('base64');
+
   // Show the code to the user
-  res.redirect(process.env.NEXT_PUBLIC_BASE_URL ? process.env.NEXT_PUBLIC_BASE_URL + "token/" + accessCode : `https://paceman.gg/token/${accessCode}`);
+  res.redirect(process.env.NEXT_PUBLIC_BASE_URL ? process.env.NEXT_PUBLIC_BASE_URL + "token/" + encryptedCode : `https://paceman.gg/token/${encryptedCode}`);
 };
