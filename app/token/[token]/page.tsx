@@ -17,7 +17,7 @@ export default function TokenPage({ params }: { params: { token: string } }) {
         Here is your access token for PaceMan, please keep it a secret!
       </p>
       <p className="py-4 text-3xl">
-        <span className="text-gray-950 bg-gray-950 rounded hover:bg-inherit hover:text-white">
+        <span className="text-gray-950 bg-gray-950 rounded-md">
           { code }
         </span>
       </p>
