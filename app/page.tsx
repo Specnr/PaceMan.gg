@@ -13,7 +13,7 @@ export default function Home() {
   const { data, error, isLoading } = useSWR("/api/get-runs", fetcher, { refreshWhenHidden: true, refreshInterval: 1000 });
 
   let msg = null;
-  if (error) msg =  "failed to load";
+  if (error) msg = "failed to load";
   else if (isLoading) msg = <Loading />;
   else if (data.length === 0) msg = "No one is currently on pace...";
 
@@ -26,7 +26,7 @@ export default function Home() {
         </p>
       </div>
         {
-          msg !== null || data.length === 0 ? 
+          msg !== null ? 
           <div className="grid h-4/6 place-items-center">{msg}</div>: (
           <div className="mt-4 mx-auto half-height overflow-y-auto w-full md:w-6/12">
             <table className="relative text-lg text-left text-gray-400 justify-between w-full half-height">
