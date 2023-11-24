@@ -1,5 +1,9 @@
 @tailwind base;
 
+.container-height {
+  height: 85vh;
+}
+
 .half-height {
   max-height: 61vh
 }
