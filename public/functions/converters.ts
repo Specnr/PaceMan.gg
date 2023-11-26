@@ -41,7 +41,7 @@ export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
       splitName: eventIdToName.get(latestEvent.eventId)!,
       time: latestEvent.igt,
       uuid: p.user.uuid,
-      twitch: p.user.liveAccont
+      twitch: p.user.liveAccount
     });
   }
 
