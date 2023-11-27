@@ -55,9 +55,9 @@ export default function Events() {
           }
         </select>
       </div>
-      <div className="grid h-4/6 place-items-center">
-        { !selectedEvent ? <p>No event selected...</p> : <EventTable event={selectedEvent} /> }
-      </div>
+      {
+        !selectedEvent ? <div className="grid h-4/6 place-items-center"></div> : <EventTable event={selectedEvent} />
+      }
     </div>
   );
 }
