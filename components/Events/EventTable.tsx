@@ -5,11 +5,12 @@ import { fetcher } from "@/public/functions/converters";
 import TableHeader from "@/components/TableHeader";
 import Completion from "@/components/interfaces/Completion";
 import CompletionEntry from "../CompletionEntry";
+import Loading from "../Loading";
 
 export default function EventTable({ event }: { event: Event }) {
   const { data, isLoading, error } = useSWR(`/api/get-event-completions?eventId=${event._id}`, fetcher);
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <Loading />
 
   return (
     <div className="half-height overflow-y-auto w-full md:w-2/4">

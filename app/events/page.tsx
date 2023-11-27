@@ -15,6 +15,15 @@ export default function Events() {
   const searchParams = useSearchParams();
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
+  useEffect(() => {
+    if (searchParams && !error && !isLoading && events && !selectedEvent) {
+      const foundEvent = events.filter((e: any) => e._id === searchParams.get("eventId"));
+      if (foundEvent.length === 1) {
+        setSelectedEvent(foundEvent[0] as Event);
+      }
+    }
+  }, [searchParams, error, events, isLoading, selectedEvent])
+
   let msg = null;
   if (error || (!isLoading && !events)) msg = "failed to load";
   if (isLoading || !searchParams || !events) msg = <Loading />;
@@ -40,7 +49,7 @@ export default function Events() {
             block w-full p-2.5 dark:bg-gray-700
             dark:border-gray-600 dark:placeholder-gray-400
             dark:text-white">
-            <option className="font-sans">Choose an event</option>
+              <option className="font-sans">Choose an event</option>
           {
             eventList.map(e => (<option className="font-sans" value={e._id} key={e._id}>{e.name}</option>))
           }

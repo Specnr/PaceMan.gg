@@ -4,5 +4,5 @@ export default interface Pace {
   splitName: string,
   time: number,
   uuid: string
-  twitch?: string
+  twitch: string | null
 };
