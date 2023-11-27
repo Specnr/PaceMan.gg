@@ -13,7 +13,7 @@ export default function EventTable({ event }: { event: Event }) {
   if (isLoading) return <div className="grid h-4/6 place-items-center"><Loading /></div>
 
   return (
-    (error || !data || data.length === 0) ? <div>There are no completions yet...</div> : (
+    (error || !data || data.length === 0) ? <div className="grid h-4/6 place-items-center">There are no completions yet...</div> : (
       <div className="mt-4 mx-auto half-height overflow-y-auto w-full md:w-2/4">
         <table className="relative text-lg text-left text-gray-400 justify-between w-full">
           <thead className="sticky top-0 text-sm uppercase bg-gray-700 text-gray-400">
