@@ -16,9 +16,15 @@ export default function Events() {
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
   useEffect(() => {
-    if (searchParams && !error && !isLoading && events && !selectedEvent) {
-      const foundEvent = events.filter((e: any) => e._id === searchParams.get("eventId"));
-      if (foundEvent.length === 1) {
+    if (!error && !isLoading && events && !selectedEvent) {
+      let foundEvent = null
+      if (searchParams && searchParams.has("eventId")) {
+        foundEvent = events.filter((e: any) => e._id === searchParams.get("eventId"));
+      } else if (events.length > 0) {
+        foundEvent = [events[0]];
+      }
+
+      if (foundEvent?.length === 1) {
         setSelectedEvent(foundEvent[0] as Event);
       }
     }
