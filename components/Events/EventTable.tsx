@@ -10,10 +10,10 @@ import Loading from "../Loading";
 export default function EventTable({ event }: { event: Event }) {
   const { data, isLoading, error } = useSWR(`/api/get-event-completions?eventId=${event._id}`, fetcher);
 
-  if (isLoading) return <div className="grid h-4/6 place-items-center"><Loading /></div>
+  if (isLoading || !data) return <div className="grid h-4/6 place-items-center"><Loading /></div>
 
   return (
-    (error || !data || data.length === 0) ? <div className="grid h-4/6 place-items-center">There are no completions yet...</div> : (
+    (error || data.length === 0) ? <div className="grid h-4/6 place-items-center">There are no completions yet...</div> : (
       <div className="mt-4 mx-auto half-height overflow-y-auto w-full md:w-2/4">
         <table className="relative text-lg text-left text-gray-400 justify-between w-full">
           <thead className="sticky top-0 text-sm uppercase bg-gray-700 text-gray-400">
