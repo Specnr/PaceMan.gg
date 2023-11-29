@@ -12,7 +12,8 @@ export const eventIdToName = new Map<string, string>([
   ["rsg.second_portal", "Second Portal"],
   ["rsg.enter_stronghold", "Enter Stronghold"],
   ["rsg.enter_end", "Enter End"],
-  ["rsg.credits", "Finish"]
+  // TODO: Potentially make this toggleable
+  // ["rsg.credits", "Finish"]
 ]);
 
 export const eventOrder = new Map([
