@@ -11,7 +11,7 @@ import Title from "@/components/Title";
 import Loading from "@/components/Loading";
 
 export default function Events() {
-  const { data: events, error, isLoading } = useSWR<Event[]>("/api/get-events", fetcher)
+  const { data: events, error, isLoading } = useSWR<Event[]>("/api/get-events", fetcher, { revalidateOnFocus: false })
   const searchParams = useSearchParams();
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
