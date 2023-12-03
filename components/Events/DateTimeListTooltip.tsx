@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import Tooltip from "../Tooltip";
 
 const dateToTimeFormat = (date: dayjs.Dayjs) => {
   return date.format("MM/DD HH:mm");
@@ -9,7 +10,7 @@ export default function DateTimeListTooltip(props: {
   ends: number[];
 }) {
   return (
-    <span className="absolute transition-all top-0 scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100">
+    <Tooltip>
       {props.starts.map((start, i) => {
         const startDate = dayjs(start * 1000);
         const endDate = dayjs(props.ends[i] * 1000);
@@ -21,6 +22,6 @@ export default function DateTimeListTooltip(props: {
           </p>
         );
       })}
-    </span>
+    </Tooltip>
   );
 }
