@@ -9,10 +9,7 @@ export default function PaceEntry(props: Pace) {
 
   return (
     <>
-      <tr
-        className={"bg-gray-800 border-gray-700"}
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
+      <tr className={"bg-gray-800 border-gray-700"}>
         <td
           className="pl-4 h-0 w-0 md:h-14 md:w-14 md:pl-6 md:py-4"
           scope="row"
@@ -34,8 +31,15 @@ export default function PaceEntry(props: Pace) {
             props.nickname
           )}
         </td>
-        <td className="px-6 py-4">{props.splitName}</td>
-        <td className="px-6 py-4">{msToTime(props.time)}</td>
+        <td
+          className="px-6 py-4 hover:underline"
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          {props.splitName}
+        </td>
+        <td className="px-6 py-4" onClick={() => setIsExpanded(!isExpanded)}>
+          {msToTime(props.time)}
+        </td>
       </tr>
       {isExpanded &&
         props.eventList!.map((e) => (
