@@ -58,7 +58,14 @@ export default function Events() {
   return (
     <div className="container-height">
       <div className="pt-16">
-        <Title titleOverrite={selectedEvent ? selectedEvent.name : undefined} />
+        <Title
+          titleOverrite={selectedEvent ? selectedEvent.name : undefined}
+          link={
+            selectedEvent && selectedEvent.host
+              ? `https://twitch.tv/${selectedEvent.host}`
+              : undefined
+          }
+        />
         {selectedEvent && (
           <div className="group w-fit mx-auto relative flex justify-center">
             <p className="pb-2">
