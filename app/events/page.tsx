@@ -84,6 +84,7 @@ export default function Events() {
               eventList.filter((e) => e._id === evt.target.value)[0]
             )
           }
+          value={selectedEvent ? selectedEvent._id : ""}
           className="
             md:w-80
             mx-auto
@@ -93,7 +94,6 @@ export default function Events() {
             dark:border-gray-600 dark:placeholder-gray-400
             dark:text-white"
         >
-          <option className="font-sans">Choose an event</option>
           {eventList.map((e) => (
             <option className="font-sans" value={e._id} key={e._id}>
               {e.name}
