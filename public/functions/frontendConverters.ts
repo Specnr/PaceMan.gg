@@ -44,3 +44,14 @@ export const placeToColor = (place: number) => {
   if (place === 2) return "#929292";
   if (place === 3) return "#cd7f32";
 };
+
+export const EVENT_ID_NAME = [
+  "Enter Nether",
+  "Enter Bastion",
+  "Enter Fortress",
+  "First Portal",
+  "Second Portal",
+  "Enter Stronghold",
+  "Enter End",
+  "Finish",
+];
