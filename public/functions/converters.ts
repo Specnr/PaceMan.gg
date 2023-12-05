@@ -1,4 +1,4 @@
-import Pace from "@/components/interfaces/Pace";
+import { Pace, Event } from "@/components/interfaces/Pace";
 import Completion from "@/components/interfaces/Completion";
 import axios from "axios";
 
@@ -12,8 +12,7 @@ export const eventIdToName = new Map<string, string>([
   ["rsg.second_portal", "Second Portal"],
   ["rsg.enter_stronghold", "Enter Stronghold"],
   ["rsg.enter_end", "Enter End"],
-  // TODO: Potentially make this toggleable
-  // ["rsg.credits", "Finish"]
+  ["rsg.credits", "Finish"],
 ]);
 
 export const eventOrder = new Map([
@@ -24,11 +23,11 @@ export const eventOrder = new Map([
   ["rsg.second_portal", 4],
   ["rsg.enter_stronghold", 5],
   ["rsg.enter_end", 6],
-  ["rsg.credits", 7]
+  ["rsg.credits", 7],
 ]);
 
 export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
-  const filteredPace = paceItems.filter(p => !p.isCheated && !p.isHidden);
+  const filteredPace = paceItems.filter((p) => !p.isCheated && !p.isHidden);
   const mappedPace: Pace[] = [];
   for (const p of filteredPace) {
     const latestEvent = p.eventList[p.eventList.length - 1];
@@ -36,18 +35,24 @@ export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
       continue;
     }
 
+    const formattedEventList: Event[] = p.eventList.map((e: any) => ({
+      name: eventIdToName.get(e.eventId)!,
+      time: e.igt,
+    }));
+
     mappedPace.push({
       nickname: await uuidToName(p.user.uuid),
       split: eventOrder.get(latestEvent.eventId),
       splitName: eventIdToName.get(latestEvent.eventId)!,
       time: latestEvent.igt,
+      eventList: formattedEventList,
       uuid: p.user.uuid,
-      twitch: p.user.liveAccount
+      twitch: p.user.liveAccount,
     });
   }
 
   return mappedPace;
-}
+};
 
 export const paceSort = (a: Pace, b: Pace) => {
   if (a.split! > b.split!) {
@@ -63,25 +68,31 @@ export const paceSort = (a: Pace, b: Pace) => {
       return 0;
     }
   }
-}
+};
 
-export const completionSort = (a: Completion, b: Completion) => a.time - b.time
+export const getTimeFromCompletion = (c: Completion) =>
+  c.time ?? c.eventList![c.eventList!.length - 1].time;
+
+export const completionSort = (a: Completion, b: Completion) =>
+  getTimeFromCompletion(a) - getTimeFromCompletion(b);
 
 export const uuidToName = async (uuid: string): Promise<string> => {
   const endpoint = `https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`;
   const data = await axios.get(endpoint);
   if (data.status >= 400) return "UNKNOWN";
 
-  return data.data.name
+  return data.data.name;
 };
 
-export const apiToCompletion = async (completions: any[]): Promise<Completion[]> => {
+export const apiToCompletion = async (
+  completions: any[]
+): Promise<Completion[]> => {
   const formattedCompletions: Completion[] = [];
   for (const completion of completions) {
     formattedCompletions.push({
       ...completion,
-      nickname: await uuidToName(completion.uuid)
-    })
+      nickname: await uuidToName(completion.uuid),
+    });
   }
 
   return formattedCompletions;

@@ -1,7 +1,18 @@
-export default function Table(props: { titleOverrite?: string }) {
+import Link from "./Link";
+
+export default function Table(props: {
+  titleOverrite?: string;
+  link?: string;
+}) {
+  const text = props.titleOverrite ? props.titleOverrite : "MCSR PaceMan";
   return (
-    <h1 className={"px-4 text-5xl md:text-7xl font-semibold " + (props.titleOverrite ? null : "pb-4")}>
-      { props.titleOverrite ? props.titleOverrite : "MCSR PaceMan" }
+    <h1
+      className={
+        "w-fit mx-auto px-4 text-5xl md:text-7xl font-semibold " +
+        (props.titleOverrite ? "" : "pb-4 ")
+      }
+    >
+      {!props.link ? text : <Link link={props.link}>{text}</Link>}
     </h1>
   );
 }
