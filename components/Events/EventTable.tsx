@@ -41,7 +41,9 @@ export default function EventTable({ event }: { event: Event }) {
               placement={idx + 1}
               nickname={completion.nickname}
               uuid={completion.uuid}
-              time={completion.time}
+              eventList={
+                completion.eventList ?? [{ eventId: 7, time: completion.time! }]
+              }
             />
           ))}
         </tbody>

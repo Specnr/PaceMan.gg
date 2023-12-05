@@ -1,15 +1,17 @@
+import Image from "next/image";
+
 import {
   msToTime,
   ordinalSuffix,
   placeToColor,
   uuidToHead,
 } from "@/public/functions/frontendConverters";
-import Image from "next/image";
+import { EventItem } from "./interfaces/Completion";
 
 interface Props {
   uuid: string;
   nickname: string;
-  time: number;
+  eventList: EventItem[];
   placement: number;
 }
 
@@ -43,7 +45,9 @@ export default function CompletionEntry(props: Props) {
         <p style={placementStyle}>{props.nickname}</p>
       </td>
       <td className="px-6 py-4">
-        <p style={placementStyle}>{msToTime(props.time)}</p>
+        <p style={placementStyle}>
+          {msToTime(props.eventList[props.eventList.length - 1].time)}
+        </p>
       </td>
     </tr>
   );

@@ -70,7 +70,11 @@ export const paceSort = (a: Pace, b: Pace) => {
   }
 };
 
-export const completionSort = (a: Completion, b: Completion) => a.time - b.time;
+export const getTimeFromCompletion = (c: Completion) =>
+  c.time ?? c.eventList![c.eventList!.length - 1].time;
+
+export const completionSort = (a: Completion, b: Completion) =>
+  getTimeFromCompletion(a) - getTimeFromCompletion(b);
 
 export const uuidToName = async (uuid: string): Promise<string> => {
   const endpoint = `https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`;
