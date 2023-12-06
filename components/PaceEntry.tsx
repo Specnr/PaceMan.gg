@@ -31,14 +31,15 @@ export default function PaceEntry(props: Pace) {
             props.nickname
           )}
         </td>
-        <td
-          className="px-6 py-4 hover:underline"
-          onClick={() => setIsExpanded(!isExpanded)}
-        >
-          {props.splitName}
+        <td className="px-6 py-4">
+          <button onClick={() => setIsExpanded(!isExpanded)}>
+            {props.splitName}
+          </button>
         </td>
-        <td className="px-6 py-4" onClick={() => setIsExpanded(!isExpanded)}>
-          {msToTime(props.time)}
+        <td className="px-6 py-4 btn">
+          <button onClick={() => setIsExpanded(!isExpanded)}>
+            {msToTime(props.time)}
+          </button>
         </td>
       </tr>
       {isExpanded &&

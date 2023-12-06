@@ -28,14 +28,15 @@ export default function CompletionEntry(props: Props) {
 
   return (
     <>
-      <tr
-        className="bg-gray-800 border-gray-700"
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
+      <tr className="bg-gray-800 border-gray-700">
         <td className="pl-2 pr-6 py-4 font-medium w-1">
-          <p className="pl-4" style={placementStyle}>
+          <button
+            className="pl-4"
+            style={placementStyle}
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
             {ordinalSuffix(props.placement)}
-          </p>
+          </button>
         </td>
         <td
           className="h-0 w-0 md:h-14 md:w-14 md:pl-6 md:py-4"
@@ -50,12 +51,20 @@ export default function CompletionEntry(props: Props) {
           />
         </td>
         <td className="px-6 py-4 font-medium">
-          <p style={placementStyle}>{props.nickname}</p>
+          <button
+            style={placementStyle}
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
+            {props.nickname}
+          </button>
         </td>
         <td className="px-6 py-4">
-          <p style={placementStyle}>
+          <button
+            style={placementStyle}
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
             {msToTime(props.eventList[props.eventList.length - 1].time)}
-          </p>
+          </button>
         </td>
       </tr>
       {isExpanded &&

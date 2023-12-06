@@ -5,13 +5,6 @@ export const msToTime = (ms: number, keepMs = false): string => {
     seconds = Math.floor((ms / 1000) % 60),
     minutes = Math.floor((ms / (1000 * 60)) % 60);
 
-  if (milliseconds >= 5) {
-    seconds = (seconds + 1) % 60;
-    if (seconds === 0) {
-      minutes = minutes + 1;
-    }
-  }
-
   const minutesStr = minutes < 10 ? "0" + minutes : minutes;
   const secondsStr = seconds < 10 ? "0" + seconds : seconds;
 
