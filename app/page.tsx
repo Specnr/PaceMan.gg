@@ -24,7 +24,7 @@ export default function Home() {
     <div className="container-height">
       <div className="pt-16">
         <Title />
-        <p className="invisible h-0 md:h-auto md:pt-4 md:visible">
+        <p className="invisible h-0 md:h-auto md:pt-2 md:visible">
           The best Minecraft Speedrunning pace in real-time
         </p>
       </div>
