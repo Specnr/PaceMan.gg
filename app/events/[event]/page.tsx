@@ -10,6 +10,7 @@ import { msToDate } from "@/public/functions/frontendConverters";
 import Title from "@/components/Title";
 import Loading from "@/components/Loading";
 import DateTimeListTooltip from "@/components/Events/DateTimeListTooltip";
+import { Select, SelectItem } from "@nextui-org/react";
 
 export default function Events({ params }: { params: { event: string } }) {
   const {
@@ -63,17 +64,22 @@ export default function Events({ params }: { params: { event: string } }) {
         />
         {selectedEvent && (
           <div className="group w-fit mx-auto relative flex justify-center">
-            <p className="pb-2">
-              {msToDate(selectedEvent.starts[0])} -{" "}
-              {msToDate(selectedEvent.ends[selectedEvent.ends.length - 1])}
-            </p>
             <DateTimeListTooltip
               starts={selectedEvent.starts}
               ends={selectedEvent.ends}
-            />
+            >
+              <p className="pb-2">
+                {msToDate(selectedEvent.starts[0])} -{" "}
+                {msToDate(selectedEvent.ends[selectedEvent.ends.length - 1])}
+              </p>
+            </DateTimeListTooltip>
           </div>
         )}
-        <select
+        <Select
+          className="max-w-sm"
+          variant="bordered"
+          size="sm"
+          defaultSelectedKeys={[selectedEvent!.vanity]}
           onChange={(evt) =>
             router.push(
               `/events/${
@@ -82,21 +88,13 @@ export default function Events({ params }: { params: { event: string } }) {
             )
           }
           value={selectedEvent ? selectedEvent.vanity : ""}
-          className="
-            md:w-80
-            mx-auto
-            bg-gray-50 border border-gray-300
-            text-gray-900 text-sm rounded-lg
-            block w-full p-2.5 dark:bg-gray-700
-            dark:border-gray-600 dark:placeholder-gray-400
-            dark:text-white"
         >
           {eventList.map((e) => (
-            <option className="font-sans" value={e.vanity} key={e.vanity}>
+            <SelectItem value={e.vanity} key={e.vanity}>
               {e.name}
-            </option>
+            </SelectItem>
           ))}
-        </select>
+        </Select>
       </div>
       {!selectedEvent ? (
         <div className="grid h-4/6 place-items-center">No Event Selected</div>

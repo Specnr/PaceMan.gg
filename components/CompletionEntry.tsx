@@ -50,7 +50,7 @@ export default function CompletionEntry(props: Props) {
             height={28}
           />
         </td>
-        <td className="px-6 py-4 font-medium">
+        <td className="max-w-xs truncate px-6 py-4 font-medium">
           <button
             style={placementStyle}
             onClick={() => setIsExpanded(!isExpanded)}
