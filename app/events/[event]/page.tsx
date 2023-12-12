@@ -1,6 +1,6 @@
 "use client";
 import { fetcher } from "@/public/functions/converters";
-import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 
@@ -11,22 +11,22 @@ import Title from "@/components/Title";
 import Loading from "@/components/Loading";
 import DateTimeListTooltip from "@/components/Events/DateTimeListTooltip";
 
-export default function Events() {
+export default function Events({ params }: { params: { event: string } }) {
   const {
     data: events,
     error,
     isLoading,
   } = useSWR<Event[]>("/api/get-events", fetcher, { revalidateOnFocus: false });
-  const searchParams = useSearchParams();
+  const router = useRouter();
+
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  const [isLoadingEvent, setIsLoadingEvent] = useState<boolean>(true);
 
   useEffect(() => {
     if (!error && !isLoading && events && !selectedEvent) {
       let foundEvent = null;
-      if (searchParams && searchParams.has("eventId")) {
-        foundEvent = events.filter(
-          (e: any) => e._id === searchParams.get("eventId")
-        );
+      if (params.event !== "latest") {
+        foundEvent = events.filter((e: any) => e._id === params.event);
       } else if (events.length > 0) {
         foundEvent = [events[0]];
       }
@@ -34,19 +34,14 @@ export default function Events() {
       if (foundEvent?.length === 1) {
         setSelectedEvent(foundEvent[0] as Event);
       }
+      setIsLoadingEvent(false);
     }
-  }, [searchParams, error, events, isLoading, selectedEvent]);
+  }, [params, error, events, isLoading, selectedEvent]);
 
   let msg = null;
   if (error || (!isLoading && !events)) msg = "failed to load";
-  if (isLoading || !searchParams || !events) msg = <Loading />;
-  if (
-    !isLoading &&
-    searchParams &&
-    !selectedEvent &&
-    searchParams.get("eventId") !== null
-  )
-    msg = "invalid event id";
+  if (isLoadingEvent || isLoading || !events) msg = <Loading />;
+  if (!isLoading && !isLoadingEvent && !selectedEvent) msg = "invalid event id";
 
   if (msg !== null) {
     return (
@@ -80,8 +75,10 @@ export default function Events() {
         )}
         <select
           onChange={(evt) =>
-            setSelectedEvent(
-              eventList.filter((e) => e._id === evt.target.value)[0]
+            router.push(
+              `/events/${
+                eventList.filter((e) => e._id === evt.target.value)[0]._id
+              }`
             )
           }
           value={selectedEvent ? selectedEvent._id : ""}

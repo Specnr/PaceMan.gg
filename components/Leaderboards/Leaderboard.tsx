@@ -19,7 +19,8 @@ const filterToId = (filter: string) => {
 export default function EventTable({ filter }: { filter: string }) {
   const { data, isLoading, error } = useSWR(
     `/api/get-leaderboard?filterId=${filterToId(filter)}&removeDuplicates=1`,
-    fetcher
+    fetcher,
+    { revalidateOnFocus: false }
   );
 
   return (

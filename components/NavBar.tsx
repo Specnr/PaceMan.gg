@@ -7,7 +7,7 @@ export default function NavBar() {
         Home
       </Link>
       |
-      <Link className="px-4" href="/events">
+      <Link className="px-4" href="/events/latest">
         Events
       </Link>
       |
