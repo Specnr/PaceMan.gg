@@ -4,5 +4,6 @@ export default interface Event {
   starts: number[];
   ends: number[];
   whitelist: boolean;
+  vanity: string;
   host?: string;
 }

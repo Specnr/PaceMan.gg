@@ -26,7 +26,7 @@ export default function Events({ params }: { params: { event: string } }) {
     if (!error && !isLoading && events && !selectedEvent) {
       let foundEvent = null;
       if (params.event !== "latest") {
-        foundEvent = events.filter((e: any) => e._id === params.event);
+        foundEvent = events.filter((e: any) => e.vanity === params.event);
       } else if (events.length > 0) {
         foundEvent = [events[0]];
       }
@@ -77,11 +77,11 @@ export default function Events({ params }: { params: { event: string } }) {
           onChange={(evt) =>
             router.push(
               `/events/${
-                eventList.filter((e) => e._id === evt.target.value)[0]._id
+                eventList.filter((e) => e.vanity === evt.target.value)[0].vanity
               }`
             )
           }
-          value={selectedEvent ? selectedEvent._id : ""}
+          value={selectedEvent ? selectedEvent.vanity : ""}
           className="
             md:w-80
             mx-auto
@@ -92,7 +92,7 @@ export default function Events({ params }: { params: { event: string } }) {
             dark:text-white"
         >
           {eventList.map((e) => (
-            <option className="font-sans" value={e._id} key={e._id}>
+            <option className="font-sans" value={e.vanity} key={e.vanity}>
               {e.name}
             </option>
           ))}
