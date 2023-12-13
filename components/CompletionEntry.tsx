@@ -51,12 +51,7 @@ export default function CompletionEntry(props: Props) {
           />
         </td>
         <td className="max-w-xs truncate px-6 py-4 font-medium">
-          <button
-            style={placementStyle}
-            onClick={() => setIsExpanded(!isExpanded)}
-          >
-            {props.nickname}
-          </button>
+          <button style={placementStyle}>{props.nickname}</button>
         </td>
         <td className="px-6 py-4">
           <button

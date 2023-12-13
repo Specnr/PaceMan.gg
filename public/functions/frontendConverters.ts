@@ -22,6 +22,11 @@ export const uuidToHead = (uuid: string): string => {
   return `${endpoint}${uuid}.png`;
 };
 
+export const uuidToSkin = (uuid: string): string => {
+  const endpoint = "https://mc-heads.net/body/";
+  return `${endpoint}${uuid}/1000.png`;
+};
+
 // https://stackoverflow.com/questions/13627308/add-st-nd-rd-and-th-ordinal-suffix-to-a-number
 export const ordinalSuffix = (i: number): string => {
   const j = i % 10,

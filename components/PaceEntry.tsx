@@ -28,7 +28,7 @@ export default function PaceEntry(props: Pace) {
               {props.nickname}
             </Link>
           ) : (
-            props.nickname
+            <button>{props.nickname}</button>
           )}
         </td>
         <td className="px-6 py-4">
