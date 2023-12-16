@@ -8,9 +8,8 @@ import Event from "@/components/interfaces/Event";
 import EventTable from "@/components/Events/EventTable";
 import { msToDate } from "@/public/functions/frontendConverters";
 import Title from "@/components/Title";
-import Loading from "@/components/Loading";
 import DateTimeListTooltip from "@/components/Events/DateTimeListTooltip";
-import { Select, SelectItem } from "@nextui-org/react";
+import { Select, SelectItem, Spinner } from "@nextui-org/react";
 
 export default function Events({ params }: { params: { event: string } }) {
   const {
@@ -41,7 +40,7 @@ export default function Events({ params }: { params: { event: string } }) {
 
   let msg = null;
   if (error || (!isLoading && !events)) msg = "failed to load";
-  if (isLoadingEvent || isLoading || !events) msg = <Loading />;
+  if (isLoadingEvent || isLoading || !events) msg = <Spinner />;
   if (!isLoading && !isLoadingEvent && !selectedEvent) msg = "invalid event id";
 
   if (msg !== null) {

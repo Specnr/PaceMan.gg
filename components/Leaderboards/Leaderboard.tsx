@@ -1,7 +1,7 @@
 import useSWR from "swr";
 
 import { fetcher } from "@/public/functions/converters";
-import CompletionTable from "../CompletionTable";
+import CompletionTable from "./CompletionTable";
 
 const filterToId = (filter: string) => {
   switch (filter) {

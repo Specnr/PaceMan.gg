@@ -2,7 +2,7 @@ import useSWR from "swr";
 
 import Event from "@/components/interfaces/Event";
 import { fetcher } from "@/public/functions/converters";
-import CompletionTable from "../CompletionTable";
+import CompletionTable from "../Leaderboards/CompletionTable";
 
 export default function EventTable({ event }: { event: Event }) {
   const { data, isLoading, error } = useSWR(

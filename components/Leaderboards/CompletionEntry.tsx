@@ -7,7 +7,7 @@ import {
   placeToColor,
   uuidToHead,
 } from "@/public/functions/frontendConverters";
-import { EventItem } from "./interfaces/Completion";
+import { EventItem } from "../interfaces/Completion";
 import { useState } from "react";
 
 interface Props {

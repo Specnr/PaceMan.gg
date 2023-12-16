@@ -5,7 +5,7 @@ import PaceEntry from "@/components/PaceEntry";
 import TableHeader from "@/components/TableHeader";
 import Title from "@/components/Title";
 import { Pace } from "@/components/interfaces/Pace";
-import Loading from "@/components/Loading";
+import { Spinner } from "@nextui-org/react";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -17,7 +17,7 @@ export default function Home() {
 
   let msg = null;
   if (error) msg = "failed to load";
-  else if (isLoading) msg = <Loading />;
+  else if (isLoading) msg = <Spinner />;
   else if (data.length === 0) msg = "No one is currently on pace...";
 
   return (

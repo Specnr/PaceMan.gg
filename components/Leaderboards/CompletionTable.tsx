@@ -1,7 +1,7 @@
 import TableHeader from "@/components/TableHeader";
 import Completion from "@/components/interfaces/Completion";
 import CompletionEntry from "./CompletionEntry";
-import Loading from "./Loading";
+import { Spinner } from "@nextui-org/react";
 
 export default function EventTable({
   completions,
@@ -15,7 +15,7 @@ export default function EventTable({
   if (isLoading || !completions)
     return (
       <div className="grid h-4/6 place-items-center">
-        <Loading />
+        <Spinner />
       </div>
     );
 
