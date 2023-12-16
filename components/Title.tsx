@@ -8,7 +8,7 @@ export default function Table(props: {
   return (
     <h1
       className={
-        "w-fit mx-auto px-4 text-5xl md:text-7xl font-semibold " +
+        "w-fit mx-auto px-4 text-5xl lg:text-7xl font-semibold " +
         (props.titleOverrite ? "" : "pb-4 ")
       }
     >

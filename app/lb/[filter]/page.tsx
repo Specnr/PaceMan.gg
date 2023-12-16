@@ -32,7 +32,7 @@ export default function LeaderboardPage({
     <div className="container-height">
       <div className="pt-16">
         <Title titleOverrite={`PaceMan Leaderboard`} />
-        <div className="px-4 pt-2 mx-auto flex md:w-2/4 gap-4 justify-center">
+        <div className="px-4 pt-2 mx-auto flex lg:w-2/4 gap-4 justify-center">
           <Select
             className="max-w-sm"
             variant="bordered"

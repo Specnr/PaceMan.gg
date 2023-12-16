@@ -14,7 +14,7 @@ export default function TokenPage({ params }: { params: { token: string } }) {
     <div className="container-height">
       <div className="pt-16">
         <Title />
-        <p className="invisible h-0 md:h-auto md:pt-2 md:visible">
+        <p className="invisible h-0 lg:h-auto lg:pt-2 lg:visible">
           Here is your access token for PaceMan, please keep it a secret!
         </p>
       </div>

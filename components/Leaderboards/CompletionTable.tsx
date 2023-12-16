@@ -15,7 +15,7 @@ export default function EventTable({
   if (isLoading || !completions)
     return (
       <div className="grid h-4/6 place-items-center">
-        <Spinner />
+        <Spinner color="secondary" size="lg" />
       </div>
     );
 
@@ -24,16 +24,16 @@ export default function EventTable({
       There are no completions yet...
     </div>
   ) : (
-    <div className="mt-2 mx-auto half-height overflow-y-auto w-full md:w-2/4">
+    <div className="mt-2 mx-auto half-height overflow-y-auto w-full lg:w-2/4">
       <table className="relative text-lg text-left text-gray-400 justify-between w-full">
         <thead className="sticky top-0 text-sm uppercase bg-gray-700 text-gray-400">
           <tr>
-            <TableHeader>Placement</TableHeader>
+            <TableHeader>Place</TableHeader>
             <TableHeader colSpan={2}>Player</TableHeader>
             <TableHeader>Time</TableHeader>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-medium lg:text-lg">
           {completions.map((completion: Completion, idx: number) => (
             <CompletionEntry
               key={idx}

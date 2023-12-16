@@ -17,21 +17,21 @@ export default function Home() {
 
   let msg = null;
   if (error) msg = "failed to load";
-  else if (isLoading) msg = <Spinner />;
+  else if (isLoading) msg = <Spinner color="secondary" size="lg" />;
   else if (data.length === 0) msg = "No one is currently on pace...";
 
   return (
     <div className="container-height">
       <div className="pt-16">
         <Title />
-        <p className="invisible h-0 md:h-auto md:pt-2 md:visible">
+        <p className="invisible h-0 lg:h-auto lg:pt-2 lg:visible">
           The best Minecraft Speedrunning pace in real-time
         </p>
       </div>
       {msg !== null ? (
         <div className="grid h-4/6 place-items-center">{msg}</div>
       ) : (
-        <div className="mt-4 mx-auto half-height overflow-y-auto w-full md:w-6/12">
+        <div className="mt-4 mx-auto half-height overflow-y-auto w-full lg:w-6/12">
           <table className="relative text-lg text-left text-gray-400 justify-between w-full half-height">
             <thead className="sticky top-0 text-sm uppercase bg-gray-700 text-gray-400">
               <tr>

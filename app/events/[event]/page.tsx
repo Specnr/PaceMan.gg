@@ -40,7 +40,8 @@ export default function Events({ params }: { params: { event: string } }) {
 
   let msg = null;
   if (error || (!isLoading && !events)) msg = "failed to load";
-  if (isLoadingEvent || isLoading || !events) msg = <Spinner />;
+  if (isLoadingEvent || isLoading || !events)
+    msg = <Spinner color="secondary" size="lg" />;
   if (!isLoading && !isLoadingEvent && !selectedEvent) msg = "invalid event id";
 
   if (msg !== null) {
