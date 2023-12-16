@@ -1,4 +1,9 @@
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export const msToTime = (ms: number, keepMs = false): string => {
   let milliseconds = Math.floor((ms % 1000) / 100),
@@ -53,3 +58,11 @@ export const EVENT_ID_NAME = [
   "Enter End",
   "Finish",
 ];
+
+export const lastUpdatedDifference = (
+  lastUpdated: number,
+  latestSplit: number
+) => {
+  const now = dayjs().tz("America/Toronto").valueOf();
+  return msToTime(latestSplit + now - lastUpdated);
+};

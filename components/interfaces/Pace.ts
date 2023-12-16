@@ -11,4 +11,5 @@ export interface Pace {
   time: number;
   uuid: string;
   twitch: string | null;
+  lastUpdated: number;
 }

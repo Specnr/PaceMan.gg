@@ -48,8 +48,20 @@ export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
       eventList: formattedEventList,
       uuid: p.user.uuid,
       twitch: p.user.liveAccount,
+      lastUpdated: p.lastUpdated,
     });
   }
+
+  mappedPace.push({
+    nickname: "spec",
+    split: 0,
+    splitName: "Enter Nether",
+    time: 1000000,
+    eventList: [],
+    uuid: "11",
+    twitch: null,
+    lastUpdated: 1000000,
+  });
 
   return mappedPace;
 };

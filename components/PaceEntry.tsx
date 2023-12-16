@@ -1,11 +1,19 @@
-import { msToTime, uuidToHead } from "@/public/functions/frontendConverters";
+import {
+  lastUpdatedDifference,
+  msToTime,
+  uuidToHead,
+} from "@/public/functions/frontendConverters";
 import { Pace } from "./interfaces/Pace";
 import Image from "next/image";
 import Link from "./Link";
 import { useState } from "react";
+import { Tooltip } from "@nextui-org/react";
 
 export default function PaceEntry(props: Pace) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [estimatedPace, setEstimatedPace] = useState(
+    lastUpdatedDifference(props.lastUpdated, props.time)
+  );
 
   return (
     <>
@@ -37,9 +45,19 @@ export default function PaceEntry(props: Pace) {
           </button>
         </td>
         <td className="px-6 py-4 btn">
-          <button onClick={() => setIsExpanded(!isExpanded)}>
-            {msToTime(props.time)}
-          </button>
+          <Tooltip
+            showArrow
+            onAnimationStart={() =>
+              setEstimatedPace(
+                lastUpdatedDifference(props.lastUpdated, props.time)
+              )
+            }
+            content={`Currently ${estimatedPace}`}
+          >
+            <button onClick={() => setIsExpanded(!isExpanded)}>
+              {msToTime(props.time)}
+            </button>
+          </Tooltip>
         </td>
       </tr>
       {isExpanded &&

@@ -37,20 +37,12 @@ export default function Home() {
               <tr>
                 <TableHeader colSpan={2}>Player</TableHeader>
                 <TableHeader>Split</TableHeader>
-                <TableHeader>Time</TableHeader>
+                <TableHeader colSpan={2}>Time</TableHeader>
               </tr>
             </thead>
             <tbody>
               {data.map((pace: Pace, idx: number) => (
-                <PaceEntry
-                  key={idx}
-                  nickname={pace.nickname}
-                  uuid={pace.uuid}
-                  time={pace.time}
-                  splitName={pace.splitName}
-                  twitch={pace.twitch}
-                  eventList={pace.eventList}
-                />
+                <PaceEntry key={idx} {...pace} />
               ))}
             </tbody>
           </table>
