@@ -4,7 +4,7 @@ export interface EventItem {
 }
 
 export default interface UserCompletion {
-  time?: number;
+  time: number;
   eventList?: EventItem[];
   submitted: number;
 }
@@ -12,7 +12,7 @@ export default interface UserCompletion {
 export default interface Completion {
   _id: string;
   uuid: string;
-  time?: number;
+  time: number;
   eventList?: EventItem[];
   nickname: string;
 }
