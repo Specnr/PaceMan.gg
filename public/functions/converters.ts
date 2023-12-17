@@ -48,6 +48,7 @@ export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
       eventList: formattedEventList,
       uuid: p.user.uuid,
       twitch: p.user.liveAccount,
+      lastUpdated: p.lastUpdated,
     });
   }
 
@@ -70,11 +71,7 @@ export const paceSort = (a: Pace, b: Pace) => {
   }
 };
 
-export const getTimeFromCompletion = (c: Completion) =>
-  c.time ?? c.eventList![c.eventList!.length - 1].time;
-
-export const completionSort = (a: Completion, b: Completion) =>
-  getTimeFromCompletion(a) - getTimeFromCompletion(b);
+export const completionSort = (a: Completion, b: Completion) => a.time - b.time;
 
 export const uuidToName = async (uuid: string): Promise<string> => {
   const endpoint = `https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`;
@@ -82,6 +79,22 @@ export const uuidToName = async (uuid: string): Promise<string> => {
   if (data.status >= 400) return "UNKNOWN";
 
   return data.data.name;
+};
+
+export const nameToUuid = async (name: string): Promise<string> => {
+  const endpoint = `https://api.mojang.com/users/profiles/minecraft/${name}`;
+  const data = await axios.get(endpoint);
+  if (data.status >= 400) return "UNKNOWN";
+
+  let fullUuid = "";
+  for (let i = 0; i < data.data.id.length; i++) {
+    if (i === 8 || i === 12 || i === 16 || i === 20) {
+      fullUuid += "-";
+    }
+    fullUuid += data.data.id.charAt(i);
+  }
+
+  return fullUuid;
 };
 
 export const apiToCompletion = async (

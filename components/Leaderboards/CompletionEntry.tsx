@@ -7,7 +7,7 @@ import {
   placeToColor,
   uuidToHead,
 } from "@/public/functions/frontendConverters";
-import { EventItem } from "./interfaces/Completion";
+import { EventItem } from "../interfaces/Completion";
 import { useState } from "react";
 
 interface Props {
@@ -50,13 +50,8 @@ export default function CompletionEntry(props: Props) {
             height={28}
           />
         </td>
-        <td className="px-6 py-4 font-medium">
-          <button
-            style={placementStyle}
-            onClick={() => setIsExpanded(!isExpanded)}
-          >
-            {props.nickname}
-          </button>
+        <td className="max-w-xs truncate px-6 py-4 font-medium">
+          <button style={placementStyle}>{props.nickname}</button>
         </td>
         <td className="px-6 py-4">
           <button

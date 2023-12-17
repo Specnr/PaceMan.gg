@@ -1,4 +1,9 @@
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export const msToTime = (ms: number, keepMs = false): string => {
   let milliseconds = Math.floor((ms % 1000) / 100),
@@ -20,6 +25,11 @@ export const msToDate = (ms: number) => dayjs(ms * 1000).format("MM/DD/YYYY");
 export const uuidToHead = (uuid: string): string => {
   const endpoint = "https://mc-heads.net/avatar/";
   return `${endpoint}${uuid}.png`;
+};
+
+export const uuidToSkin = (uuid: string): string => {
+  const endpoint = "https://mc-heads.net/body/";
+  return `${endpoint}${uuid}/1000.png`;
 };
 
 // https://stackoverflow.com/questions/13627308/add-st-nd-rd-and-th-ordinal-suffix-to-a-number
@@ -48,3 +58,11 @@ export const EVENT_ID_NAME = [
   "Enter End",
   "Finish",
 ];
+
+export const lastUpdatedDifference = (
+  lastUpdated: number,
+  latestSplit: number
+) => {
+  const now = dayjs().tz("America/Toronto").valueOf();
+  return msToTime(latestSplit + now - lastUpdated);
+};
