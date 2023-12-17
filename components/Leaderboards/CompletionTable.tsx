@@ -40,6 +40,7 @@ export default function EventTable({
               placement={idx + 1}
               nickname={completion.nickname}
               uuid={completion.uuid}
+              submitted={completion.submitted}
               eventList={
                 completion.eventList ?? [{ eventId: 7, time: completion.time! }]
               }
