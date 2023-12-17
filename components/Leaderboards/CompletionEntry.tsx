@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import {
   EVENT_ID_NAME,
+  msToDate,
   msToTime,
   ordinalSuffix,
   placeToColor,
@@ -9,12 +10,14 @@ import {
 } from "@/public/functions/frontendConverters";
 import { EventItem } from "../interfaces/Completion";
 import { useState } from "react";
+import { Tooltip } from "@nextui-org/react";
 
 interface Props {
   uuid: string;
   nickname: string;
   eventList: EventItem[];
   placement: number;
+  submitted: number;
 }
 
 export default function CompletionEntry(props: Props) {
@@ -54,12 +57,19 @@ export default function CompletionEntry(props: Props) {
           <button style={placementStyle}>{props.nickname}</button>
         </td>
         <td className="px-6 py-4">
-          <button
-            style={placementStyle}
-            onClick={() => setIsExpanded(!isExpanded)}
+          <Tooltip
+            showArrow
+            content={`Submitted ${msToDate(
+              Math.floor(props.submitted / 1000)
+            )}`}
           >
-            {msToTime(props.eventList[props.eventList.length - 1].time)}
-          </button>
+            <button
+              style={placementStyle}
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
+              {msToTime(props.eventList[props.eventList.length - 1].time)}
+            </button>
+          </Tooltip>
         </td>
       </tr>
       {isExpanded &&

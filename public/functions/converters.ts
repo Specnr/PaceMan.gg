@@ -56,9 +56,9 @@ export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
 };
 
 export const paceSort = (a: Pace, b: Pace) => {
-  if (a.split! > b.split!) {
+  if (a.eventList.length > b.eventList.length) {
     return -1;
-  } else if (b.split! > a.split!) {
+  } else if (b.eventList.length > a.eventList.length) {
     return 1;
   } else {
     if (a.time < b.time) {
