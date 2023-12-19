@@ -41,7 +41,7 @@ export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
     }));
 
     mappedPace.push({
-      nickname: await uuidToName(p.user.uuid),
+      nickname: p.nickname,
       split: eventOrder.get(latestEvent.eventId),
       splitName: eventIdToName.get(latestEvent.eventId)!,
       time: latestEvent.igt,
@@ -88,14 +88,6 @@ export const paceSort = (a: Pace, b: Pace) => {
 
 export const completionSort = (a: Completion, b: Completion) => a.time - b.time;
 
-export const uuidToName = async (uuid: string): Promise<string> => {
-  const endpoint = `https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`;
-  const data = await axios.get(endpoint);
-  if (data.status >= 400) return "UNKNOWN";
-
-  return data.data.name;
-};
-
 export const nameToUuid = async (name: string): Promise<string> => {
   const endpoint = `https://api.mojang.com/users/profiles/minecraft/${name}`;
   const data = await axios.get(endpoint);
@@ -110,18 +102,4 @@ export const nameToUuid = async (name: string): Promise<string> => {
   }
 
   return fullUuid;
-};
-
-export const apiToCompletion = async (
-  completions: any[]
-): Promise<Completion[]> => {
-  const formattedCompletions: Completion[] = [];
-  for (const completion of completions) {
-    formattedCompletions.push({
-      ...completion,
-      nickname: await uuidToName(completion.uuid),
-    });
-  }
-
-  return formattedCompletions;
 };
