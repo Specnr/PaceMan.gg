@@ -41,7 +41,7 @@ export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
     }));
 
     mappedPace.push({
-      nickname: await uuidToName(p.user.uuid),
+      nickname: p.nickname,
       split: eventOrder.get(latestEvent.eventId),
       splitName: eventIdToName.get(latestEvent.eventId)!,
       time: latestEvent.igt,
@@ -56,30 +56,37 @@ export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
 };
 
 export const paceSort = (a: Pace, b: Pace) => {
-  if (a.eventList.length > b.eventList.length) {
+  // Sort on event count if S1/S2
+  // Sort on split index otherwise
+  if (
+    a.split! === eventOrder.get("rsg.enter_fortress") ||
+    b.split! === eventOrder.get("rsg.enter_fortress") ||
+    a.split! === eventOrder.get("rsg.enter_bastion") ||
+    b.split! === eventOrder.get("rsg.enter_bastion")
+  ) {
+    if (a.eventList.length > b.eventList.length) {
+      return -1;
+    } else if (b.eventList.length > a.eventList.length) {
+      return 1;
+    }
+  } else {
+    if (a.split! > b.split!) {
+      return -1;
+    } else if (b.split! > a.split!) {
+      return 1;
+    }
+  }
+  // Otherwise splits are the same
+  if (a.time < b.time) {
     return -1;
-  } else if (b.eventList.length > a.eventList.length) {
+  } else if (b.time < a.time) {
     return 1;
   } else {
-    if (a.time < b.time) {
-      return -1;
-    } else if (b.time < a.time) {
-      return 1;
-    } else {
-      return 0;
-    }
+    return 0;
   }
 };
 
 export const completionSort = (a: Completion, b: Completion) => a.time - b.time;
-
-export const uuidToName = async (uuid: string): Promise<string> => {
-  const endpoint = `https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`;
-  const data = await axios.get(endpoint);
-  if (data.status >= 400) return "UNKNOWN";
-
-  return data.data.name;
-};
 
 export const nameToUuid = async (name: string): Promise<string> => {
   const endpoint = `https://api.mojang.com/users/profiles/minecraft/${name}`;
@@ -95,18 +102,4 @@ export const nameToUuid = async (name: string): Promise<string> => {
   }
 
   return fullUuid;
-};
-
-export const apiToCompletion = async (
-  completions: any[]
-): Promise<Completion[]> => {
-  const formattedCompletions: Completion[] = [];
-  for (const completion of completions) {
-    formattedCompletions.push({
-      ...completion,
-      nickname: await uuidToName(completion.uuid),
-    });
-  }
-
-  return formattedCompletions;
 };

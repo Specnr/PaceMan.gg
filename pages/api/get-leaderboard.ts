@@ -1,4 +1,4 @@
-import { apiToCompletion, completionSort } from "@/public/functions/converters";
+import { completionSort } from "@/public/functions/converters";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const PaceManEndpoint = (filter: string, removeDupes: string) =>
@@ -15,9 +15,7 @@ export default async function handler(
   const lbCompletions = await (
     await fetch(PaceManEndpoint(filterId as string, removeDuplicates as string))
   ).json();
-  const formattedCompletions = (await apiToCompletion(lbCompletions)).sort(
-    completionSort
-  );
+  const formattedCompletions = lbCompletions.sort(completionSort);
 
   res.status(200).json(formattedCompletions);
 }
