@@ -12,4 +12,5 @@ export interface Pace {
   uuid: string;
   twitch: string | null;
   lastUpdated: number;
+  isHighQuality: boolean;
 }

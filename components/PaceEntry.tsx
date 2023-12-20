@@ -15,6 +15,8 @@ export default function PaceEntry(props: Pace) {
     lastUpdatedDifference(props.lastUpdated, props.time)
   );
 
+  const hqClassNames = props.isHighQuality ? " font-extrabold" : "";
+
   return (
     <>
       <tr className={"bg-gray-800 border-gray-700"}>
@@ -39,12 +41,12 @@ export default function PaceEntry(props: Pace) {
             <button>{props.nickname}</button>
           )}
         </td>
-        <td className="px-6 py-4">
+        <td className={`px-6 py-4 ${hqClassNames}`}>
           <button onClick={() => setIsExpanded(!isExpanded)}>
             {props.splitName}
           </button>
         </td>
-        <td className="px-6 py-4 btn">
+        <td className={`px-6 py-4 btn ${hqClassNames}`}>
           <Tooltip
             showArrow
             onAnimationStart={() =>
