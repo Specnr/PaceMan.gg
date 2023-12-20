@@ -28,9 +28,9 @@ export const eventOrder = new Map([
 
 export const goodPaceSplits = new Map([
   ["s2", 270000], // 4:30
-  ["rsg.first_portal", 390000], // 6:30
-  ["rsg.enter_stronghold", 480000], // 8:00
-  ["rsg.enter_end", 510000], // 8:30
+  ["rsg.first_portal", 360000], // 6:00
+  ["rsg.enter_stronghold", 450000], // 7:30
+  ["rsg.enter_end", 480000], // 8:00
   ["rsg.credits", 600000], // 10:00
 ]);
 
