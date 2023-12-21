@@ -36,7 +36,7 @@ export default function Home() {
             <thead className="sticky top-0 text-sm uppercase bg-gray-700 text-gray-400">
               <tr>
                 <TableHeader colSpan={2}>Player</TableHeader>
-                <TableHeader>Split</TableHeader>
+                <TableHeader colSpan={2}>Split</TableHeader>
                 <TableHeader colSpan={2}>Time</TableHeader>
               </tr>
             </thead>

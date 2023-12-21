@@ -1,6 +1,7 @@
 import {
   lastUpdatedDifference,
   msToTime,
+  splitToIcon,
   uuidToHead,
 } from "@/public/functions/frontendConverters";
 import { Pace } from "./interfaces/Pace";
@@ -21,7 +22,7 @@ export default function PaceEntry(props: Pace) {
     <>
       <tr className={"bg-gray-800 border-gray-700"}>
         <td
-          className="pl-4 h-0 w-0 md:h-14 md:w-14 md:pl-6 md:py-4"
+          className="pl-2 h-0 w-0 md:h-14 md:w-14 md:pl-6 md:py-4"
           scope="row"
           width={54}
         >
@@ -41,12 +42,24 @@ export default function PaceEntry(props: Pace) {
             <button>{props.nickname}</button>
           )}
         </td>
-        <td className={`px-6 py-4 ${hqClassNames}`}>
+        <td
+          className="h-0 w-0 md:h-14 md:w-14 md:pl-6 md:py-4"
+          scope="row"
+          width={54}
+        >
+          <Image
+            alt="avatar"
+            src={splitToIcon(props.split!)}
+            width={28}
+            height={28}
+          />
+        </td>
+        <td className={`px-4 md:px-2 py-4 ${hqClassNames}`}>
           <button onClick={() => setIsExpanded(!isExpanded)}>
             {props.splitName}
           </button>
         </td>
-        <td className={`px-6 py-4 btn ${hqClassNames}`}>
+        <td className={`px-4 md:px-6 py-4 btn ${hqClassNames}`}>
           <Tooltip
             showArrow
             onAnimationStart={() =>
@@ -68,9 +81,9 @@ export default function PaceEntry(props: Pace) {
             key={`${props.uuid}${e.name}`}
             className="bg-gray-800 border-gray-700 text-sm"
           >
-            <td colSpan={2} />
-            <td className="px-6">{e.name}</td>
-            <td className="px-6">{msToTime(e.time)}</td>
+            <td colSpan={3} />
+            <td className="px-4 md:px-2">{e.name}</td>
+            <td className="px-4 md:px-6">{msToTime(e.time)}</td>
           </tr>
         ))}
     </>

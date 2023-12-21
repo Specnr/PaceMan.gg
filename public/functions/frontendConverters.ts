@@ -5,6 +5,14 @@ import timezone from "dayjs/plugin/timezone";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
+import Nether from "@/public/images/nether.png";
+import Bastion from "@/public/images/bastion.png";
+import Fortress from "@/public/images/fortress.png";
+import Blind from "@/public/images/portal.png";
+import Stronghold from "@/public/images/sh.png";
+import End from "@/public/images/end.png";
+import Credits from "@/public/images/credits.png";
+
 export const msToTime = (ms: number, keepMs = false): string => {
   let milliseconds = Math.floor((ms % 1000) / 100),
     seconds = Math.floor((ms / 1000) % 60),
@@ -21,6 +29,29 @@ export const msToTime = (ms: number, keepMs = false): string => {
 };
 
 export const msToDate = (ms: number) => dayjs(ms * 1000).format("MM/DD/YYYY");
+
+export const splitToIcon = (splitId: number) => {
+  switch (splitId) {
+    case 0:
+      return Nether;
+    case 1:
+      return Bastion;
+    case 2:
+      return Fortress;
+    case 3:
+      return Blind;
+    case 4:
+      return Blind;
+    case 5:
+      return Stronghold;
+    case 6:
+      return End;
+    case 7:
+      return Credits;
+    default:
+      return Nether;
+  }
+};
 
 export const uuidToHead = (uuid: string): string => {
   const endpoint = "https://mc-heads.net/avatar/";
