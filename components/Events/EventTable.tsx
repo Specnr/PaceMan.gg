@@ -7,7 +7,8 @@ import CompletionTable from "../Leaderboards/CompletionTable";
 export default function EventTable({ event }: { event: Event }) {
   const { data, isLoading, error } = useSWR(
     `/api/get-event-completions?eventId=${event._id}`,
-    fetcher
+    fetcher,
+    { revalidateOnFocus: false }
   );
 
   return (

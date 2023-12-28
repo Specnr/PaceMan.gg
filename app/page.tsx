@@ -6,19 +6,28 @@ import TableHeader from "@/components/TableHeader";
 import Title from "@/components/Title";
 import { Pace } from "@/components/interfaces/Pace";
 import { Spinner } from "@nextui-org/react";
+import { apiToPace, paceSort } from "@/public/functions/converters";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const fetcher = async (url: string) => {
+  const data = await fetch(url).then((res) => res.json());
+  const paces = (await apiToPace(data)).sort(paceSort);
+  return paces;
+};
 
 export default function Home() {
-  const { data, error, isLoading } = useSWR("/api/get-runs", fetcher, {
-    refreshWhenHidden: true,
-    refreshInterval: 1000,
-  });
+  const { data, error, isLoading } = useSWR(
+    "https://paceman.gg/api/ars/liveruns",
+    fetcher,
+    {
+      refreshWhenHidden: true,
+      refreshInterval: 1000,
+    }
+  );
 
   let msg = null;
   if (error) msg = "failed to load";
   else if (isLoading) msg = <Spinner color="secondary" size="lg" />;
-  else if (data.length === 0) msg = "No one is currently on pace...";
+  else if (!data || data.length === 0) msg = "No one is currently on pace...";
 
   return (
     <div className="container-height">
@@ -41,7 +50,7 @@ export default function Home() {
               </tr>
             </thead>
             <tbody>
-              {data.map((pace: Pace, idx: number) => (
+              {data!.map((pace: Pace, idx: number) => (
                 <PaceEntry key={idx} {...pace} />
               ))}
             </tbody>
