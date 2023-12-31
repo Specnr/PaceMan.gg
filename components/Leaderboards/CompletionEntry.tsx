@@ -11,6 +11,7 @@ import {
 import { EventItem } from "../interfaces/Completion";
 import { useState } from "react";
 import { Tooltip } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 
 interface Props {
   uuid: string;
@@ -21,6 +22,7 @@ interface Props {
 }
 
 export default function CompletionEntry(props: Props) {
+  const router = useRouter();
   const [isExpanded, setIsExpanded] = useState(false);
 
   const placementStyle = {
@@ -41,20 +43,26 @@ export default function CompletionEntry(props: Props) {
             {ordinalSuffix(props.placement)}
           </button>
         </td>
-        <td
-          className="h-0 w-0 md:h-14 md:w-14 md:pl-6 md:py-4"
-          scope="row"
-          width={54}
-        >
-          <Image
-            alt="avatar"
-            src={uuidToHead(props.uuid)}
-            width={28}
-            height={28}
-          />
+        <td className="h-0 w-0 md:h-14 md:w-14 md:pl-6" scope="row" width={54}>
+          <button
+            className="pt-2"
+            onClick={() => router.push(`/user/${props.nickname}`)}
+          >
+            <Image
+              alt="avatar"
+              src={uuidToHead(props.uuid)}
+              width={28}
+              height={28}
+            />
+          </button>
         </td>
         <td className="max-w-xs truncate px-6 py-4 font-medium">
-          <button style={placementStyle}>{props.nickname}</button>
+          <button
+            style={placementStyle}
+            onClick={() => router.push(`/user/${props.nickname}`)}
+          >
+            {props.nickname}
+          </button>
         </td>
         <td className="px-6 py-4">
           <Tooltip

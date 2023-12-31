@@ -2,7 +2,7 @@ import { nameToUuid } from "@/public/functions/converters";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const PaceManEndpoint = (uuid: string) =>
-  `https://paceman.gg/api/us/user?uuid=${uuid}`;
+  `https://paceman.gg/api/us/user?uuid=${uuid}&sortByTime=1`;
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,6 +20,7 @@ export default async function handler(
     res.status(200).json({
       ...userData.user,
       completions: userData.completions,
+      pbs: userData.pbs,
     });
   } catch {
     return res.status(404).json(`Could not find user with nickname ${name}`);

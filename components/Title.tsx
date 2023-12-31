@@ -1,7 +1,8 @@
+import { ReactNode } from "react";
 import Link from "./Link";
 
 export default function Table(props: {
-  titleOverrite?: string;
+  titleOverrite?: string | ReactNode;
   link?: string;
 }) {
   const text = props.titleOverrite ? props.titleOverrite : "MCSR PaceMan";

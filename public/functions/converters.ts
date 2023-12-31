@@ -2,7 +2,7 @@ import { Pace, Event } from "@/components/interfaces/Pace";
 import Completion from "@/components/interfaces/Completion";
 import axios from "axios";
 
-export const fetcher = (url: string) => fetch(url).then((res) => res.json());
+export const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 export const eventIdToName = new Map<string, string>([
   ["rsg.enter_nether", "Enter Nether"],
@@ -26,6 +26,14 @@ export const eventOrder = new Map([
   ["rsg.credits", 7],
 ]);
 
+export const goodPaceSplits = new Map([
+  ["s2", 270000], // 4:30
+  ["rsg.first_portal", 360000], // 6:00
+  ["rsg.enter_stronghold", 450000], // 7:30
+  ["rsg.enter_end", 480000], // 8:00
+  ["rsg.credits", 600000], // 10:00
+]);
+
 export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
   const filteredPace = paceItems.filter((p) => !p.isCheated && !p.isHidden);
   const mappedPace: Pace[] = [];
@@ -33,6 +41,15 @@ export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
     const latestEvent = p.eventList[p.eventList.length - 1];
     if (!eventIdToName.has(latestEvent.eventId)) {
       continue;
+    }
+
+    let isHighQuality = false;
+
+    if (p.eventList.length === 3) {
+      isHighQuality = latestEvent.igt <= goodPaceSplits.get("s2")!; // 4:30
+    } else if (goodPaceSplits.has(latestEvent.eventId)) {
+      isHighQuality =
+        latestEvent.igt <= goodPaceSplits.get(latestEvent.eventId)!;
     }
 
     const formattedEventList: Event[] = p.eventList.map((e: any) => ({
@@ -49,6 +66,7 @@ export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
       uuid: p.user.uuid,
       twitch: p.user.liveAccount,
       lastUpdated: p.lastUpdated,
+      isHighQuality,
     });
   }
 
@@ -56,6 +74,12 @@ export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
 };
 
 export const paceSort = (a: Pace, b: Pace) => {
+  if (a.isHighQuality && !b.isHighQuality) {
+    return -1;
+  }
+  if (b.isHighQuality && !a.isHighQuality) {
+    return 1;
+  }
   // Sort on event count if S1/S2
   // Sort on split index otherwise
   if (
