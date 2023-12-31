@@ -2,7 +2,7 @@ import { Pace, Event } from "@/components/interfaces/Pace";
 import Completion from "@/components/interfaces/Completion";
 import axios from "axios";
 
-export const fetcher = (url: string) => fetch(url).then((res) => res.json());
+export const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 export const eventIdToName = new Map<string, string>([
   ["rsg.enter_nether", "Enter Nether"],

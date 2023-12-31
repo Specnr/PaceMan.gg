@@ -55,12 +55,12 @@ export const splitToIcon = (splitId: number) => {
 
 export const uuidToHead = (uuid: string): string => {
   const endpoint = "https://mc-heads.net/avatar/";
-  return `${endpoint}${uuid}.png`;
+  return `${endpoint}${uuid}`;
 };
 
 export const uuidToSkin = (uuid: string): string => {
   const endpoint = "https://mc-heads.net/body/";
-  return `${endpoint}${uuid}/1000.png`;
+  return `${endpoint}${uuid}`;
 };
 
 // https://stackoverflow.com/questions/13627308/add-st-nd-rd-and-th-ordinal-suffix-to-a-number
