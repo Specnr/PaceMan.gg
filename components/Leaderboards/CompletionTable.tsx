@@ -49,12 +49,13 @@ export default function EventTable({
             ];
             return simplify ? (
               <SimpleCompletionEntry
+                key={completion._id}
                 eventList={el}
                 submitted={completion.submitted}
               />
             ) : (
               <CompletionEntry
-                key={idx}
+                key={completion._id}
                 placement={idx + 1}
                 nickname={completion.nickname}
                 uuid={completion.uuid}
