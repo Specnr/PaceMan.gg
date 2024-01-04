@@ -5,8 +5,10 @@ import PaceEntry from "@/components/PaceEntry";
 import TableHeader from "@/components/TableHeader";
 import Title from "@/components/Title";
 import { Pace } from "@/components/interfaces/Pace";
-import { Spinner } from "@nextui-org/react";
+import { Spinner, Tooltip } from "@nextui-org/react";
 import { apiToPace, paceSort } from "@/public/functions/converters";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 const fetcher = async (url: string) => {
   const data = await fetch(url).then((res) => res.json());
@@ -35,6 +37,20 @@ export default function Home() {
         <Title />
         <p className="invisible h-0 lg:h-auto lg:pt-2 lg:visible">
           The best Minecraft Speedrunning pace in real-time
+          <Tooltip
+            showArrow
+            content={
+              <div className="text-left">
+                <p>Click on time {"->"} Splits</p>
+                <p>Click on head {"->"} User profile</p>
+                <p>Hover over time {"->"} Current time</p>
+                <p>Bolded {"->"} Good pace, will prioritize</p>
+                <p>Blue name {"->"} Live, click to watch</p>
+              </div>
+            }
+          >
+            <FontAwesomeIcon icon={faCircleInfo} className="pl-2" />
+          </Tooltip>
         </p>
       </div>
       {msg !== null ? (
