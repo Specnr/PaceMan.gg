@@ -3,12 +3,12 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'mc-heads.net',
-        pathname: '**',
+        protocol: "https",
+        hostname: "api.mineatar.io",
+        pathname: "**",
       },
-    ]
-  }
-}
+    ],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
