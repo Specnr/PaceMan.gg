@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import Providers from "./providers";
 config.autoAddCss = false;
 
 const inter = Inter({ subsets: ["latin"] });
@@ -27,7 +28,7 @@ export default function RootLayout({
           <NavBar />
         </div>
         <div className="h-screen">
-          {children}
+          <Providers>{children}</Providers>
           <Footer />
         </div>
       </body>
