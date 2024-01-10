@@ -59,7 +59,7 @@ export const uuidToHead = (uuid: string): string => {
 };
 
 export const uuidToSkin = (uuid: string): string => {
-  const endpoint = "https://api.mineatar.io/body/full/";
+  const endpoint = "https://mc-heads.net/body/full/";
   return `${endpoint}${uuid}?scale=16`;
 };
 
