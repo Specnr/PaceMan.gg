@@ -39,7 +39,9 @@ export default function LeaderboardPage({
             size="sm"
             defaultSelectedKeys={[params.filter]}
             value={params.filter}
-            onChange={(e) => router.push(`/lb/${e.target.value}`)}
+            onChange={(e) =>
+              e.target.value !== "" && router.push(`/lb/${e.target.value}`)
+            }
           >
             {filters.map((filter) => (
               <SelectItem value={filter} key={filter}>
