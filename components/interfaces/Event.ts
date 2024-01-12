@@ -3,7 +3,7 @@ export default interface Event {
   name: string;
   starts: number[];
   ends: number[];
-  whitelist: boolean;
+  whitelist: string[];
   vanity: string;
   host?: string;
 }

@@ -9,7 +9,8 @@ import EventTable from "@/components/Events/EventTable";
 import { msToDate } from "@/public/functions/frontendConverters";
 import Title from "@/components/Title";
 import DateTimeListTooltip from "@/components/Events/DateTimeListTooltip";
-import { Select, SelectItem, Spinner } from "@nextui-org/react";
+import { Select, SelectItem, Spinner, Switch } from "@nextui-org/react";
+import PaceLeaderboard from "@/components/Leaderboards/PaceLeaderboard";
 
 export default function Events({ params }: { params: { event: string } }) {
   const {
@@ -21,6 +22,7 @@ export default function Events({ params }: { params: { event: string } }) {
 
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [isLoadingEvent, setIsLoadingEvent] = useState<boolean>(true);
+  const [paceTable, setPaceTable] = useState(false);
 
   useEffect(() => {
     if (!error && !isLoading && events && !selectedEvent) {
@@ -75,29 +77,42 @@ export default function Events({ params }: { params: { event: string } }) {
             </DateTimeListTooltip>
           </div>
         )}
-        <Select
-          className="max-w-sm"
-          variant="bordered"
-          size="sm"
-          defaultSelectedKeys={[selectedEvent!.vanity]}
-          onChange={(evt) =>
-            router.push(
-              `/events/${
-                eventList.filter((e) => e.vanity === evt.target.value)[0].vanity
-              }`
-            )
-          }
-          value={selectedEvent ? selectedEvent.vanity : ""}
-        >
-          {eventList.map((e) => (
-            <SelectItem value={e.vanity} key={e.vanity}>
-              {e.name}
-            </SelectItem>
-          ))}
-        </Select>
+
+        <div className="px-4 pt-2 mx-auto flex lg:w-2/4 gap-4 justify-center">
+          <Select
+            className="max-w-sm"
+            variant="bordered"
+            size="sm"
+            defaultSelectedKeys={[selectedEvent!.vanity]}
+            onChange={(evt) =>
+              router.push(
+                `/events/${
+                  eventList.filter((e) => e.vanity === evt.target.value)[0]
+                    .vanity
+                }`
+              )
+            }
+            value={selectedEvent ? selectedEvent.vanity : ""}
+          >
+            {eventList.map((e) => (
+              <SelectItem value={e.vanity} key={e.vanity}>
+                {e.name}
+              </SelectItem>
+            ))}
+          </Select>
+          <Switch
+            color="secondary"
+            checked={paceTable}
+            onChange={(e) => setPaceTable(e.target.checked)}
+          >
+            <span>Pace</span>
+          </Switch>
+        </div>
       </div>
       {!selectedEvent ? (
         <div className="grid h-4/6 place-items-center">No Event Selected</div>
+      ) : paceTable ? (
+        <PaceLeaderboard whitelist={new Set(selectedEvent.whitelist)} />
       ) : (
         <EventTable event={selectedEvent} />
       )}
