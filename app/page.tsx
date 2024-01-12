@@ -1,36 +1,10 @@
-"use client";
-import useSWR from "swr";
-
-import PaceEntry from "@/components/PaceEntry";
-import TableHeader from "@/components/TableHeader";
 import Title from "@/components/Title";
-import { Pace } from "@/components/interfaces/Pace";
-import { Spinner, Tooltip } from "@nextui-org/react";
-import { apiToPace, paceSort } from "@/public/functions/converters";
+import { Tooltip } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-
-const fetcher = async (url: string) => {
-  const data = await fetch(url).then((res) => res.json());
-  const paces = (await apiToPace(data)).sort(paceSort);
-  return paces;
-};
+import PaceLeaderboard from "@/components/Leaderboards/PaceLeaderboard";
 
 export default function Home() {
-  const { data, error, isLoading } = useSWR(
-    "https://paceman.gg/api/ars/liveruns",
-    fetcher,
-    {
-      refreshWhenHidden: true,
-      refreshInterval: 1000,
-    }
-  );
-
-  let msg = null;
-  if (error) msg = "failed to load";
-  else if (isLoading) msg = <Spinner color="secondary" size="lg" />;
-  else if (!data || data.length === 0) msg = "No one is currently on pace...";
-
   return (
     <div className="container-height">
       <div className="pt-16">
@@ -53,26 +27,7 @@ export default function Home() {
           </Tooltip>
         </p>
       </div>
-      {msg !== null ? (
-        <div className="grid h-4/6 place-items-center">{msg}</div>
-      ) : (
-        <div className="mt-4 mx-auto half-height overflow-y-auto w-full lg:w-6/12">
-          <table className="relative text-lg text-left text-gray-400 justify-between w-full half-height">
-            <thead className="sticky top-0 text-sm uppercase bg-gray-700 text-gray-400">
-              <tr>
-                <TableHeader colSpan={2}>Player</TableHeader>
-                <TableHeader colSpan={2}>Split</TableHeader>
-                <TableHeader colSpan={2}>Time</TableHeader>
-              </tr>
-            </thead>
-            <tbody>
-              {data!.map((pace: Pace, idx: number) => (
-                <PaceEntry key={idx} {...pace} />
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      <PaceLeaderboard />
     </div>
   );
 }

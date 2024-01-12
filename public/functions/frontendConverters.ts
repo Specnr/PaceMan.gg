@@ -59,8 +59,8 @@ export const uuidToHead = (uuid: string): string => {
 };
 
 export const uuidToSkin = (uuid: string): string => {
-  const endpoint = "https://api.mineatar.io/body/full/";
-  return `${endpoint}${uuid}?scale=16`;
+  const endpoint = "https://mc-heads.net/body/";
+  return `${endpoint}${uuid}`;
 };
 
 // https://stackoverflow.com/questions/13627308/add-st-nd-rd-and-th-ordinal-suffix-to-a-number

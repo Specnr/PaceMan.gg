@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: "api.mineatar.io",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "mc-heads.net",
+        pathname: "**",
+      },
     ],
   },
 };
