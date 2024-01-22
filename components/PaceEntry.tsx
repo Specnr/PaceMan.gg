@@ -32,7 +32,7 @@ export default function PaceEntry(props: Pace) {
             className="pt-2"
             onClick={() => router.push(`/user/${props.nickname}`)}
           >
-            <Image
+            <img // eslint-disable-line
               alt="avatar"
               src={uuidToHead(props.uuid)}
               width={28}

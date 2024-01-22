@@ -42,7 +42,7 @@ export default function PaceLeaderboard({
   }
 
   return (
-    <div className="mt-4 mx-auto half-height overflow-y-auto w-full lg:w-6/12">
+    <div className="mt-2 mx-auto half-height overflow-y-auto w-full lg:w-6/12">
       <table className="relative text-lg text-left text-gray-400 justify-between w-full half-height">
         <thead className="sticky top-0 text-sm uppercase bg-gray-700 text-gray-400">
           <tr>
