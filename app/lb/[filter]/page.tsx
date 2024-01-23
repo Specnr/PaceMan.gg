@@ -2,12 +2,15 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { Switch, Select, SelectItem } from "@nextui-org/react";
+import { Switch, Select, SelectItem, Tooltip } from "@nextui-org/react";
 
 import Leaderboard from "@/components/Leaderboards/Leaderboard";
 import Title from "@/components/Title";
+import TrophyLeaderboard from "@/components/Leaderboards/TrophyLeaderboard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
-const filterTypes = new Set(["daily", "weekly", "monthly", "all"]);
+const filterTypes = new Set(["daily", "weekly", "monthly", "all", "trophy"]);
 
 const filterToDisplayName = (filter: string) => {
   if (filter === "all" || !filterTypes.has(filter)) return "Lifetime";
@@ -26,7 +29,8 @@ export default function LeaderboardPage({
     return router.push("/lb/all");
   }
 
-  const filters = ["daily", "weekly", "monthly", "all"];
+  const filters = ["daily", "weekly", "monthly", "all", "trophy"];
+  const isTrophy = params.filter === "trophy";
 
   return (
     <div className="container-height">
@@ -49,16 +53,39 @@ export default function LeaderboardPage({
               </SelectItem>
             ))}
           </Select>
-          <Switch
-            color="secondary"
-            checked={showAll}
-            onChange={(e) => setShowAll(e.target.checked)}
-          >
-            <span>Show All</span>
-          </Switch>
+          {isTrophy ? (
+            <Tooltip
+              showArrow
+              content={
+                <div className="text-left">
+                  <p>Daily = 1 point</p>
+                  <p>Weekly = 3 points</p>
+                  <p>Monthly = 5 points</p>
+                  <p>PB will be used to break ties</p>
+                </div>
+              }
+            >
+              <FontAwesomeIcon
+                icon={faCircleInfo}
+                className="text-xl pl-2 pt-4"
+              />
+            </Tooltip>
+          ) : (
+            <Switch
+              color="secondary"
+              checked={showAll}
+              onChange={(e) => setShowAll(e.target.checked)}
+            >
+              <span>Show All</span>
+            </Switch>
+          )}
         </div>
       </div>
-      <Leaderboard filter={params.filter} removeDupes={!showAll} />
+      {isTrophy ? (
+        <TrophyLeaderboard />
+      ) : (
+        <Leaderboard filter={params.filter} removeDupes={!showAll} />
+      )}
     </div>
   );
 }

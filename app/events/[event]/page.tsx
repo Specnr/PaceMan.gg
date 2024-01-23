@@ -11,6 +11,7 @@ import Title from "@/components/Title";
 import DateTimeListTooltip from "@/components/Events/DateTimeListTooltip";
 import { Select, SelectItem, Spinner, Switch } from "@nextui-org/react";
 import PaceLeaderboard from "@/components/Leaderboards/PaceLeaderboard";
+import dayjs from "dayjs";
 
 export default function Events({ params }: { params: { event: string } }) {
   const {
@@ -26,11 +27,21 @@ export default function Events({ params }: { params: { event: string } }) {
 
   useEffect(() => {
     if (!error && !isLoading && events && !selectedEvent) {
-      let foundEvent = null;
+      let foundEvent: Event[] = [];
       if (params.event !== "latest") {
-        foundEvent = events.filter((e: any) => e.vanity === params.event);
+        foundEvent = events.filter((e) => e.vanity === params.event);
       } else if (events.length > 0) {
-        foundEvent = [events[0]];
+        // Get the newest start date in the past
+        let minEvent = events[events.length - 1];
+        events.forEach((e) => {
+          if (
+            dayjs().valueOf() >= e.starts[0] * 1000 &&
+            e.starts[0] > minEvent.starts[0]
+          ) {
+            minEvent = e;
+          }
+        });
+        foundEvent = [minEvent];
       }
 
       if (foundEvent?.length === 1) {
