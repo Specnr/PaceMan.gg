@@ -6,8 +6,9 @@ import { Switch, Select, SelectItem } from "@nextui-org/react";
 
 import Leaderboard from "@/components/Leaderboards/Leaderboard";
 import Title from "@/components/Title";
+import TrophyLeaderboard from "@/components/Leaderboards/TrophyLeaderboard";
 
-const filterTypes = new Set(["daily", "weekly", "monthly", "all"]);
+const filterTypes = new Set(["daily", "weekly", "monthly", "all", "trophy"]);
 
 const filterToDisplayName = (filter: string) => {
   if (filter === "all" || !filterTypes.has(filter)) return "Lifetime";
@@ -26,7 +27,8 @@ export default function LeaderboardPage({
     return router.push("/lb/all");
   }
 
-  const filters = ["daily", "weekly", "monthly", "all"];
+  const filters = ["daily", "weekly", "monthly", "all", "trophy"];
+  const isTrophy = params.filter === "trophy";
 
   return (
     <div className="container-height">
@@ -49,16 +51,22 @@ export default function LeaderboardPage({
               </SelectItem>
             ))}
           </Select>
-          <Switch
-            color="secondary"
-            checked={showAll}
-            onChange={(e) => setShowAll(e.target.checked)}
-          >
-            <span>Show All</span>
-          </Switch>
+          {!isTrophy && (
+            <Switch
+              color="secondary"
+              checked={showAll}
+              onChange={(e) => setShowAll(e.target.checked)}
+            >
+              <span>Show All</span>
+            </Switch>
+          )}
         </div>
       </div>
-      <Leaderboard filter={params.filter} removeDupes={!showAll} />
+      {isTrophy ? (
+        <TrophyLeaderboard />
+      ) : (
+        <Leaderboard filter={params.filter} removeDupes={!showAll} />
+      )}
     </div>
   );
 }
