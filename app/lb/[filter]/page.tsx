@@ -2,11 +2,13 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { Switch, Select, SelectItem } from "@nextui-org/react";
+import { Switch, Select, SelectItem, Tooltip } from "@nextui-org/react";
 
 import Leaderboard from "@/components/Leaderboards/Leaderboard";
 import Title from "@/components/Title";
 import TrophyLeaderboard from "@/components/Leaderboards/TrophyLeaderboard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 const filterTypes = new Set(["daily", "weekly", "monthly", "all", "trophy"]);
 
@@ -51,7 +53,24 @@ export default function LeaderboardPage({
               </SelectItem>
             ))}
           </Select>
-          {!isTrophy && (
+          {isTrophy ? (
+            <Tooltip
+              showArrow
+              content={
+                <div className="text-left">
+                  <p>Daily = 1 point</p>
+                  <p>Weekly = 3 points</p>
+                  <p>Monthly = 5 points</p>
+                  <p>PB will be used to break ties</p>
+                </div>
+              }
+            >
+              <FontAwesomeIcon
+                icon={faCircleInfo}
+                className="text-xl pl-2 pt-4"
+              />
+            </Tooltip>
+          ) : (
             <Switch
               color="secondary"
               checked={showAll}

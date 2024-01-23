@@ -37,9 +37,9 @@ export default function TrophyLeaderboard() {
           <tr>
             <TableHeader>Place</TableHeader>
             <TableHeader colSpan={2}>Player</TableHeader>
-            <TableHeader>M</TableHeader>
-            <TableHeader>W</TableHeader>
             <TableHeader>D</TableHeader>
+            <TableHeader>W</TableHeader>
+            <TableHeader>M</TableHeader>
             <TableHeader>PB</TableHeader>
           </tr>
         </thead>
