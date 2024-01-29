@@ -11,7 +11,7 @@ import CompletionTable from "@/components/Leaderboards/CompletionTable";
 import UserCompletion from "@/components/interfaces/Completion";
 
 const TitleContent = (params: { name: string }) => (
-  <span className="capitalize italic">{params.name}</span>
+  <span className="italic">{params.name}</span>
 );
 
 const PBSectionEntry = (params: {
