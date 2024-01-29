@@ -16,17 +16,17 @@ const filterToId = (filter: string) => {
   }
 };
 
-export default function EventTable({
-  filter,
-  removeDupes,
-}: {
+interface Props {
   filter: string;
   removeDupes: boolean;
-}) {
+  date: number;
+}
+
+export default function EventTable({ filter, removeDupes, date }: Props) {
   const { data, isLoading, error } = useSWR(
     `/api/get-leaderboard?filterId=${filterToId(
       filter
-    )}&removeDuplicates=${+removeDupes}`,
+    )}&removeDuplicates=${+removeDupes}&date=${date}`,
     fetcher,
     { revalidateOnFocus: false }
   );
