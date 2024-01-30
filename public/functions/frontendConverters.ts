@@ -97,3 +97,14 @@ export const lastUpdatedDifference = (
   const now = dayjs().tz("America/Toronto").valueOf();
   return msToTime(latestSplit + now - lastUpdated);
 };
+
+export const createDateFromInput = (date: dayjs.Dayjs) => {
+  date = date ?? dayjs();
+
+  const newDate = date.tz("America/Toronto");
+  newDate.set("date", date.get("date"));
+  newDate.set("month", date.get("month"));
+  newDate.set("year", date.get("year"));
+
+  return newDate.valueOf();
+};

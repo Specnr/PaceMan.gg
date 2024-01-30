@@ -12,6 +12,7 @@ import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import { createDateFromInput } from "@/public/functions/frontendConverters";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -59,7 +60,7 @@ export default function LeaderboardPage({
                   type="date"
                   size="sm"
                   variant="bordered"
-                  value={date.format("YYYY-MM-DD")}
+                  value={date.tz(dayjs.tz.guess()).format("YYYY-MM-DD")}
                   onChange={(e) => setDate(dayjs(e.target.value))}
                 />
               </div>
@@ -115,7 +116,7 @@ export default function LeaderboardPage({
         <Leaderboard
           filter={params.filter}
           removeDupes={!showAll}
-          date={(date ?? dayjs()).tz("America/Toronto").valueOf()}
+          date={createDateFromInput(date)}
         />
       )}
     </div>
