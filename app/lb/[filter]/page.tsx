@@ -30,7 +30,7 @@ export default function LeaderboardPage({
 }) {
   const router = useRouter();
   const [showAll, setShowAll] = useState(false);
-  const [date, setDate] = useState(dayjs());
+  const [date, setDate] = useState(dayjs().tz("America/Toronto"));
 
   if (!filterTypes.has(params.filter)) {
     return router.push("/lb/all");
