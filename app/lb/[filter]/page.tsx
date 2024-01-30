@@ -12,6 +12,7 @@ import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import { createDateFromInput } from "@/public/functions/frontendConverters";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -30,7 +31,7 @@ export default function LeaderboardPage({
 }) {
   const router = useRouter();
   const [showAll, setShowAll] = useState(false);
-  const [date, setDate] = useState(dayjs().tz("America/Toronto"));
+  const [date, setDate] = useState(dayjs());
 
   if (!filterTypes.has(params.filter)) {
     return router.push("/lb/all");
@@ -60,9 +61,7 @@ export default function LeaderboardPage({
                   size="sm"
                   variant="bordered"
                   value={date.tz(dayjs.tz.guess()).format("YYYY-MM-DD")}
-                  onChange={(e) =>
-                    setDate(dayjs(e.target.value).tz("America/Toronto"))
-                  }
+                  onChange={(e) => setDate(dayjs(e.target.value))}
                 />
               </div>
             </Tooltip>
@@ -117,7 +116,7 @@ export default function LeaderboardPage({
         <Leaderboard
           filter={params.filter}
           removeDupes={!showAll}
-          date={(date ?? dayjs()).tz("America/Toronto").valueOf()}
+          date={createDateFromInput(date)}
         />
       )}
     </div>
