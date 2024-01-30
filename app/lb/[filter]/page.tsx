@@ -46,17 +46,26 @@ export default function LeaderboardPage({
         <Title titleOverrite={`PaceMan Leaderboard`} />
         <div className="px-4 pt-2 mx-auto flex lg:w-2/4 gap-4 justify-center">
           {!isTrophy && !isAll && (
-            <div className="w-0 invisible md:visible md:w-[180px]">
-              <Input
-                type="date"
-                size="sm"
-                variant="bordered"
-                value={date.format("YYYY-MM-DD")}
-                onChange={(e) =>
-                  setDate(dayjs(e.target.value).tz("America/Toronto"))
-                }
-              />
-            </div>
+            <Tooltip
+              showArrow
+              content={`Localized day start: ${dayjs()
+                .tz("America/Toronto")
+                .startOf("day")
+                .tz(dayjs.tz.guess())
+                .format("HH:mm")}`}
+            >
+              <div className="w-0 invisible md:visible md:w-[180px]">
+                <Input
+                  type="date"
+                  size="sm"
+                  variant="bordered"
+                  value={date.format("YYYY-MM-DD")}
+                  onChange={(e) =>
+                    setDate(dayjs(e.target.value).tz("America/Toronto"))
+                  }
+                />
+              </div>
+            </Tooltip>
           )}
           <Select
             className="max-w-sm"
