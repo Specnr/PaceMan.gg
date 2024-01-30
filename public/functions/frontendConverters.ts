@@ -101,10 +101,12 @@ export const lastUpdatedDifference = (
 export const createDateFromInput = (date: dayjs.Dayjs) => {
   date = date ?? dayjs();
 
+  const [d, m, y] = [date.get("date"), date.get("month"), date.get("year")];
+
   const newDate = date.tz("America/Toronto");
-  newDate.set("date", date.get("date"));
-  newDate.set("month", date.get("month"));
-  newDate.set("year", date.get("year"));
+  newDate.set("date", d);
+  newDate.set("month", m);
+  newDate.set("year", y);
 
   return newDate.valueOf();
 };
