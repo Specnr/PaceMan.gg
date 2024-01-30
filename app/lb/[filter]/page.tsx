@@ -10,9 +10,9 @@ import TrophyLeaderboard from "@/components/Leaderboards/TrophyLeaderboard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import dayjs from "dayjs";
-
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -30,7 +30,7 @@ export default function LeaderboardPage({
 }) {
   const router = useRouter();
   const [showAll, setShowAll] = useState(false);
-  const [date, setDate] = useState(dayjs().tz("America/Toronto"));
+  const [date, setDate] = useState(dayjs());
 
   if (!filterTypes.has(params.filter)) {
     return router.push("/lb/all");
@@ -117,7 +117,7 @@ export default function LeaderboardPage({
         <Leaderboard
           filter={params.filter}
           removeDupes={!showAll}
-          date={date ? date.valueOf() : dayjs().tz("America/Toronto").valueOf()}
+          date={(date ?? dayjs()).tz("America/Toronto").valueOf()}
         />
       )}
     </div>
