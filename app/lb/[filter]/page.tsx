@@ -59,7 +59,7 @@ export default function LeaderboardPage({
                   type="date"
                   size="sm"
                   variant="bordered"
-                  value={date.format("YYYY-MM-DD")}
+                  value={date.tz(dayjs.tz.guess()).format("YYYY-MM-DD")}
                   onChange={(e) =>
                     setDate(dayjs(e.target.value).tz("America/Toronto"))
                   }
