@@ -5,7 +5,6 @@ import {
   uuidToHead,
 } from "@/public/functions/frontendConverters";
 import { Pace } from "./interfaces/Pace";
-import Image from "next/image";
 import Link from "./Link";
 import { useState } from "react";
 import { Tooltip } from "@nextui-org/react";
@@ -54,7 +53,7 @@ export default function PaceEntry(props: Pace) {
           scope="row"
           width={54}
         >
-          <Image
+          <img // eslint-disable-line
             alt="avatar"
             src={splitToIcon(props.split!)}
             width={28}

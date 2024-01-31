@@ -5,14 +5,6 @@ import timezone from "dayjs/plugin/timezone";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-import Nether from "@/public/images/nether.png";
-import Bastion from "@/public/images/bastion.png";
-import Fortress from "@/public/images/fortress.png";
-import Blind from "@/public/images/portal.png";
-import Stronghold from "@/public/images/sh.png";
-import End from "@/public/images/end.png";
-import Credits from "@/public/images/credits.png";
-
 export const msToTime = (ms: number, keepMs = false): string => {
   let milliseconds = Math.floor((ms % 1000) / 100),
     seconds = Math.floor((ms / 1000) % 60),
@@ -33,23 +25,23 @@ export const msToDate = (ms: number) => dayjs(ms * 1000).format("MM/DD/YYYY");
 export const splitToIcon = (splitId: number) => {
   switch (splitId) {
     case 0:
-      return Nether;
+      return "../images/nether.png";
     case 1:
-      return Bastion;
+      return "../images/bastion.png";
     case 2:
-      return Fortress;
+      return "../images/fortress.png";
     case 3:
-      return Blind;
+      return "../images/portal.png";
     case 4:
-      return Blind;
+      return "../images/portal.png";
     case 5:
-      return Stronghold;
+      return "../images/sh.png";
     case 6:
-      return End;
+      return "../images/end.png";
     case 7:
-      return Credits;
+      return "../images/credits.png";
     default:
-      return Nether;
+      return "../images/nether.png";
   }
 };
 

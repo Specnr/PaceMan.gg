@@ -4,7 +4,6 @@ import { UserData } from "@/components/interfaces/UserData";
 import { fetcher } from "@/public/functions/converters";
 import { Spinner } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import useSWR from "swr";
 import { msToTime, uuidToSkin } from "@/public/functions/frontendConverters";
 import CompletionTable from "@/components/Leaderboards/CompletionTable";
@@ -69,7 +68,7 @@ export default function LeaderboardPage({
       <div className="w-full max-w-[1200px] mx-auto mt-4 flex flex-col lg:flex-row justify-center items-center lg:items-start">
         <div className="w-2/3 lg:w-1/3">
           <div className="mx-auto w-0 lg:w-fit">
-            <Image
+            <img // eslint-disable-line
               alt="avatar"
               src={uuidToSkin(data!.uuid)}
               width={128}
