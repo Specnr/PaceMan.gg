@@ -8,6 +8,7 @@ import useSWR from "swr";
 import { msToTime, uuidToSkin } from "@/public/functions/frontendConverters";
 import CompletionTable from "@/components/Leaderboards/CompletionTable";
 import UserCompletion from "@/components/interfaces/Completion";
+import Image from "next/image";
 
 const TitleContent = (params: { name: string }) => (
   <span className="italic">{params.name}</span>
@@ -68,11 +69,12 @@ export default function LeaderboardPage({
       <div className="w-full max-w-[1200px] mx-auto mt-4 flex flex-col lg:flex-row justify-center items-center lg:items-start">
         <div className="w-2/3 lg:w-1/3">
           <div className="mx-auto w-0 lg:w-fit">
-            <img // eslint-disable-line
+            <Image
               alt="avatar"
               src={uuidToSkin(data!.uuid)}
               width={128}
               height={512}
+              unoptimized
             />
           </div>
           <div className="mx-auto w-3/4 uppercase bg-gray-700 text-gray-400 text-xs sm:text-sm lg:text-base lg:mt-4 font-semibold">

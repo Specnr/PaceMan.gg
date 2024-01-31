@@ -6,6 +6,7 @@ import {
 } from "@/public/functions/frontendConverters";
 import { TrophyEntry } from "../interfaces/TrophyEntry";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface Props {
   trophyEntry: TrophyEntry;
@@ -33,11 +34,12 @@ export default function TrophyTableEntry({ trophyEntry, placement }: Props) {
           className="pt-2"
           onClick={() => router.push(`/user/${trophyEntry.nickname}`)}
         >
-          <img // eslint-disable-line
+          <Image
             alt="avatar"
             src={uuidToHead(trophyEntry.uuid)}
             width={28}
             height={28}
+            unoptimized
           />
         </button>
       </td>

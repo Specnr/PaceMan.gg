@@ -9,6 +9,7 @@ import Link from "./Link";
 import { useState } from "react";
 import { Tooltip } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function PaceEntry(props: Pace) {
   const router = useRouter();
@@ -31,11 +32,12 @@ export default function PaceEntry(props: Pace) {
             className="pt-2"
             onClick={() => router.push(`/user/${props.nickname}`)}
           >
-            <img // eslint-disable-line
+            <Image
               alt="avatar"
               src={uuidToHead(props.uuid)}
               width={28}
               height={28}
+              unoptimized
             />
           </button>
         </td>
@@ -53,11 +55,12 @@ export default function PaceEntry(props: Pace) {
           scope="row"
           width={54}
         >
-          <img // eslint-disable-line
+          <Image
             alt="avatar"
             src={splitToIcon(props.split!)}
             width={28}
             height={28}
+            unoptimized
           />
         </td>
         <td className={`px-4 md:px-2 py-4 ${hqClassNames}`}>
