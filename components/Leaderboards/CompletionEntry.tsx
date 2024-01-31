@@ -48,11 +48,12 @@ export default function CompletionEntry(props: Props) {
             className="pt-2"
             onClick={() => router.push(`/user/${props.nickname}`)}
           >
-            <img // eslint-disable-line
+            <Image
               alt="avatar"
               src={uuidToHead(props.uuid)}
               width={28}
               height={28}
+              unoptimized
             />
           </button>
         </td>
