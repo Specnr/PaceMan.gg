@@ -22,6 +22,8 @@ const Footer = () => {
           Rules
         </Link>
         {" • "}
+        <Link link="https://paceman.gg/stats">Stats</Link>
+        {" • "}
         <Link link="https://github.com/PaceMan-MCSR/PaceMan-Tracker/releases">
           Tracker
         </Link>
