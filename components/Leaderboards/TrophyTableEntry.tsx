@@ -57,7 +57,7 @@ export default function TrophyTableEntry({ trophyEntry, placement }: Props) {
             showArrow
             content={
               <div className="text-left">
-                <p>{trophyEntry.score - trophyEntry.bonus} + {trophyEntry.bonus}</p>
+                <p>{trophyEntry.score - trophyEntry.bonus} + {trophyEntry.bonus} Bonus</p>
               </div>
             }>
           <span>{trophyEntry.score}</span>
