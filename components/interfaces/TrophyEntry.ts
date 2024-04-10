@@ -8,4 +8,5 @@ export interface TrophyEntry {
   monthly: number;
   score: number;
   pb: number;
+  bonus: number;
 }

@@ -7,6 +7,7 @@ import {
 import { TrophyEntry } from "../interfaces/TrophyEntry";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { Tooltip } from "@nextui-org/react";
 
 interface Props {
   trophyEntry: TrophyEntry;
@@ -52,16 +53,21 @@ export default function TrophyTableEntry({ trophyEntry, placement }: Props) {
         </button>
       </td>
       <td className="px-6 py-4" style={placementStyle}>
-        <span>{trophyEntry.daily}</span>
-      </td>
-      <td className="px-6 py-4" style={placementStyle}>
-        <span>{trophyEntry.weekly}</span>
-      </td>
-      <td className="px-6 py-4" style={placementStyle}>
-        <span>{trophyEntry.monthly}</span>
+        <Tooltip
+            showArrow
+            content={
+              <div className="text-left">
+                <p>{trophyEntry.score - trophyEntry.bonus} + {trophyEntry.bonus}</p>
+              </div>
+            }>
+          <span>{trophyEntry.score}</span>
+        </Tooltip>
       </td>
       <td className="px-6 py-4" style={placementStyle}>
         <span>{msToTime(trophyEntry.pb)}</span>
+      </td>
+      <td className="px-6 py-4" style={placementStyle}>
+        <span>{trophyEntry.daily}/{trophyEntry.weekly}/{trophyEntry.monthly}</span>
       </td>
     </tr>
   );
