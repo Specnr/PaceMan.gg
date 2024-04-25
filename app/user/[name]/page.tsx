@@ -37,7 +37,7 @@ export default function LeaderboardPage({
 }) {
   const router = useRouter();
   const { data, error, isLoading } = useSWR<UserData>(
-    `/api/get-user?name=${params.name}`,
+    `https://paceman.gg/api/us/user?name=${params.name}&sortByTime=1`,
     fetcher,
     { revalidateOnFocus: false }
   );
@@ -71,7 +71,7 @@ export default function LeaderboardPage({
           <div className="mx-auto w-0 lg:w-fit">
             <Image
               alt="avatar"
-              src={uuidToSkin(data!.uuid)}
+              src={uuidToSkin(data!.user.uuid)}
               width={128}
               height={512}
               unoptimized
@@ -89,19 +89,19 @@ export default function LeaderboardPage({
                     key="monthly-pb"
                     filter="Monthly"
                     completion={data!.pbs.monthly}
-                    count={data!.monthly}
+                    count={data!.user.monthly}
                   />
                   <PBSectionEntry
                     key="weekly-pb"
                     filter="Weekly"
                     completion={data!.pbs.weekly}
-                    count={data!.weekly}
+                    count={data!.user.weekly}
                   />
                   <PBSectionEntry
                     key="daily-pb"
                     filter="Daily"
                     completion={data!.pbs.daily}
-                    count={data!.daily}
+                    count={data!.user.daily}
                   />
                 </tbody>
               </table>
