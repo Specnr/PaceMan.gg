@@ -1,6 +1,6 @@
 import useSWR from "swr";
 
-import { fetcher } from "@/public/functions/converters";
+import { fetcher, completionSort } from "@/public/functions/converters";
 import CompletionTable from "./CompletionTable";
 
 const filterToId = (filter: string) => {
@@ -24,10 +24,8 @@ interface Props {
 
 export default function EventTable({ filter, removeDupes, date }: Props) {
   const { data, isLoading, error } = useSWR(
-    `/api/get-leaderboard?filterId=${filterToId(
-      filter
-    )}&removeDuplicates=${+removeDupes}&date=${date}`,
-    fetcher,
+    `https://paceman.gg/api/cs/leaderboard?filter=${filterToId(filter)}&removeDuplicates=${+removeDupes}&date=${date}`,
+    (url: string) => fetcher(url).then(data => data.sort(completionSort)),
     { revalidateOnFocus: false }
   );
 

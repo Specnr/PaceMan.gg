@@ -8,7 +8,7 @@ import { fetcher } from "@/public/functions/converters";
 
 export default function TrophyLeaderboard() {
   const { data, isLoading, error } = useSWR(
-    "/api/get-trophy-leaderboard",
+    "https://paceman.gg/api/us/trophy",
     fetcher,
     { revalidateOnFocus: false }
   );

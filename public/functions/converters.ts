@@ -111,19 +111,3 @@ export const paceSort = (a: Pace, b: Pace) => {
 };
 
 export const completionSort = (a: Completion, b: Completion) => a.time - b.time;
-
-export const nameToUuid = async (name: string): Promise<string> => {
-  const endpoint = `https://api.mojang.com/users/profiles/minecraft/${name}`;
-  const data = await axios.get(endpoint);
-  if (data.status >= 400) return "UNKNOWN";
-
-  let fullUuid = "";
-  for (let i = 0; i < data.data.id.length; i++) {
-    if (i === 8 || i === 12 || i === 16 || i === 20) {
-      fullUuid += "-";
-    }
-    fullUuid += data.data.id.charAt(i);
-  }
-
-  return fullUuid;
-};
