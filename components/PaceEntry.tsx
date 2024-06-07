@@ -10,6 +10,7 @@ import { useState } from "react";
 import { Tooltip } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import ItemEstimateTooltipContent from "./Leaderboards/ItemEstimateTooltipContent";
 
 export default function PaceEntry(props: Pace) {
   const router = useRouter();
@@ -30,7 +31,7 @@ export default function PaceEntry(props: Pace) {
         >
           <button
             className="pt-2"
-            onClick={() => router.push(`/user/${props.nickname}`)}
+            onClick={() => router.push(`/stats/player/${props.nickname}`)}
           >
             <Image
               alt="avatar"
@@ -64,9 +65,15 @@ export default function PaceEntry(props: Pace) {
           />
         </td>
         <td className={`px-4 md:px-2 py-4 ${hqClassNames}`}>
-          <button onClick={() => setIsExpanded(!isExpanded)}>
-            {props.splitName}
-          </button>
+          <Tooltip
+              hidden={!props.itemEstimates}
+              showArrow
+              content={<ItemEstimateTooltipContent estimates={props.itemEstimates} />}
+            >
+            <button onClick={() => setIsExpanded(!isExpanded)}>
+              {props.splitName}
+            </button>
+          </Tooltip>
         </td>
         <td className={`px-4 md:px-6 py-4 btn ${hqClassNames}`}>
           <Tooltip

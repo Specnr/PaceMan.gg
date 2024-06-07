@@ -13,4 +13,5 @@ export interface Pace {
   twitch: string | null;
   lastUpdated: number;
   isHighQuality: boolean;
+  itemEstimates?: any;
 }

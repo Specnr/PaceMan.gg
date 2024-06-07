@@ -33,7 +33,7 @@ export default function TrophyTableEntry({ trophyEntry, placement }: Props) {
       <td className="h-0 w-0 md:h-14 md:w-14 md:pl-6" scope="row" width={54}>
         <button
           className="pt-2"
-          onClick={() => router.push(`/user/${trophyEntry.nickname}`)}
+          onClick={() => router.push(`/stats/player/${trophyEntry.nickname}`)}
         >
           <Image
             alt="avatar"
@@ -47,7 +47,7 @@ export default function TrophyTableEntry({ trophyEntry, placement }: Props) {
       <td className="max-w-xs truncate px-6 py-4 font-medium">
         <button
           style={placementStyle}
-          onClick={() => router.push(`/user/${trophyEntry.nickname}`)}
+          onClick={() => router.push(`/stats/player/${trophyEntry.nickname}`)}
         >
           {trophyEntry.nickname}
         </button>
