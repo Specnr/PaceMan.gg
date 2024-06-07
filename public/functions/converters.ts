@@ -67,6 +67,7 @@ export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
       twitch: p.user.liveAccount,
       lastUpdated: p.lastUpdated,
       isHighQuality,
+      itemEstimates: p.itemData ? p.itemData.estimatedCounts : null
     });
   }
 
