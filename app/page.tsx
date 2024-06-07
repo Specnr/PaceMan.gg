@@ -18,6 +18,7 @@ export default function Home() {
                 <p>Click on time {"->"} Splits</p>
                 <p>Click on head {"->"} User profile</p>
                 <p>Hover over time {"->"} Current time</p>
+                <p>Hover over split {"->"} Pearl/Rod count</p>
                 <p>Bolded {"->"} Good pace, will prioritize</p>
                 <p>Blue name {"->"} Live, click to watch</p>
               </div>
