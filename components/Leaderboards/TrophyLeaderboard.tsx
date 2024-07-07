@@ -6,9 +6,9 @@ import TableHeader from "../TableHeader";
 import TrophyTableEntry from "./TrophyTableEntry";
 import { fetcher } from "@/public/functions/converters";
 
-export default function TrophyLeaderboard() {
+export default function TrophyLeaderboard({ season }: { season: string }) {
   const { data, isLoading, error } = useSWR(
-    "https://paceman.gg/api/us/trophy",
+    `https://paceman.gg/api/us/trophy?season=${season}`,
     fetcher,
     { revalidateOnFocus: false }
   );

@@ -18,6 +18,8 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const filterTypes = new Set(["daily", "weekly", "monthly", "all", "trophy"]);
+const trophyOptions = ["current", "season 1"]
+const filters = ["daily", "weekly", "monthly", "all", "trophy"];
 
 const filterToDisplayName = (filter: string) => {
   if (filter === "all" || !filterTypes.has(filter)) return "Lifetime";
@@ -31,13 +33,13 @@ export default function LeaderboardPage({
 }) {
   const router = useRouter();
   const [showAll, setShowAll] = useState(false);
+  const [season, setSeason] = useState(trophyOptions[0]);
   const [date, setDate] = useState(dayjs());
 
   if (!filterTypes.has(params.filter)) {
     return router.push("/lb/all");
   }
 
-  const filters = ["daily", "weekly", "monthly", "all", "trophy"];
   const isTrophy = params.filter === "trophy";
   const isAll = params.filter === "all";
 
@@ -83,22 +85,44 @@ export default function LeaderboardPage({
             ))}
           </Select>
           {isTrophy ? (
-            <Tooltip
-              showArrow
-              content={
-                <div className="text-left">
-                  <p>Daily = 1 point</p>
-                  <p>Weekly = 3 points</p>
-                  <p>Monthly = 5 points</p>
-                  <p>PB will be used to break ties</p>
-                </div>
-              }
-            >
-              <FontAwesomeIcon
-                icon={faCircleInfo}
-                className="text-xl pl-2 pt-4"
-              />
-            </Tooltip>
+            <>
+              <Select
+                className="max-w-xs"
+                variant="bordered"
+                size="sm"
+                defaultSelectedKeys={[season]}
+                value={season}
+                onChange={(e) =>
+                  e.target.value !== "" && setSeason(e.target.value)
+                }
+              >
+                {trophyOptions.map((to) => (
+                  <SelectItem value={to} key={to}>
+                    {to.charAt(0).toUpperCase() + to.slice(1)}
+                  </SelectItem>
+                ))}
+              </Select>
+              <Tooltip
+                showArrow
+                content={
+                  <div className="text-left">
+                    <p>Daily = 1 point</p>
+                    <p>Weekly = 3 points</p>
+                    <p>Monthly = 5 points</p>
+                    <p>Sub-10 = 1 bonus point</p>
+                    <p>Sub-9 = 2 bonus point</p>
+                    <p>Sub-8 = 3 bonus point</p>
+                    <p>World Record = 5 bonus point</p>
+                    <p>Personal Best is the tie breaker</p>
+                  </div>
+                }
+              >
+                <FontAwesomeIcon
+                  icon={faCircleInfo}
+                  className="text-xl pl-2 pt-4"
+                />
+              </Tooltip>
+            </>
           ) : (
             <Switch
               color="secondary"
@@ -111,7 +135,7 @@ export default function LeaderboardPage({
         </div>
       </div>
       {isTrophy ? (
-        <TrophyLeaderboard />
+        <TrophyLeaderboard season={season} />
       ) : (
         <Leaderboard
           filter={params.filter}
