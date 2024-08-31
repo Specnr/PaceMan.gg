@@ -1,4 +1,4 @@
-import { Pace, Event } from "@/components/interfaces/Pace";
+import { Pace, Event, AAPace } from "@/components/interfaces/Pace";
 import Completion from "@/components/interfaces/Completion";
 import axios from "axios";
 
@@ -112,3 +112,33 @@ export const paceSort = (a: Pace, b: Pace) => {
 };
 
 export const completionSort = (a: Completion, b: Completion) => a.time - b.time;
+
+export const apiToAAPace = async (aaPaceItems: any[]): Promise<AAPace[]> => {
+  const filteredPace = aaPaceItems.filter((p) => !p.isCheated && !p.isHidden);
+  const mappedPace: AAPace[] = [];
+  for (const p of filteredPace) {
+
+    const formattedCompletedList: Event[] = p.completed.map((e: any) => ({
+      name: e.eventId,
+      time: e.igt,
+    }));
+
+    mappedPace.push({
+      completed: formattedCompletedList,
+      context: p.context,
+      currentTime: p.currentTime,
+      uuid: p.user.uuid,
+      twitch: p.user.liveAccount,
+      lastUpdated: p.lastUpdated,
+      nickname: p.nickname,
+      criterias: p.criterias
+    });
+  }
+
+  return mappedPace;
+};
+
+export const AAPaceSort = (a: AAPace, b: AAPace) => {
+  // TODO: Look into better ways of sorting this...
+  return a.completed.length - b.completed.length;
+};
