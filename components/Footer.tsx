@@ -18,11 +18,11 @@ const Footer = () => {
             Generate Access Token
           </button>
         </div>
-        <Link link="https://docs.google.com/document/d/118WJx5C9giWHsdc-CShhoF_6yKrPsTFB_edGmtR9F-k">
-          Rules
-        </Link>
+        <Link link="/aa">AA</Link>
         {" • "}
-        <Link link="https://paceman.gg/stats">Stats</Link>
+        <Link link="/events/latest">Events</Link>
+        {" • "}
+        <Link link="https://discord.gg/t63gGSWvdV">Discord</Link>
         {" • "}
         <Link link="https://github.com/PaceMan-MCSR/PaceMan-Tracker/releases">
           Tracker
@@ -32,7 +32,9 @@ const Footer = () => {
           Tutorial
         </Link>
         {" • "}
-        <Link link="https://discord.gg/t63gGSWvdV">Discord</Link>
+        <Link link="https://docs.google.com/document/d/118WJx5C9giWHsdc-CShhoF_6yKrPsTFB_edGmtR9F-k">
+          Rules
+        </Link>
         {" • "}
         <Link link="https://docs.google.com/document/d/1vybBwJT2vM7MWHP9Oc544a8WdGhjQWVA34o5Cx7N7YM">
           Privacy Policy

@@ -15,3 +15,27 @@ export interface Pace {
   isHighQuality: boolean;
   itemEstimates?: any;
 }
+
+export interface AAPace {
+  completed: Event[];
+  context: AAContext;
+  currentTime: number;
+  uuid: string;
+  twitch: string | null;
+  lastUpdated: number;
+  nickname?: string;
+  criterias: AdvancementCriterias;
+}
+
+export interface AdvancementCriterias {
+  biomes: string[];
+  monstersKilled: string[];
+  animalsBred: string[];
+  catsTamed: string[];
+  foodEaten: string[];
+}
+
+export interface AAContext {
+  shells: number,
+  hasTrident: boolean
+}

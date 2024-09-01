@@ -22,26 +22,34 @@ export const msToTime = (ms: number, keepMs = false): string => {
 
 export const msToDate = (ms: number) => dayjs(ms * 1000).format("MM/DD/YYYY");
 
+export const NETHER_ICON = "../images/nether.png"
+export const FORTRESS_ICON = "../images/fortress.png"
+export const BASTION_ICON = "../images/bastion.png"
+export const PORTAL_ICON = "../images/portal.png"
+export const STRONGHOLD_ICON = "../images/sh.png"
+export const END_ICON = "../images/end.png"
+export const CREDITS_ICON = "../images/credits.png"
+
 export const splitToIcon = (splitId: number) => {
   switch (splitId) {
     case 0:
-      return "../images/nether.png";
+      return NETHER_ICON;
     case 1:
-      return "../images/bastion.png";
+      return BASTION_ICON;
     case 2:
-      return "../images/fortress.png";
+      return FORTRESS_ICON;
     case 3:
-      return "../images/portal.png";
+      return PORTAL_ICON;
     case 4:
-      return "../images/portal.png";
+      return PORTAL_ICON;
     case 5:
-      return "../images/sh.png";
+      return STRONGHOLD_ICON;
     case 6:
-      return "../images/end.png";
+      return END_ICON;
     case 7:
-      return "../images/credits.png";
+      return CREDITS_ICON;
     default:
-      return "../images/nether.png";
+      return NETHER_ICON;
   }
 };
 

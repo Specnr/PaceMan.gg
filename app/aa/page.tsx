@@ -2,7 +2,7 @@ import Title from "@/components/Title";
 import { Tooltip } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import PaceLeaderboard from "@/components/Leaderboards/PaceLeaderboard";
+import AAPaceLeaderboard from "@/components/Leaderboards/AAPaceLeaderboard";
 
 export default function Home() {
   return (
@@ -18,7 +18,7 @@ export default function Home() {
                 <p>Click on time {"->"} Splits</p>
                 <p>Click on head {"->"} Stats profile</p>
                 <p>Hover over time {"->"} Current time</p>
-                <p>Hover over split {"->"} Pearl/Rod count</p>
+                <p>Hover over split {"->"} Advancement progress</p>
                 <p>Bolded {"->"} Good pace, will prioritize</p>
                 <p>Blue name {"->"} Live, click to watch</p>
               </div>
@@ -28,7 +28,7 @@ export default function Home() {
           </Tooltip>
         </p>
       </div>
-      <PaceLeaderboard />
+      <AAPaceLeaderboard />
     </div>
   );
 }
