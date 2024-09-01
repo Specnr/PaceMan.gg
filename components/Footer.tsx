@@ -18,9 +18,9 @@ const Footer = () => {
             Generate Access Token
           </button>
         </div>
-        <Link link="/aa">AA</Link>
+        <Link stay link="/aa">AA</Link>
         {" • "}
-        <Link link="/events/latest">Events</Link>
+        <Link stay link="/events/latest">Events</Link>
         {" • "}
         <Link link="https://discord.gg/t63gGSWvdV">Discord</Link>
         {" • "}
