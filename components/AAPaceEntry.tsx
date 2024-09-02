@@ -53,7 +53,7 @@ export default function AAPaceEntry(props: AAPace) {
         >
           <Image
             alt="avatar"
-            src={advToIcon(props.completed[props.completed.length - 1].name)}
+            src={advToIcon(props.completed[0].name)}
             width={28}
             height={28}
             unoptimized
@@ -67,7 +67,7 @@ export default function AAPaceEntry(props: AAPace) {
           >
             <button onClick={() => setIsExpanded(!isExpanded)}>
               <span className="font-bold">{props.completed.length}/80 - </span>
-              {(ADV_TO_NAME as any)[props.completed[props.completed.length - 1].name]}
+              {(ADV_TO_NAME as any)[props.completed[0].name]}
             </button>
           </Tooltip>
         </td>

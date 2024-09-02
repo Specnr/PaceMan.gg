@@ -16,3 +16,15 @@ export default interface Completion {
   eventList?: EventItem[];
   nickname: string;
 }
+
+export interface RankingCompletion {
+  time: number;
+  points: number;
+}
+
+export interface Ranking {
+  uuid: string;
+  nickname: string;
+  totalPoints: number;
+  completions: RankingCompletion[];
+}

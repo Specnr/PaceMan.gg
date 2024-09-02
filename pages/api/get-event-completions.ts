@@ -8,14 +8,21 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { eventId } = req.query;
+  const { eventId, usePoints } = req.query;
 
   if (!eventId) return res.send(400);
 
   const eventData = await (
     await fetch(PaceManEndpoint(eventId as string))
   ).json();
-  const formattedCompletions = eventData.completions.sort(completionSort);
 
-  res.status(200).json(formattedCompletions);
+
+  let rankings;
+  if (usePoints === "true") {
+    rankings = eventData.rankings;
+  } else {
+    rankings = eventData.completions.sort(completionSort);
+  }
+
+  res.status(200).json(rankings);
 }

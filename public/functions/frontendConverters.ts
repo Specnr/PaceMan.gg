@@ -8,8 +8,10 @@ dayjs.extend(timezone);
 export const msToTime = (ms: number, keepMs = false): string => {
   let milliseconds = Math.floor((ms % 1000) / 100),
     seconds = Math.floor((ms / 1000) % 60),
-    minutes = Math.floor((ms / (1000 * 60)) % 60);
+    minutes = Math.floor((ms / (1000 * 60)) % 60),
+    hours = Math.floor((ms / (1000 * 60 * 60)) % 60);
 
+  const hoursStr = hours < 10 ? "0" + hours : hours;
   const minutesStr = minutes < 10 ? "0" + minutes : minutes;
   const secondsStr = seconds < 10 ? "0" + seconds : seconds;
 
@@ -17,6 +19,11 @@ export const msToTime = (ms: number, keepMs = false): string => {
   if (keepMs) {
     ret += "." + milliseconds;
   }
+
+  if (hours > 0) {
+    ret = `${hoursStr}:${ret}`
+  }
+
   return ret;
 };
 
@@ -110,3 +117,5 @@ export const createDateFromInput = (date: dayjs.Dayjs) => {
 
   return newDate.valueOf();
 };
+
+export const fracToPerc = (frac: number) => `${Math.round(frac * 10000) / 100}%`;
