@@ -81,7 +81,7 @@ export default function Events({ params }: { params: { event: string } }) {
               starts={selectedEvent.starts}
               ends={selectedEvent.ends}
             >
-              <p className="pb-2">
+              <p className="pb-2 pt-4">
                 {msToDate(selectedEvent.starts[0])} -{" "}
                 {msToDate(selectedEvent.ends[selectedEvent.ends.length - 1])}
               </p>

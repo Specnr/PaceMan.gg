@@ -1,3 +1,8 @@
+export interface PointDistribution {
+  barrier: number;
+  points: number;
+};
+
 export default interface Event {
   _id: string;
   name: string;
@@ -6,4 +11,5 @@ export default interface Event {
   whitelist: string[];
   vanity: string;
   host?: string;
+  points?: PointDistribution[]
 }
