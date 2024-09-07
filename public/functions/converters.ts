@@ -124,7 +124,13 @@ export const apiToAAPace = async (aaPaceItems: any[]): Promise<AAPace[]> => {
     }));
 
     mappedPace.push({
-      completed: formattedCompletedList.sort((a, b) => b.time - a.time),
+      completed: formattedCompletedList.sort((a, b) => {
+        if (a.time === b.time) {
+          return a.name.includes("root") ? 1 : -1;
+        }
+
+        return b.time - a.time;
+      }),
       context: p.context,
       currentTime: p.currentTime,
       uuid: p.user.uuid,

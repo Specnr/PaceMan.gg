@@ -1,7 +1,7 @@
 "use client";
 import TableHeader from "@/components/TableHeader";
 import { Spinner } from "@nextui-org/react";
-import AAPaceEntry from "../AAPaceEntry";
+import AAPaceEntry from "../AA/AAPaceEntry";
 import { AAPace } from "../interfaces/Pace";
 import useSWR from "swr";
 import { AAPaceSort, apiToAAPace } from "@/public/functions/converters";
@@ -14,7 +14,7 @@ const fetcher = async (url: string) => {
 
 export default function AAPaceLeaderboard() {
   const { data, error, isLoading } = useSWR(
-    "https://paceman.gg/api/ars/aa/liveruns",
+    "http://localhost:8001/api/ars/aa/liveruns",
     fetcher,
     {
       refreshWhenHidden: true,
@@ -39,7 +39,8 @@ export default function AAPaceLeaderboard() {
           <tr>
             <TableHeader colSpan={2}>Player</TableHeader>
             <TableHeader colSpan={2}>Advancement</TableHeader>
-            <TableHeader colSpan={2}>Time</TableHeader>
+            <TableHeader colSpan={1}>Time</TableHeader>
+            <TableHeader colSpan={1}><span className="invisible 2xl:visible">Missing</span></TableHeader>
           </tr>
         </thead>
         <tbody>

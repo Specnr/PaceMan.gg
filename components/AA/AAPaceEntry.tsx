@@ -3,18 +3,21 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Tooltip } from "@nextui-org/react";
 
-import Link from "./Link";
+import Link from "../Link";
 
 import { lastUpdatedDifference, msToTime, uuidToHead } from "@/public/functions/frontendConverters";
-import ADV_TO_NAME from "../public/data/advancements.json";
-import { AAPace } from "./interfaces/Pace";
+import ADV_TO_NAME from "../../public/data/advancements.json";
+import { AAPace } from "../interfaces/Pace";
 import { advToIcon } from "@/public/functions/aa";
-import AdvancementDetailsTooltipContent from "./Leaderboards/AdvancementDetailsTooltipContent";
+import AdvancementDetailsTooltipContent from "./AdvancementDetailsTooltipContent";
+import { AAMissingIcon } from "./AAMissingIcon";
 
 export default function AAPaceEntry(props: AAPace) {
   const router = useRouter();
   const [isExpanded, setIsExpanded] = useState(false);
   const [estimatedPace, setEstimatedPace] = useState(lastUpdatedDifference(props.lastUpdated, props.currentTime));
+
+  console.log(props.context);
 
   return (
     <>
@@ -86,6 +89,15 @@ export default function AAPaceEntry(props: AAPace) {
             </button>
           </Tooltip>
         </td>
+        <td className="h-0 w-0 2xl:h-full 2xl:w-full 2xl:px-6 2xl:py-4 flex">
+          { props.context.jungle.length > 0 && <AAMissingIcon icon="jungle" context={props.context.jungle} /> }
+          { props.context.mesa.length > 0 && <AAMissingIcon icon="mesa" context={props.context.mesa} /> }
+          { props.context.snowy.length > 0 && <AAMissingIcon icon="snowy" context={props.context.snowy} /> }
+          { props.context.mushroom.length > 0 && <AAMissingIcon icon="mushroom" context={props.context.mushroom} /> }
+          { props.context.thunder.length > 0 && <AAMissingIcon icon="thunder" context={props.context.thunder} /> }
+          { props.context.phantoms.length > 0 && <AAMissingIcon icon="phantom" context={props.context.phantoms} /> }
+          { props.context.endgame.length > 0 && <AAMissingIcon icon="endgame" context={props.context.endgame} /> }
+        </td>
       </tr>
       {isExpanded &&
         props.completed.map((e) => (
@@ -96,6 +108,7 @@ export default function AAPaceEntry(props: AAPace) {
             <td colSpan={3} />
             <td className="px-4 md:px-2">{(ADV_TO_NAME as any)[e.name]}</td>
             <td className="px-4 md:px-6">{msToTime(e.time)}</td>
+            <td />
           </tr>
         ))}
     </>
