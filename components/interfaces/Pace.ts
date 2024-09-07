@@ -1,3 +1,5 @@
+import { EndgameMissing, JungleMissing, MesaMissing, MushroomMissing, PhantomsMissing, SnowyMissing, ThunderMissing } from "./AAEnums";
+
 export interface Event {
   name: string;
   time: number;
@@ -36,6 +38,12 @@ export interface AdvancementCriterias {
 }
 
 export interface AAContext {
-  shells: number,
-  hasTrident: boolean
+  shells: number;
+  mesa: MesaMissing[];
+  snowy: SnowyMissing[];
+  jungle: JungleMissing[];
+  mushroom: MushroomMissing[];
+  phantoms: PhantomsMissing[];
+  thunder: ThunderMissing[];
+  endgame: EndgameMissing[];
 }
