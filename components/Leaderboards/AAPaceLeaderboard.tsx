@@ -14,7 +14,7 @@ const fetcher = async (url: string) => {
 
 export default function AAPaceLeaderboard() {
   const { data, error, isLoading } = useSWR(
-    "http://localhost:8001/api/ars/aa/liveruns",
+    "https://paceman.gg/api/ars/aa/liveruns",
     fetcher,
     {
       refreshWhenHidden: true,
