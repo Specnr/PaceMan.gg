@@ -137,7 +137,8 @@ export const apiToAAPace = async (aaPaceItems: any[]): Promise<AAPace[]> => {
       twitch: p.user.liveAccount,
       lastUpdated: p.lastUpdated,
       nickname: p.nickname,
-      criterias: p.criterias
+      criterias: p.criterias,
+      items: p.items
     });
   }
 

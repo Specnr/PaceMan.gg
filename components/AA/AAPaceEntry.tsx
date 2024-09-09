@@ -66,7 +66,7 @@ export default function AAPaceEntry(props: AAPace) {
           <Tooltip
             showArrow
             hidden={!props.criterias}
-            content={<AdvancementDetailsTooltipContent criterias={props.criterias} context={props.context} />}
+            content={<AdvancementDetailsTooltipContent criterias={props.criterias} context={props.context} items={props.items} />}
           >
             <button onClick={() => setIsExpanded(!isExpanded)}>
               <span className="font-bold">{props.completed.length}/80 - </span>
