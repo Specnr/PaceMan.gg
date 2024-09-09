@@ -66,7 +66,7 @@ export default function AAPaceEntry(props: AAPace) {
           <Tooltip
             showArrow
             hidden={!props.criterias}
-            content={<AdvancementDetailsTooltipContent criterias={props.criterias} context={props.context} />}
+            content={<AdvancementDetailsTooltipContent criterias={props.criterias} context={props.context} items={props.items} />}
           >
             <button onClick={() => setIsExpanded(!isExpanded)}>
               <span className="font-bold">{props.completed.length}/80 - </span>
@@ -90,13 +90,13 @@ export default function AAPaceEntry(props: AAPace) {
           </Tooltip>
         </td>
         <td className="h-0 w-0 2xl:h-full 2xl:w-full 2xl:px-6 2xl:py-4 flex">
-          { props.context.jungle.length > 0 && <AAMissingIcon icon="jungle" context={props.context.jungle} /> }
-          { props.context.mesa.length > 0 && <AAMissingIcon icon="mesa" context={props.context.mesa} /> }
-          { props.context.snowy.length > 0 && <AAMissingIcon icon="snowy" context={props.context.snowy} /> }
-          { props.context.mushroom.length > 0 && <AAMissingIcon icon="mushroom" context={props.context.mushroom} /> }
-          { props.context.thunder.length > 0 && <AAMissingIcon icon="thunder" context={props.context.thunder} /> }
-          { props.context.phantoms.length > 0 && <AAMissingIcon icon="phantom" context={props.context.phantoms} /> }
-          { props.context.endgame.length > 0 && <AAMissingIcon icon="endgame" context={props.context.endgame} /> }
+          <AAMissingIcon icon="jungle" context={props.context.jungle} />
+          <AAMissingIcon icon="mesa" context={props.context.mesa} />
+          <AAMissingIcon icon="snowy" context={props.context.snowy} />
+          <AAMissingIcon icon="mushroom" context={props.context.mushroom} />
+          <AAMissingIcon icon="thunder" context={props.context.thunder} />
+          <AAMissingIcon icon="phantom" context={props.context.phantoms} />
+          <AAMissingIcon icon="endgame" context={props.context.endgame} />
         </td>
       </tr>
       {isExpanded &&

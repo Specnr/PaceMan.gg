@@ -137,7 +137,8 @@ export const apiToAAPace = async (aaPaceItems: any[]): Promise<AAPace[]> => {
       twitch: p.user.liveAccount,
       lastUpdated: p.lastUpdated,
       nickname: p.nickname,
-      criterias: p.criterias
+      criterias: p.criterias,
+      items: p.items
     });
   }
 
@@ -146,5 +147,5 @@ export const apiToAAPace = async (aaPaceItems: any[]): Promise<AAPace[]> => {
 
 export const AAPaceSort = (a: AAPace, b: AAPace) => {
   // TODO: Look into better ways of sorting this...
-  return a.completed.length - b.completed.length;
+  return b.completed.length - a.completed.length;
 };

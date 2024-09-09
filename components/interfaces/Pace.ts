@@ -18,6 +18,11 @@ export interface Pace {
   itemEstimates?: any;
 }
 
+export interface AAItems {
+  has_enchanted_golden_apple: boolean;
+  skulls: number;
+};
+
 export interface AAPace {
   completed: Event[];
   context: AAContext;
@@ -27,6 +32,7 @@ export interface AAPace {
   lastUpdated: number;
   nickname?: string;
   criterias: AdvancementCriterias;
+  items: AAItems;
 }
 
 export interface AdvancementCriterias {
