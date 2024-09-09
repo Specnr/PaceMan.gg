@@ -14,6 +14,8 @@ export const AA_THUNDER_ICON = "../images/aa_thunder.png";
 export const AA_PHANTOM_ICON = "../images/aa_phantom.png";
 export const AA_ENDGAME_ICON = "../images/aa_endgame.png";
 
+export const AA_COMPLETED_ICON = "../images/aa_completed.png";
+
 export const advToIcon = (adv: string) => {
   const parent = adv.split("/")[0];
   switch (parent) {

@@ -146,5 +146,5 @@ export const apiToAAPace = async (aaPaceItems: any[]): Promise<AAPace[]> => {
 
 export const AAPaceSort = (a: AAPace, b: AAPace) => {
   // TODO: Look into better ways of sorting this...
-  return a.completed.length - b.completed.length;
+  return b.completed.length - a.completed.length;
 };
