@@ -15,12 +15,13 @@ export default function Home() {
             showArrow
             content={
               <div className="text-left">
-                <p>Click on time {"->"} Splits</p>
-                <p>Click on head {"->"} Stats profile</p>
-                <p>Hover over time {"->"} Current time</p>
-                <p>Hover over split {"->"} Advancement progress</p>
-                <p>Bolded {"->"} Good pace, will prioritize</p>
-                <p>Blue name {"->"} Live, click to watch</p>
+                <p>Click on time {"→"} Splits</p>
+                <p>Click on head {"→"} Stats profile</p>
+                <p>Hover over time {"→"} Current time</p>
+                <p>Hover over split {"→"} Advancement progress</p>
+                <p>Hover over missing {"→"} Missing criteria</p>
+                <p>Bolded {"→"} Good pace, will prioritize</p>
+                <p>Blue name {"→"} Live, click to watch</p>
               </div>
             }
           >
