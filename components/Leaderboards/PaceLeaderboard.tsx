@@ -2,7 +2,7 @@
 import TableHeader from "@/components/TableHeader";
 import { Spinner } from "@nextui-org/react";
 import PaceEntry from "../PaceEntry";
-import { Pace } from "../interfaces/Pace";
+import { Pace, PaceSettings } from "../interfaces/Pace";
 import useSWR from "swr";
 import { apiToPace, paceSort } from "@/public/functions/converters";
 
@@ -14,11 +14,13 @@ const fetcher = async (url: string) => {
 
 export default function PaceLeaderboard({
   whitelist,
+  settings
 }: {
   whitelist?: Set<string>;
+  settings?: PaceSettings
 }) {
   const { data, error, isLoading } = useSWR(
-    "https://paceman.gg/api/ars/liveruns",
+    `https://paceman.gg/api/ars/liveruns?gameVersion=${settings?.version || "1.16.1"}&liveOnly=${settings?.liveOnly || false}`,
     fetcher,
     {
       refreshWhenHidden: true,

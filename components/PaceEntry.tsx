@@ -11,6 +11,7 @@ import { Tooltip } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import ItemEstimateTooltipContent from "./Leaderboards/ItemEstimateTooltipContent";
+import React from "react";
 
 export default function PaceEntry(props: Pace) {
   const router = useRouter();

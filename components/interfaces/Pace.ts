@@ -16,6 +16,7 @@ export interface Pace {
   lastUpdated: number;
   isHighQuality: boolean;
   itemEstimates?: any;
+  gameVersion: string;
 }
 
 export interface AAItems {
@@ -52,4 +53,9 @@ export interface AAContext {
   phantoms: PhantomsMissing[];
   thunder: ThunderMissing[];
   endgame: EndgameMissing[];
+}
+
+export interface PaceSettings {
+  version: string;
+  liveOnly: boolean;
 }

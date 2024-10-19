@@ -1,10 +1,13 @@
 "use client";
+import React from "react";
 import { useState } from "react";
+import { usePathname } from 'next/navigation'
 
 import Link from "./Link";
 import Modal from "@/components/Modal";
 
 const Footer = () => {
+  const pathname = usePathname()
   const [showAuthModal, setShowAuthModal] = useState(false);
 
   return (
@@ -24,7 +27,7 @@ const Footer = () => {
         {" • "}
         <Link link="https://discord.gg/t63gGSWvdV">Discord</Link>
         {" • "}
-        <Link link="https://github.com/PaceMan-MCSR/PaceMan-Tracker/releases">
+        <Link link={"https://github.com/PaceMan-MCSR/PaceMan" + (pathname?.includes("aa") ? "-AA-" : "-") + "Tracker/releases"}>
           Tracker
         </Link>
         {" • "}
