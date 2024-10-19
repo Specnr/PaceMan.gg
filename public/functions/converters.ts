@@ -13,6 +13,11 @@ export const eventIdToName = new Map<string, string>([
   ["rsg.enter_stronghold", "Enter Stronghold"],
   ["rsg.enter_end", "Enter End"],
   ["rsg.credits", "Finish"],
+
+  ["rsg.tower_start", "Tower Start"],
+  ["rsg.break_underground_bookshelf", "Enter Library"],
+  ["rsg.obtain_gold_block", "Loot Monument"],
+  ["rsg.trade", "Villager Trade"],
 ]);
 
 export const eventOrder = new Map([
@@ -24,6 +29,10 @@ export const eventOrder = new Map([
   ["rsg.enter_stronghold", 5],
   ["rsg.enter_end", 6],
   ["rsg.credits", 7],
+  ["rsg.tower_start", 3],
+  ["rsg.break_underground_bookshelf", 6],
+  ["rsg.obtain_gold_block", -2],
+  ["rsg.trade", -1]
 ]);
 
 export const goodPaceSplits = new Map([
@@ -45,11 +54,13 @@ export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
 
     let isHighQuality = false;
 
-    if (p.eventList.length === 3) {
-      isHighQuality = latestEvent.igt <= goodPaceSplits.get("s2")!; // 4:30
-    } else if (goodPaceSplits.has(latestEvent.eventId)) {
-      isHighQuality =
-        latestEvent.igt <= goodPaceSplits.get(latestEvent.eventId)!;
+    if (p.gameVersion === "1.16.1") {
+      if (p.eventList.length === 3) {
+        isHighQuality = latestEvent.igt <= goodPaceSplits.get("s2")!; // 4:30
+      } else if (goodPaceSplits.has(latestEvent.eventId)) {
+        isHighQuality =
+          latestEvent.igt <= goodPaceSplits.get(latestEvent.eventId)!;
+      }
     }
 
     const formattedEventList: Event[] = p.eventList.map((e: any) => ({
@@ -59,7 +70,7 @@ export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
 
     mappedPace.push({
       nickname: p.nickname,
-      split: eventOrder.get(latestEvent.eventId),
+      split: eventOrder.get(latestEvent.eventId) || 0,
       splitName: eventIdToName.get(latestEvent.eventId)!,
       time: latestEvent.igt,
       eventList: formattedEventList,
