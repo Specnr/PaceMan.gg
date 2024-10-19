@@ -14,6 +14,7 @@ export const eventIdToName = new Map<string, string>([
   ["rsg.enter_end", "Enter End"],
   ["rsg.credits", "Finish"],
 
+  ["rsg.killed_blaze", "Killed Blaze"],
   ["rsg.tower_start", "Tower Start"],
   ["rsg.break_underground_bookshelf", "Enter Library"],
   ["rsg.obtain_gold_block", "Loot Monument"],
@@ -29,6 +30,8 @@ export const eventOrder = new Map([
   ["rsg.enter_stronghold", 5],
   ["rsg.enter_end", 6],
   ["rsg.credits", 7],
+
+  ["rsg.killed_blaze", 2],
   ["rsg.tower_start", 3],
   ["rsg.break_underground_bookshelf", 6],
   ["rsg.obtain_gold_block", -2],
