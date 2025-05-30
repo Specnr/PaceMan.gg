@@ -17,8 +17,6 @@ export default function AAPaceEntry(props: AAPace) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [estimatedPace, setEstimatedPace] = useState(lastUpdatedDifference(props.lastUpdated, props.currentTime));
 
-  console.log(props.context);
-
   return (
     <>
       <tr className={"bg-gray-800 border-gray-700"}>

@@ -17,7 +17,7 @@ export default function PaceLeaderboard({
   settings
 }: {
   whitelist?: Set<string>;
-  settings?: PaceSettings
+  settings?: PaceSettings;
 }) {
   const { data, error, isLoading } = useSWR(
     `https://paceman.gg/api/ars/liveruns?gameVersion=${settings?.version || "1.16.1"}&liveOnly=${settings?.liveOnly || false}`,
