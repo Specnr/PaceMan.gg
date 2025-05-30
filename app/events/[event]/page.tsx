@@ -9,8 +9,9 @@ import EventTable from "@/components/Events/EventTable";
 import { msToDate } from "@/public/functions/frontendConverters";
 import Title from "@/components/Title";
 import DateTimeListTooltip from "@/components/Events/DateTimeListTooltip";
-import { Select, SelectItem, Spinner, Switch } from "@nextui-org/react";
+import { Select, SelectItem, Spinner } from "@nextui-org/react";
 import PaceLeaderboard from "@/components/Leaderboards/PaceLeaderboard";
+import WhitelistTable from "@/components/Events/WhitelistTable";
 import dayjs from "dayjs";
 
 export default function Events({ params }: { params: { event: string } }) {
@@ -23,7 +24,7 @@ export default function Events({ params }: { params: { event: string } }) {
 
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [isLoadingEvent, setIsLoadingEvent] = useState<boolean>(true);
-  const [paceTable, setPaceTable] = useState(false);
+  const [viewMode, setViewMode] = useState<string>("results");
 
   useEffect(() => {
     if (!error && !isLoading && events && !selectedEvent) {
@@ -94,6 +95,7 @@ export default function Events({ params }: { params: { event: string } }) {
             className="max-w-sm"
             variant="bordered"
             size="sm"
+            label="Event"
             defaultSelectedKeys={[selectedEvent!.vanity]}
             onChange={(evt) =>
               router.push(
@@ -111,19 +113,32 @@ export default function Events({ params }: { params: { event: string } }) {
               </SelectItem>
             ))}
           </Select>
-          <Switch
-            color="secondary"
-            checked={paceTable}
-            onChange={(e) => setPaceTable(e.target.checked)}
+          <Select
+            className="max-w-xs"
+            variant="bordered"
+            size="sm"
+            label="View"
+            defaultSelectedKeys={["results"]}
+            onChange={(evt) => setViewMode(evt.target.value)}
           >
-            <span>Pace</span>
-          </Switch>
+            <SelectItem key="results" value="results">
+              Results
+            </SelectItem>
+            <SelectItem key="pace" value="pace">
+              Pace
+            </SelectItem>
+            <SelectItem key="whitelist" value="whitelist">
+              Whitelist
+            </SelectItem>
+          </Select>
         </div>
       </div>
       {!selectedEvent ? (
         <div className="grid h-4/6 place-items-center">No Event Selected</div>
-      ) : paceTable ? (
+      ) : viewMode === "pace" ? (
         <PaceLeaderboard whitelist={new Set(selectedEvent.whitelist)} />
+      ) : viewMode === "whitelist" ? (
+        <WhitelistTable whitelist={selectedEvent.whitelist} />
       ) : (
         <EventTable event={selectedEvent} />
       )}
