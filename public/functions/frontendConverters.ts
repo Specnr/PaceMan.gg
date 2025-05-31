@@ -121,6 +121,7 @@ export const createDateFromInput = (date: dayjs.Dayjs) => {
 export const fracToPerc = (frac: number) => `${Math.round(frac * 10000) / 100}%`;
 
 export const gameVersions = [
+  "All",
   "1.16.1",
   "1.15.2",
   "1.7.10",

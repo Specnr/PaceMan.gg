@@ -6,7 +6,7 @@ import AAPaceLeaderboard from "@/components/Leaderboards/AAPaceLeaderboard";
 
 export default function Home() {
   return (
-    <div className="container-height">
+    <div className="flex flex-col flex-1">
       <div className="pt-16">
         <Title />
         <p className="invisible h-0 lg:h-auto lg:pt-2 lg:visible">
@@ -29,7 +29,9 @@ export default function Home() {
           </Tooltip>
         </p>
       </div>
-      <AAPaceLeaderboard />
+      <div className="flex-1">
+        <AAPaceLeaderboard />
+      </div>
     </div>
   );
 }
