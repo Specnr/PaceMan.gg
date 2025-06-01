@@ -5,6 +5,14 @@ import timezone from "dayjs/plugin/timezone";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
+export const timeToMs = (time: string) => {
+  if (time === "Error" || time === "N/A") {
+    return Number.MAX_SAFE_INTEGER;
+  }
+  const [minutes, seconds] = time.split(":").map(Number);
+  return (minutes * 60) + seconds;
+};
+
 export const msToTime = (ms: number, keepMs = false): string => {
   let milliseconds = Math.floor((ms % 1000) / 100),
     seconds = Math.floor((ms / 1000) % 60),
@@ -84,6 +92,7 @@ export const placeToColor = (place: number) => {
   if (place === 1) return "goldenrod";
   if (place === 2) return "#929292";
   if (place === 3) return "#cd7f32";
+  return "#d1d5db";
 };
 
 export const EVENT_ID_NAME = [

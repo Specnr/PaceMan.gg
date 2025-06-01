@@ -13,6 +13,8 @@ import { Select, SelectItem, Spinner } from "@nextui-org/react";
 import PaceLeaderboard from "@/components/Leaderboards/PaceLeaderboard";
 import WhitelistTable from "@/components/Events/WhitelistTable";
 import dayjs from "dayjs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt, faChartLine, faUsers } from "@fortawesome/free-solid-svg-icons";
 
 export default function Events({ params }: { params: { event: string } }) {
   const {
@@ -65,83 +67,108 @@ export default function Events({ params }: { params: { event: string } }) {
   }
 
   const eventList = events ? events : [];
+
+  // Get icon based on view mode
+  const getViewIcon = () => {
+    switch (viewMode) {
+      case "pace":
+        return faChartLine;
+      case "whitelist":
+        return faUsers;
+      default:
+        return faCalendarAlt;
+    }
+  };
+
   return (
-    <div className="container-height">
-      <div className="pt-16">
-        <Title
-          titleOverrite={selectedEvent ? selectedEvent.name : undefined}
-          link={
-            selectedEvent && selectedEvent.host
-              ? `https://twitch.tv/${selectedEvent.host}`
-              : undefined
-          }
-        />
+    <div className="flex flex-col h-full fade-in">
+      <Title
+        titleOverrite={selectedEvent ? selectedEvent.name : undefined}
+        link={
+          selectedEvent && selectedEvent.host
+            ? `https://twitch.tv/${selectedEvent.host}`
+            : undefined
+        }
+      />
+
+      <div className="flex justify-center mb-4 -mt-4">
         {selectedEvent && (
-          <div className="group w-fit mx-auto relative flex justify-center">
+          <div className="group w-fit relative flex justify-center">
             <DateTimeListTooltip
               starts={selectedEvent.starts}
               ends={selectedEvent.ends}
             >
-              <p className="pb-2 pt-4">
+              <p className="text-gray-300">
                 {msToDate(selectedEvent.starts[0])} -{" "}
                 {msToDate(selectedEvent.ends[selectedEvent.ends.length - 1])}
               </p>
             </DateTimeListTooltip>
           </div>
         )}
+      </div>
 
-        <div className="px-4 pt-2 mx-auto flex lg:w-2/4 gap-4 justify-center">
-          <Select
-            className="max-w-sm"
-            variant="bordered"
-            size="sm"
-            label="Event"
-            defaultSelectedKeys={[selectedEvent!.vanity]}
-            onChange={(evt) =>
-              router.push(
-                `/events/${
-                  eventList.filter((e) => e.vanity === evt.target.value)[0]
-                    .vanity
-                }`
-              )
-            }
-            value={selectedEvent ? selectedEvent.vanity : ""}
-          >
-            {eventList.map((e) => (
-              <SelectItem value={e.vanity} key={e.vanity}>
-                {e.name}
-              </SelectItem>
-            ))}
-          </Select>
-          <Select
-            className="max-w-xs"
-            variant="bordered"
-            size="sm"
-            label="View"
-            defaultSelectedKeys={["results"]}
-            onChange={(evt) => setViewMode(evt.target.value)}
-          >
-            <SelectItem key="results" value="results">
-              Results
+      <div className="flex justify-center gap-4 mb-4">
+        <Select
+          className="max-w-sm"
+          variant="bordered"
+          size="sm"
+          label="Event"
+          defaultSelectedKeys={[selectedEvent!.vanity]}
+          onChange={(evt) =>
+            router.push(
+              `/events/${eventList.filter((e) => e.vanity === evt.target.value)[0]
+                .vanity
+              }`
+            )
+          }
+          value={selectedEvent ? selectedEvent.vanity : ""}
+        >
+          {eventList.map((e) => (
+            <SelectItem value={e.vanity} key={e.vanity}>
+              {e.name}
             </SelectItem>
-            <SelectItem key="pace" value="pace">
-              Pace
-            </SelectItem>
-            <SelectItem key="whitelist" value="whitelist">
-              Whitelist
-            </SelectItem>
-          </Select>
+          ))}
+        </Select>
+        <Select
+          className="max-w-xs"
+          variant="bordered"
+          size="sm"
+          label="View"
+          defaultSelectedKeys={["results"]}
+          onChange={(evt) => setViewMode(evt.target.value)}
+        >
+          <SelectItem key="results" value="results">
+            Results
+          </SelectItem>
+          <SelectItem key="pace" value="pace">
+            Pace
+          </SelectItem>
+          <SelectItem key="whitelist" value="whitelist">
+            Whitelist
+          </SelectItem>
+        </Select>
+      </div>
+
+      <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-xl shadow-xl overflow-hidden flex-1">
+        <div className="p-3 bg-gray-800/50 border-b border-gray-700 flex items-center">
+          <FontAwesomeIcon icon={getViewIcon()} className="text-purple-400 mr-2" />
+          <h2 className="text-xl font-medium">
+            {viewMode === "pace" ? "Event Pace" : viewMode === "whitelist" ? "Event Whitelist" : "Event Results"}
+          </h2>
+        </div>
+
+        <div className="overflow-auto h-full">
+          {!selectedEvent ? (
+            <div className="grid h-full place-items-center">No Event Selected</div>
+          ) : viewMode === "pace" ? (
+            <PaceLeaderboard whitelist={new Set(selectedEvent.whitelist)} />
+          ) : viewMode === "whitelist" ? (
+            <WhitelistTable whitelist={selectedEvent.whitelist} />
+          ) : (
+            <EventTable event={selectedEvent} />
+          )}
         </div>
       </div>
-      {!selectedEvent ? (
-        <div className="grid h-4/6 place-items-center">No Event Selected</div>
-      ) : viewMode === "pace" ? (
-        <PaceLeaderboard whitelist={new Set(selectedEvent.whitelist)} />
-      ) : viewMode === "whitelist" ? (
-        <WhitelistTable whitelist={selectedEvent.whitelist} />
-      ) : (
-        <EventTable event={selectedEvent} />
-      )}
     </div>
   );
 }
