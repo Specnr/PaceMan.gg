@@ -11,13 +11,11 @@ const Footer = () => {
   const { openAuthModal } = useModal();
 
   const footerLinks = [
-    { name: "AA", link: "/aa", isExternal: false },
-    { name: "Events", link: "/events/latest", isExternal: false },
     { name: "Discord", link: "https://discord.gg/t63gGSWvdV", isExternal: true },
-    { 
-      name: "Tracker", 
-      link: `https://github.com/PaceMan-MCSR/PaceMan${pathname?.includes("aa") ? "-AA-" : "-"}Tracker/releases`, 
-      isExternal: true 
+    {
+      name: "Tracker",
+      link: `https://github.com/PaceMan-MCSR/PaceMan${pathname?.includes("aa") ? "-AA-" : "-"}Tracker/releases`,
+      isExternal: true
     },
     { name: "Tutorial", link: "https://docs.google.com/document/d/1RgHUJhLvnUp0KtnCcdJEHCi6rn7naUqWwfe-0ntTAlo", isExternal: true },
     { name: "Rules", link: "https://docs.google.com/document/d/118WJx5C9giWHsdc-CShhoF_6yKrPsTFB_edGmtR9F-k", isExternal: true },
@@ -35,13 +33,13 @@ const Footer = () => {
           Generate Access Token
         </button>
       </div>
-      
+
       <div className="flex flex-wrap justify-center gap-2 md:gap-4 text-sm">
         {footerLinks.map((link, index) => (
           <React.Fragment key={link.name}>
             <div className="flex items-center">
-              <Link 
-                stay={!link.isExternal} 
+              <Link
+                stay={!link.isExternal}
                 link={link.link}
                 className="text-gray-300 hover:text-white transition-colors duration-200"
               >
@@ -54,7 +52,7 @@ const Footer = () => {
           </React.Fragment>
         ))}
       </div>
-      
+
       <div className="mt-4 text-xs text-gray-500">
         © {new Date().getFullYear()} PaceMan
       </div>

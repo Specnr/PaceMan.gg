@@ -32,15 +32,15 @@ export default function RootLayout({
           <ModalProvider>
             <div className="flex flex-col min-h-screen">
               <header className="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 shadow-md">
-                <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div className="mx-auto px-4 py-3 flex justify-between items-center">
                   <NavBar />
                 </div>
               </header>
-              
+
               <main className="flex-1 container mx-auto px-4 py-6 flex flex-col">
                 {children}
               </main>
-              
+
               <footer className="bg-gray-900/80 backdrop-blur-sm border-t border-gray-800 py-4 mt-auto">
                 <div className="container mx-auto px-4">
                   <Footer />

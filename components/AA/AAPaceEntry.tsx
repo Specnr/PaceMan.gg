@@ -68,7 +68,6 @@ export default function AAPaceEntry(props: AAPace) {
               width={32}
               height={32}
               unoptimized
-              className="transition-transform hover:scale-110"
             />
           </div>
 

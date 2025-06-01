@@ -11,6 +11,8 @@ export default function NavBar() {
 
   const navItems = [
     { name: "Home", path: "/" },
+    { name: "AA", path: "/aa" },
+    { name: "Events", path: "/events/latest" },
     { name: "Stats", path: "/stats" },
     { name: "Leaderboard", path: "/lb/monthly" },
   ];
@@ -18,8 +20,8 @@ export default function NavBar() {
   return (
     <div className="z-50">
       {/* Mobile menu button */}
-      <button 
-        className="md:hidden text-white p-2 focus:outline-none" 
+      <button
+        className="md:hidden text-white p-2 focus:outline-none"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} size="lg" />
@@ -29,13 +31,12 @@ export default function NavBar() {
       <div className="hidden md:flex items-center space-x-1">
         {navItems.map((item, index) => (
           <div key={item.path} className="flex items-center">
-            <Link 
+            <Link
               href={item.path}
-              className={`px-4 py-2 rounded-md transition-colors duration-200 text-lg ${
-                pathname === item.path 
-                  ? "text-purple-400 font-medium" 
-                  : "text-gray-300 hover:text-white hover:bg-gray-800"
-              }`}
+              className={`px-4 py-2 rounded-md transition-colors duration-200 text-lg ${pathname === item.path
+                ? "text-purple-400 font-medium"
+                : "text-gray-300 hover:text-white hover:bg-gray-800"
+                }`}
             >
               {item.name}
             </Link>
@@ -50,14 +51,13 @@ export default function NavBar() {
       {isMenuOpen && (
         <div className="md:hidden absolute top-12 left-0 bg-gray-900 border border-gray-800 rounded-md shadow-lg p-2 w-48">
           {navItems.map((item) => (
-            <Link 
+            <Link
               key={item.path}
               href={item.path}
-              className={`block px-4 py-2 rounded-md transition-colors duration-200 ${
-                pathname === item.path 
-                  ? "text-purple-400 bg-gray-800 font-medium" 
-                  : "text-gray-300 hover:text-white hover:bg-gray-800"
-              }`}
+              className={`block px-4 py-2 rounded-md transition-colors duration-200 ${pathname === item.path
+                ? "text-purple-400 bg-gray-800 font-medium"
+                : "text-gray-300 hover:text-white hover:bg-gray-800"
+                }`}
               onClick={() => setIsMenuOpen(false)}
             >
               {item.name}

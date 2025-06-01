@@ -42,13 +42,13 @@ export default function PaceEntry(props: PaceEntryProps) {
         ? 'grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_auto_240px]'
         : 'grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_240px]'} py-3 px-4 hover:bg-gray-700/30 transition-colors duration-150`}>
         {/* Player column */}
-        <div className="flex items-center gap-3 min-w-0 overflow-hidden">
+        <div className="flex items-center gap-3 min-w-0">
           <button
             className="transition-transform hover:scale-110 focus:outline-none hidden sm:block flex-shrink-0"
             onClick={() => router.push(`/stats/player/${props.nickname}`)}
             aria-label={`View stats for ${props.nickname}`}
           >
-            <div className="w-8 h-8 overflow-hidden">
+            <div className="w-8 h-8 relative">
               <Image
                 alt={`${props.nickname}'s avatar`}
                 src={uuidToHead(props.uuid)}
@@ -73,15 +73,14 @@ export default function PaceEntry(props: PaceEntryProps) {
         </div>
 
         {/* Split column */}
-        <div className="flex items-center gap-3 overflow-hidden max-w-full">
-          <div className="flex-shrink-0 hidden sm:block">
+        <div className="flex items-center gap-3 max-w-full">
+          <div className="flex-shrink-0 hidden sm:block relative">
             <Image
               alt={`${props.splitName} icon`}
               src={splitToIcon(props.split!)}
               width={28}
               height={28}
               unoptimized
-              className="transition-transform hover:scale-110"
             />
           </div>
 
