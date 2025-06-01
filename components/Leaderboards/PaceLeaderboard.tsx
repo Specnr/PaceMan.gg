@@ -68,7 +68,7 @@ export default function PaceLeaderboard({
     <div className="w-full">
       <div className="overflow-y-auto max-h-[50vh] pb-4">
         <div className={`grid ${isAllVersion
-          ? 'grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_auto_240px]'
+          ? 'grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_120px_180px]'
           : 'grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_240px]'} text-xs uppercase tracking-wider text-gray-400 px-4 py-2`}>
           <div>Player</div>
           <div>Split</div>

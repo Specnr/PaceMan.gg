@@ -39,7 +39,7 @@ export default function PaceEntry(props: PaceEntryProps) {
   return (
     <>
       <div className={`grid ${props.showVersion
-        ? 'grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_auto_240px]'
+        ? 'grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_120px_180px]'
         : 'grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_240px]'} py-3 px-4 hover:bg-gray-700/30 transition-colors duration-150`}>
         {/* Player column */}
         <div className="flex items-center gap-3 min-w-0">
@@ -156,7 +156,7 @@ export default function PaceEntry(props: PaceEntryProps) {
             <div
               key={`${props.uuid}-${e.name}-${index}`}
               className={`grid ${props.showVersion
-                ? 'grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_auto_240px]'
+                ? 'grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_120px_180px]'
                 : 'grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_240px]'} px-4 py-1.5 border-b border-gray-600/20 last:border-0`}
             >
               <div></div>
