@@ -111,7 +111,7 @@ export default function CompletionEntry(props: Props) {
 
       {/* Expanded details */}
       {isExpanded && props.eventList.length > 0 && (
-        <div className="bg-gray-900 py-2 mx-2 mb-2 rounded-md">
+        <div className="bg-gray-900 mx-2 mb-2 rounded-md shadow-lg">
           {props.eventList.map((e, index) => (
             index !== props.eventList.length - 1 && (
               <div

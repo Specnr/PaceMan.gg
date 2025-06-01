@@ -150,14 +150,14 @@ export default function PaceEntry(props: PaceEntryProps) {
 
       {/* Expanded details */}
       {isExpanded && props.eventList && props.eventList.length > 0 && (
-        <div className="bg-gray-900 py-2 mx-2 mb-2 rounded-md">
+        <div className="bg-gray-900 mx-2 mb-2 rounded-md shadow-lg">
           {props.eventList.map((e, index) => (
             <div
               key={`${props.uuid}-${e.name}-${index}`}
               className={`grid ${props.showVersion ? 'grid-cols-3 md:grid-cols-4' : 'grid-cols-3'} px-4 py-1.5 border-b border-gray-600/20 last:border-0`}
             >
               <div></div>
-              <div className="text-gray-400 text-sm truncate">{e.name}</div>
+              <div className="text-gray-400 text-sm truncate -mx-2">{e.name}</div>
               {props.showVersion && <div className="hidden md:block"></div>}
               <div className="text-gray-300 text-sm text-right sm:text-left">{msToTime(e.time)}</div>
             </div>
