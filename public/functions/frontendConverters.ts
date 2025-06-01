@@ -5,6 +5,14 @@ import timezone from "dayjs/plugin/timezone";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
+export const timeToMs = (time: string) => {
+  if (time === "Error" || time === "N/A") {
+    return Number.MAX_SAFE_INTEGER;
+  }
+  const [minutes, seconds] = time.split(":").map(Number);
+  return (minutes * 60) + seconds;
+};
+
 export const msToTime = (ms: number, keepMs = false): string => {
   let milliseconds = Math.floor((ms % 1000) / 100),
     seconds = Math.floor((ms / 1000) % 60),
@@ -84,6 +92,7 @@ export const placeToColor = (place: number) => {
   if (place === 1) return "goldenrod";
   if (place === 2) return "#929292";
   if (place === 3) return "#cd7f32";
+  return "#d1d5db";
 };
 
 export const EVENT_ID_NAME = [
@@ -118,9 +127,44 @@ export const createDateFromInput = (date: dayjs.Dayjs) => {
   return newDate.valueOf();
 };
 
-export const fracToPerc = (frac: number) => `${Math.round(frac * 10000) / 100}%`;
+// Note: This function intentionally creates different content between server and client renders OCCATIONALLY.
+// It will cause a harmless hydration mismatch warning that can be ignored.
+export const getSemiRandomLoadingMessage = () => {
+  const timeIdx = Math.floor(Date.now() / 1000);
+
+  const messages = [
+    "Hitting a Pound-portal",
+    "Performing a one-shot",
+    "Changing the world",
+    "Hitting the zero",
+    "Getting caved",
+    "Resetting the world",
+    "Digging on 8 9",
+    "Pearling into lava",
+    "Hitting the crystal",
+    "Resetting a fastion",
+    "Hitting save & quit",
+    "Blinding at 150 150",
+    "Forgetting fire-res",
+    "Going 0/10 in Ranked",
+    "Buying a 5950x",
+    "Buying a 5090",
+    "Preparing a godseed",
+    "Getting treasure'd",
+    "Crafting 6 shears",
+    "Crafting 24 buttons",
+    "Crafting an iron hoe",
+    "Playing stronghold-first",
+    "Playing monument",
+    "Playing classic",
+    "Pacebaiting",
+  ];
+
+  return messages[timeIdx % messages.length] + "...";
+};
 
 export const gameVersions = [
+  "All",
   "1.16.1",
   "1.15.2",
   "1.7.10",

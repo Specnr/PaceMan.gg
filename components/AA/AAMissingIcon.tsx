@@ -9,13 +9,20 @@ interface Props {
 
 const AAMissingIconTooltipContent = (context: number[], category: string) => {
   return (
-    <ul className="text-left">
-      {
-        context.map(n => (
-          <li key={`${category}-${n}`}>{missingEnumToText(n, category)}</li>
-        ))
-      }
-    </ul>
+    <div className="text-left p-2">
+      <p className="font-medium mb-1 capitalize">{category} Requirements:</p>
+      {context.length > 0 ? (
+        <ul className="space-y-1">
+          {
+            context.map(n => (
+              <li key={`${category}-${n}`} className="text-sm">• {missingEnumToText(n, category)}</li>
+            ))
+          }
+        </ul>
+      ) : (
+        <p className="text-sm text-green-400">Completed!</p>
+      )}
+    </div>
   );
 };
 
@@ -23,31 +30,29 @@ export const AAMissingIcon = (props: Props) => {
   return (
     <Tooltip
       showArrow
-      hidden={props.context.length === 0}
       content={AAMissingIconTooltipContent(props.context, props.icon)}
+      className="bg-gray-900 border border-gray-700"
     >
-      <div className="pr-2">
-        <div className="relative w-[28px]">
-          {
-            props.context.length === 0 && 
-              <Image
-                className="absolute h-[28px] w-[28px] z-10"
-                alt={`${props.icon}-completed-icon`}
-                src={AA_COMPLETED_ICON}
-                width={28}
-                height={28}
-                unoptimized
-              />
-          }
+      <div className="relative w-8 h-8 mx-0.5">
+        {
+          props.context.length === 0 &&
           <Image
-            className="absolute h-[28px] w-[28px]"
-            alt={`${props.icon}-missing-icon`}
-            src={nameToIcon(props.icon)}
-            width={28}
-            height={28}
+            className="absolute h-full w-full z-10"
+            alt={`${props.icon}-completed-icon`}
+            src={AA_COMPLETED_ICON}
+            width={30}
+            height={30}
             unoptimized
           />
-        </div>
+        }
+        <Image
+          className="absolute h-full w-full"
+          alt={`${props.icon}-missing-icon`}
+          src={nameToIcon(props.icon)}
+          width={30}
+          height={30}
+          unoptimized
+        />
       </div>
     </Tooltip>
   );

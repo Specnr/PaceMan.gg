@@ -1,50 +1,87 @@
 "use client";
 import React from "react";
-import { useState } from "react";
-import { usePathname } from 'next/navigation'
-
+import { usePathname } from 'next/navigation';
 import Link from "./Link";
-import Modal from "@/components/Modal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faKey } from "@fortawesome/free-solid-svg-icons";
+import { faDiscord, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faBook, faScroll, faShield } from "@fortawesome/free-solid-svg-icons";
+import { useModal } from "@/app/context/ModalContext";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const Footer = () => {
-  const pathname = usePathname()
-  const [showAuthModal, setShowAuthModal] = useState(false);
+  const pathname = usePathname();
+  const { openAuthModal } = useModal();
+
+  const footerLinks = [
+    {
+      name: "Discord",
+      link: "https://discord.gg/t63gGSWvdV",
+      isExternal: true,
+      icon: faDiscord as IconProp
+    },
+    {
+      name: "Tracker",
+      link: `https://github.com/PaceMan-MCSR/PaceMan${pathname?.includes("aa") ? "-AA-" : "-"}Tracker/releases`,
+      isExternal: true,
+      icon: faGithub as IconProp
+    },
+    {
+      name: "Tutorial",
+      link: "https://docs.google.com/document/d/1RgHUJhLvnUp0KtnCcdJEHCi6rn7naUqWwfe-0ntTAlo",
+      isExternal: true,
+      icon: faBook as IconProp
+    },
+    {
+      name: "Rules",
+      link: "https://docs.google.com/document/d/118WJx5C9giWHsdc-CShhoF_6yKrPsTFB_edGmtR9F-k",
+      isExternal: true,
+      icon: faScroll as IconProp
+    },
+    {
+      name: "Privacy Policy",
+      link: "https://docs.google.com/document/d/1vybBwJT2vM7MWHP9Oc544a8WdGhjQWVA34o5Cx7N7YM",
+      isExternal: true,
+      icon: faShield as IconProp
+    },
+  ];
 
   return (
-    <>
-      <div className="text-xs pb-1">
-        <div className="mb-2 invisible lg:visible">
-          <button
-            className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 border border-purple-700 rounded"
-            onClick={() => setShowAuthModal(true)}
-          >
-            Generate Access Token
-          </button>
-        </div>
-        <Link stay link="/aa">AA</Link>
-        {" • "}
-        <Link stay link="/events/latest">Events</Link>
-        {" • "}
-        <Link link="https://discord.gg/t63gGSWvdV">Discord</Link>
-        {" • "}
-        <Link link={"https://github.com/PaceMan-MCSR/PaceMan" + (pathname?.includes("aa") ? "-AA-" : "-") + "Tracker/releases"}>
-          Tracker
-        </Link>
-        {" • "}
-        <Link link="https://docs.google.com/document/d/1RgHUJhLvnUp0KtnCcdJEHCi6rn7naUqWwfe-0ntTAlo">
-          Tutorial
-        </Link>
-        {" • "}
-        <Link link="https://docs.google.com/document/d/118WJx5C9giWHsdc-CShhoF_6yKrPsTFB_edGmtR9F-k">
-          Rules
-        </Link>
-        {" • "}
-        <Link link="https://docs.google.com/document/d/1vybBwJT2vM7MWHP9Oc544a8WdGhjQWVA34o5Cx7N7YM">
-          Privacy Policy
-        </Link>
+    <div className="text-center">
+      <div className="mb-6">
+        <button
+          className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-medium py-2 px-6 rounded-md transition-all duration-200 shadow-lg hover:shadow-purple-500/20"
+          onClick={openAuthModal}
+        >
+          <FontAwesomeIcon icon={faKey as IconProp} className="mr-2" />
+          Generate Access Token
+        </button>
       </div>
-      {showAuthModal && <Modal onClose={() => setShowAuthModal(false)} />}
-    </>
+
+      <div className="flex flex-wrap justify-center gap-2 md:gap-4 text-sm">
+        {footerLinks.map((link, index) => (
+          <React.Fragment key={link.name}>
+            <div className="flex items-center">
+              <Link
+                stay={!link.isExternal}
+                link={link.link}
+                className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center"
+              >
+                <FontAwesomeIcon icon={link.icon} className="mr-2 w-4 h-4" />
+                {link.name}
+              </Link>
+            </div>
+            {index < footerLinks.length - 1 && (
+              <span className="text-gray-600 hidden md:inline">•</span>
+            )}
+          </React.Fragment>
+        ))}
+      </div>
+
+      <div className="mt-4 text-xs text-gray-500">
+        © {new Date().getFullYear()} PaceMan
+      </div>
+    </div>
   );
 };
 

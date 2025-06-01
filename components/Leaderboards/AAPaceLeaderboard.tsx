@@ -1,10 +1,11 @@
 "use client";
-import TableHeader from "@/components/TableHeader";
-import { Spinner } from "@nextui-org/react";
 import AAPaceEntry from "../AA/AAPaceEntry";
 import { AAPace } from "../interfaces/Pace";
 import useSWR from "swr";
 import { AAPaceSort, apiToAAPace } from "@/public/functions/converters";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { MessageSpinner } from "../MessageSpinner";
 
 const fetcher = async (url: string) => {
   const data = await fetch(url).then((res) => res.json());
@@ -22,33 +23,50 @@ export default function AAPaceLeaderboard() {
     }
   );
 
-  let msg = null;
-  if (error) msg = "failed to load";
-  else if (isLoading) msg = <Spinner color="secondary" size="lg" />;
-  else if (!data || data.length === 0)
-    msg = "No one is currently on pace...";
+  // Loading and error states
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12 px-4">
+        <FontAwesomeIcon icon={faExclamationTriangle} className="text-red-400 text-3xl mb-4" />
+        <p className="text-gray-300">Failed to load pace data</p>
+        <p className="text-sm text-gray-500 mt-2">Please try again later</p>
+      </div>
+    );
+  }
 
-  if (msg !== null) {
-    return <div className="grid h-4/6 place-items-center">{msg}</div>;
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center py-16">
+        <MessageSpinner />
+      </div>
+    );
+  }
+
+  if (!data || data.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-16 text-center">
+        <p className="text-gray-300 text-lg mb-2">No one is currently on pace...</p>
+        <p className="text-gray-500 text-sm">Check back soon</p>
+      </div>
+    );
   }
 
   return (
-    <div className="mt-2 mx-auto half-height overflow-y-auto w-full lg:w-6/12">
-      <table className="relative text-lg text-left text-gray-400 justify-between w-full half-height">
-        <thead className="sticky top-0 text-sm uppercase bg-gray-700 text-gray-400">
-          <tr>
-            <TableHeader colSpan={2}>Player</TableHeader>
-            <TableHeader colSpan={2}>Advancement</TableHeader>
-            <TableHeader colSpan={1}>Time</TableHeader>
-            <TableHeader colSpan={1}><span className="invisible 2xl:visible">Missing</span></TableHeader>
-          </tr>
-        </thead>
-        <tbody>
-          {data!.map((pace: AAPace, idx: number) => (
-            <AAPaceEntry key={`aa-${idx}`} {...pace} />
-          ))}
-        </tbody>
-      </table>
+    <div className="w-full">
+      <div className="overflow-y-auto max-h-[50vh] pb-4">
+        <div className="grid grid-cols-[120px_minmax(0,1fr)_80px] lg:grid-cols-[200px_minmax(0,1fr)_1fr_80px] text-xs uppercase tracking-wider text-gray-400 px-4 py-2">
+          <div>Player</div>
+          <div>Advancements</div>
+          <div className="hidden lg:block">Missing</div>
+          <div>Time</div>
+        </div>
+
+        {data.map((pace: AAPace, idx: number) => (
+          <div key={`aa-${idx}`} className="border-b border-gray-700/50 last:border-0">
+            <AAPaceEntry {...pace} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

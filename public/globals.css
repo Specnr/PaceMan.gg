@@ -1,7 +1,12 @@
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* Base container heights */
 .container-height {
-  height: 85vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .half-height {
@@ -13,21 +18,58 @@
   width: 54px;
 }
 
+/* Custom scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
+::-webkit-scrollbar-track {
+  background: rgba(30, 30, 30, 0.5);
+  border-radius: 8px;
+}
+
 ::-webkit-scrollbar-thumb {
-  background-color: #a0aec0;
+  background: linear-gradient(to bottom, #9333ea, #6366f1);
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #a855f7, #818cf8);
 }
 
 * {
   scrollbar-width: thin;
+  scrollbar-color: #9333ea #1e1e1e;
 }
 
-html::-webkit-scrollbar-thumb {
-  background-color: #a0aec0;
+/* Custom transitions and animations */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-@tailwind components;
-@tailwind utilities;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Custom focus styles */
+*:focus-visible {
+  outline: 2px solid #9333ea;
+  outline-offset: 2px;
+}
+
+/* Custom selection color */
+::selection {
+  background-color: rgba(147, 51, 234, 0.3);
+  color: white;
+}

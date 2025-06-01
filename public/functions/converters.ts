@@ -90,6 +90,17 @@ export const apiToPace = async (paceItems: any[]): Promise<Pace[]> => {
 };
 
 export const paceSort = (a: Pace, b: Pace) => {
+  // Handle game versions, prioritize 1.16.1
+  if (a.gameVersion !== b.gameVersion) {
+    if (a.gameVersion === "1.16.1") {
+      return -1;
+    } else if (b.gameVersion === "1.16.1") {
+      return 1;
+    } else {
+      return a.gameVersion.localeCompare(b.gameVersion);
+    }
+  }
+
   if (a.isHighQuality && !b.isHighQuality) {
     return -1;
   }

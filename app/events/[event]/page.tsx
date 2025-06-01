@@ -9,10 +9,13 @@ import EventTable from "@/components/Events/EventTable";
 import { msToDate } from "@/public/functions/frontendConverters";
 import Title from "@/components/Title";
 import DateTimeListTooltip from "@/components/Events/DateTimeListTooltip";
-import { Select, SelectItem, Spinner } from "@nextui-org/react";
+import { Select, SelectItem } from "@nextui-org/react";
 import PaceLeaderboard from "@/components/Leaderboards/PaceLeaderboard";
 import WhitelistTable from "@/components/Events/WhitelistTable";
 import dayjs from "dayjs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt, faChartLine, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { MessageSpinner } from "@/components/MessageSpinner";
 
 export default function Events({ params }: { params: { event: string } }) {
   const {
@@ -55,93 +58,126 @@ export default function Events({ params }: { params: { event: string } }) {
   let msg = null;
   if (error || (!isLoading && !events)) msg = "failed to load";
   if (isLoadingEvent || isLoading || !events)
-    msg = <Spinner color="secondary" size="lg" />;
+    msg = (
+      <div className="flex flex-col items-center justify-center py-auto">
+        <MessageSpinner />
+      </div>
+    );
   if (!isLoading && !isLoadingEvent && !selectedEvent) msg = "invalid event id";
 
   if (msg !== null) {
     return (
-      <div className="container-height grid place-items-center">{msg}</div>
+      <div className="container-height grid place-items-center my-auto">{msg}</div>
     );
   }
 
   const eventList = events ? events : [];
-  return (
-    <div className="container-height">
-      <div className="pt-16">
-        <Title
-          titleOverrite={selectedEvent ? selectedEvent.name : undefined}
-          link={
-            selectedEvent && selectedEvent.host
-              ? `https://twitch.tv/${selectedEvent.host}`
-              : undefined
-          }
-        />
-        {selectedEvent && (
-          <div className="group w-fit mx-auto relative flex justify-center">
-            <DateTimeListTooltip
-              starts={selectedEvent.starts}
-              ends={selectedEvent.ends}
-            >
-              <p className="pb-2 pt-4">
-                {msToDate(selectedEvent.starts[0])} -{" "}
-                {msToDate(selectedEvent.ends[selectedEvent.ends.length - 1])}
-              </p>
-            </DateTimeListTooltip>
-          </div>
-        )}
 
-        <div className="px-4 pt-2 mx-auto flex lg:w-2/4 gap-4 justify-center">
-          <Select
-            className="max-w-sm"
-            variant="bordered"
-            size="sm"
-            label="Event"
-            defaultSelectedKeys={[selectedEvent!.vanity]}
-            onChange={(evt) =>
-              router.push(
-                `/events/${
-                  eventList.filter((e) => e.vanity === evt.target.value)[0]
+  // Get icon based on view mode
+  const getViewIcon = () => {
+    switch (viewMode) {
+      case "pace":
+        return faChartLine;
+      case "whitelist":
+        return faUsers;
+      default:
+        return faCalendarAlt;
+    }
+  };
+
+  return (
+    <div className="flex flex-col h-full fade-in">
+      <Title
+        titleOverrite={selectedEvent ? selectedEvent.name : undefined}
+        link={
+          selectedEvent && selectedEvent.host
+            ? `https://twitch.tv/${selectedEvent.host}`
+            : undefined
+        }
+      />
+
+      <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-xl shadow-xl overflow-hidden flex-1 max-w-5xl mx-auto w-full">
+        <div className="p-3 bg-gray-800/50 border-b border-gray-700">
+          <div className="flex items-center mb-3">
+            <FontAwesomeIcon icon={getViewIcon()} className="text-purple-400 mr-2" />
+            <h2 className="text-xl font-medium">
+              {viewMode === "pace" ? "Event Pace" : viewMode === "whitelist" ? "Event Whitelist" : "Event Results"}
+            </h2>
+
+            {selectedEvent && (
+              <div className="group relative ml-auto">
+                <DateTimeListTooltip
+                  starts={selectedEvent.starts}
+                  ends={selectedEvent.ends}
+                >
+                  <p className="text-gray-300 text-sm sm:text-base">
+                    {msToDate(selectedEvent.starts[0])} -{" "}
+                    {msToDate(selectedEvent.ends[selectedEvent.ends.length - 1])}
+                  </p>
+                </DateTimeListTooltip>
+              </div>
+            )}
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <Select
+              className="w-full sm:w-80"
+              variant="bordered"
+              size="sm"
+              defaultSelectedKeys={[selectedEvent!.vanity]}
+              onChange={(evt) =>
+                router.push(
+                  `/events/${eventList.filter((e) => e.vanity === evt.target.value)[0]
                     .vanity
-                }`
-              )
-            }
-            value={selectedEvent ? selectedEvent.vanity : ""}
-          >
-            {eventList.map((e) => (
-              <SelectItem value={e.vanity} key={e.vanity}>
-                {e.name}
+                  }`
+                )
+              }
+              value={selectedEvent ? selectedEvent.vanity : ""}
+              classNames={{
+                trigger: "bg-gray-800/30"
+              }}
+            >
+              {eventList.map((e) => (
+                <SelectItem value={e.vanity} key={e.vanity}>
+                  {e.name}
+                </SelectItem>
+              ))}
+            </Select>
+            <Select
+              className="w-full sm:w-40"
+              variant="bordered"
+              size="sm"
+              defaultSelectedKeys={["results"]}
+              onChange={(evt) => setViewMode(evt.target.value)}
+              classNames={{
+                trigger: "bg-gray-800/30"
+              }}
+            >
+              <SelectItem key="results" value="results">
+                Results
               </SelectItem>
-            ))}
-          </Select>
-          <Select
-            className="max-w-xs"
-            variant="bordered"
-            size="sm"
-            label="View"
-            defaultSelectedKeys={["results"]}
-            onChange={(evt) => setViewMode(evt.target.value)}
-          >
-            <SelectItem key="results" value="results">
-              Results
-            </SelectItem>
-            <SelectItem key="pace" value="pace">
-              Pace
-            </SelectItem>
-            <SelectItem key="whitelist" value="whitelist">
-              Whitelist
-            </SelectItem>
-          </Select>
+              <SelectItem key="pace" value="pace">
+                Pace
+              </SelectItem>
+              <SelectItem key="whitelist" value="whitelist">
+                Whitelist
+              </SelectItem>
+            </Select>
+          </div>
+        </div>
+
+        <div className="overflow-auto h-full">
+          {!selectedEvent ? (
+            <div className="grid h-full place-items-center">No Event Selected</div>
+          ) : viewMode === "pace" ? (
+            <PaceLeaderboard whitelist={new Set(selectedEvent.whitelist)} />
+          ) : viewMode === "whitelist" ? (
+            <WhitelistTable whitelist={selectedEvent.whitelist} />
+          ) : (
+            <EventTable event={selectedEvent} />
+          )}
         </div>
       </div>
-      {!selectedEvent ? (
-        <div className="grid h-4/6 place-items-center">No Event Selected</div>
-      ) : viewMode === "pace" ? (
-        <PaceLeaderboard whitelist={new Set(selectedEvent.whitelist)} />
-      ) : viewMode === "whitelist" ? (
-        <WhitelistTable whitelist={selectedEvent.whitelist} />
-      ) : (
-        <EventTable event={selectedEvent} />
-      )}
     </div>
   );
 }
