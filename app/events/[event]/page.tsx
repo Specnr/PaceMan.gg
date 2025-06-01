@@ -96,22 +96,6 @@ export default function Events({ params }: { params: { event: string } }) {
         }
       />
 
-      <div className="flex justify-center mb-4 -mt-4">
-        {selectedEvent && (
-          <div className="group w-fit relative flex justify-center">
-            <DateTimeListTooltip
-              starts={selectedEvent.starts}
-              ends={selectedEvent.ends}
-            >
-              <p className="text-gray-300">
-                {msToDate(selectedEvent.starts[0])} -{" "}
-                {msToDate(selectedEvent.ends[selectedEvent.ends.length - 1])}
-              </p>
-            </DateTimeListTooltip>
-          </div>
-        )}
-      </div>
-
       <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-xl shadow-xl overflow-hidden flex-1 max-w-5xl mx-auto w-full">
         <div className="p-3 bg-gray-800/50 border-b border-gray-700">
           <div className="flex items-center mb-3">
@@ -119,6 +103,20 @@ export default function Events({ params }: { params: { event: string } }) {
             <h2 className="text-xl font-medium">
               {viewMode === "pace" ? "Event Pace" : viewMode === "whitelist" ? "Event Whitelist" : "Event Results"}
             </h2>
+
+            {selectedEvent && (
+              <div className="group relative ml-auto">
+                <DateTimeListTooltip
+                  starts={selectedEvent.starts}
+                  ends={selectedEvent.ends}
+                >
+                  <p className="text-gray-300 text-sm sm:text-base">
+                    {msToDate(selectedEvent.starts[0])} -{" "}
+                    {msToDate(selectedEvent.ends[selectedEvent.ends.length - 1])}
+                  </p>
+                </DateTimeListTooltip>
+              </div>
+            )}
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
