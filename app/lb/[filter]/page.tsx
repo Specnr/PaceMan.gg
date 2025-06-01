@@ -47,7 +47,7 @@ export default function LeaderboardPage({
     <div className="flex flex-col h-full fade-in">
       <Title titleOverrite={`PaceMan Leaderboard`} />
 
-      <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-xl shadow-xl overflow-hidden flex-1">
+      <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-xl shadow-xl overflow-hidden flex-1 max-w-5xl mx-auto w-full">
         <div className="p-3 bg-gray-800/50 border-b border-gray-700">
           <div className="flex items-center mb-3">
             <FontAwesomeIcon

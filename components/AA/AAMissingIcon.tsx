@@ -31,13 +31,13 @@ export const AAMissingIcon = (props: Props) => {
     <Tooltip
       showArrow
       content={AAMissingIconTooltipContent(props.context, props.icon)}
-      className="bg-gray-900 border border-gray-700"
+      className="bg-gray-900 border border-gray-700 transition-transform hover:scale-110"
     >
       <div className="relative w-8 h-8 mx-0.5">
         {
           props.context.length === 0 &&
           <Image
-            className="absolute h-full w-full z-10"
+            className="absolute h-full w-full z-10 transition-transform hover:scale-110"
             alt={`${props.icon}-completed-icon`}
             src={AA_COMPLETED_ICON}
             width={30}
@@ -46,7 +46,7 @@ export const AAMissingIcon = (props: Props) => {
           />
         }
         <Image
-          className="absolute h-full w-full"
+          className="absolute h-full w-full transition-transform hover:scale-110"
           alt={`${props.icon}-missing-icon`}
           src={nameToIcon(props.icon)}
           width={30}

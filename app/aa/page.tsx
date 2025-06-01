@@ -10,7 +10,7 @@ export default function Home() {
     <div className="flex flex-col h-full fade-in">
       <Title />
 
-      <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-xl shadow-xl overflow-hidden flex-1">
+      <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-xl shadow-xl overflow-hidden flex-1 max-w-5xl mx-auto w-full">
         <div className="p-3 bg-gray-800/50 border-b border-gray-700 flex items-center justify-between">
           <div className="flex items-center">
             <FontAwesomeIcon icon={faChartLine} className="text-purple-400 mr-2" />
