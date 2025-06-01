@@ -150,7 +150,7 @@ export default function AAPaceEntry(props: AAPace) {
               <div></div>
               <div className="text-gray-400 text-sm truncate -ml-2">{(ADV_TO_NAME as any)[e.name]}</div>
               <div className="hidden md:block"></div>
-              <div className="text-gray-300 text-sm">{msToTime(e.time)}</div>
+              <div className="text-gray-300 text-sm ml-2">{msToTime(e.time)}</div>
             </div>
           ))}
         </div>
