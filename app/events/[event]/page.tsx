@@ -112,54 +112,60 @@ export default function Events({ params }: { params: { event: string } }) {
         )}
       </div>
 
-      <div className="flex justify-center gap-4 mb-4">
-        <Select
-          className="max-w-sm"
-          variant="bordered"
-          size="sm"
-          label="Event"
-          defaultSelectedKeys={[selectedEvent!.vanity]}
-          onChange={(evt) =>
-            router.push(
-              `/events/${eventList.filter((e) => e.vanity === evt.target.value)[0]
-                .vanity
-              }`
-            )
-          }
-          value={selectedEvent ? selectedEvent.vanity : ""}
-        >
-          {eventList.map((e) => (
-            <SelectItem value={e.vanity} key={e.vanity}>
-              {e.name}
-            </SelectItem>
-          ))}
-        </Select>
-        <Select
-          className="max-w-xs"
-          variant="bordered"
-          size="sm"
-          label="View"
-          defaultSelectedKeys={["results"]}
-          onChange={(evt) => setViewMode(evt.target.value)}
-        >
-          <SelectItem key="results" value="results">
-            Results
-          </SelectItem>
-          <SelectItem key="pace" value="pace">
-            Pace
-          </SelectItem>
-          <SelectItem key="whitelist" value="whitelist">
-            Whitelist
-          </SelectItem>
-        </Select>
-      </div>
-
       <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-xl shadow-xl overflow-hidden flex-1 max-w-5xl mx-auto w-full">
-        <div className="p-3 bg-gray-800/50 border-b border-gray-700 flex items-center">
-          <FontAwesomeIcon icon={getViewIcon()} className="text-purple-400 mr-2" />
-          <h2 className="text-xl font-medium">
-            {viewMode === "pace" ? "Event Pace" : viewMode === "whitelist" ? "Event Whitelist" : "Event Results"}
-          </h2>
+        <div className="p-3 bg-gray-800/50 border-b border-gray-700">
+          <div className="flex items-center mb-3">
+            <FontAwesomeIcon icon={getViewIcon()} className="text-purple-400 mr-2" />
+            <h2 className="text-xl font-medium">
+              {viewMode === "pace" ? "Event Pace" : viewMode === "whitelist" ? "Event Whitelist" : "Event Results"}
+            </h2>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <Select
+              className="w-full sm:w-80"
+              variant="bordered"
+              size="sm"
+              defaultSelectedKeys={[selectedEvent!.vanity]}
+              onChange={(evt) =>
+                router.push(
+                  `/events/${eventList.filter((e) => e.vanity === evt.target.value)[0]
+                    .vanity
+                  }`
+                )
+              }
+              value={selectedEvent ? selectedEvent.vanity : ""}
+              classNames={{
+                trigger: "bg-gray-800/30"
+              }}
+            >
+              {eventList.map((e) => (
+                <SelectItem value={e.vanity} key={e.vanity}>
+                  {e.name}
+                </SelectItem>
+              ))}
+            </Select>
+            <Select
+              className="w-full sm:w-40"
+              variant="bordered"
+              size="sm"
+              defaultSelectedKeys={["results"]}
+              onChange={(evt) => setViewMode(evt.target.value)}
+              classNames={{
+                trigger: "bg-gray-800/30"
+              }}
+            >
+              <SelectItem key="results" value="results">
+                Results
+              </SelectItem>
+              <SelectItem key="pace" value="pace">
+                Pace
+              </SelectItem>
+              <SelectItem key="whitelist" value="whitelist">
+                Whitelist
+              </SelectItem>
+            </Select>
+          </div>
         </div>
 
         <div className="overflow-auto h-full">

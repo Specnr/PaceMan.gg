@@ -16,13 +16,13 @@ export default function SettingsTable({ settings, setSettings }: Props) {
   }
 
   return (
-    <Card className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 shadow-lg">
+    <Card className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 shadow-lg max-w-5xl mx-auto w-full">
       <div className="p-4">
         <h3 className="text-lg font-medium mb-4 flex items-center">
           <FontAwesomeIcon icon={faFilter} className="text-purple-400 mr-2" />
           Settings
         </h3>
-        
+
         <div className="flex flex-col md:flex-row items-center gap-6">
           <div className="w-full md:w-auto">
             <Select
@@ -45,7 +45,7 @@ export default function SettingsTable({ settings, setSettings }: Props) {
               ))}
             </Select>
           </div>
-          
+
           <div className="flex items-center">
             <Checkbox
               onValueChange={(liveOnly) => setAndUpdateSettings({ ...settings, liveOnly })}
