@@ -71,8 +71,8 @@ export default function PaceEntry(props: PaceEntryProps) {
         </div>
 
         {/* Split column */}
-        <div className="flex items-center gap-3">
-          <div className="flex-shrink-0">
+        <div className="flex items-center gap-3 overflow-hidden max-w-full">
+          <div className="flex-shrink-0 hidden sm:block">
             <Image
               alt={`${props.splitName} icon`}
               src={splitToIcon(props.split!)}
@@ -91,9 +91,9 @@ export default function PaceEntry(props: PaceEntryProps) {
           >
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="flex items-center gap-1 focus:outline-none"
+              className="flex items-center gap-1 focus:outline-none max-w-full overflow-hidden"
             >
-              <span className={`${qualityClasses} truncate`}>{props.splitName}</span>
+              <span className={`${qualityClasses} truncate max-w-full`}>{props.splitName}</span>
             </button>
           </Tooltip>
         </div>
@@ -134,7 +134,7 @@ export default function PaceEntry(props: PaceEntryProps) {
           >
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className={`${qualityClasses} focus:outline-none`}
+              className={`${qualityClasses} focus:outline-none whitespace-nowrap`}
             >
               {msToTime(props.time)}
               {props.eventList && props.eventList.length > 0 && (
