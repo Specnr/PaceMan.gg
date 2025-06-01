@@ -34,7 +34,7 @@ export default function CompletionEntry(props: Props) {
 
   return (
     <>
-      <div className="grid grid-cols-[80px_minmax(0,1fr)_minmax(0,1fr)] py-3 px-4 hover:bg-gray-700/30 transition-colors duration-150">
+      <div className="grid grid-cols-[80px_minmax(0,1fr)_80px] md:grid-cols-[80px_minmax(0,1fr)_240px] py-3 px-4 hover:bg-gray-700/30 transition-colors duration-150">
         {/* Placement column */}
         <div className="flex items-center gap-3">
           <button
@@ -116,11 +116,11 @@ export default function CompletionEntry(props: Props) {
             index !== props.eventList.length - 1 && (
               <div
                 key={`${props.uuid}-${e.eventId}-${index}`}
-                className="grid grid-cols-[80px_minmax(0,1fr)_minmax(0,1fr)] px-4 py-1.5 border-b border-gray-600/20 last:border-0"
+                className="grid grid-cols-[80px_minmax(0,1fr)_80px] md:grid-cols-[80px_minmax(0,1fr)_240px] px-4 py-1.5 border-b border-gray-600/20 last:border-0"
               >
                 <div></div>
-                <div className="text-gray-400 text-sm truncate -mx-2">{EVENT_ID_NAME[e.eventId]}</div>
-                <div className="text-gray-300 text-sm text-left">{msToTime(e.time)}</div>
+                <div className="text-gray-400 text-sm truncate -ml-2">{EVENT_ID_NAME[e.eventId]}</div>
+                <div className="text-gray-300 text-sm text-left ml-2">{msToTime(e.time)}</div>
               </div>
             )
           ))}

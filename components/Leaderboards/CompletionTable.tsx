@@ -46,7 +46,7 @@ export default function CompletionTable({
   return (
     <div className="w-full">
       <div className="overflow-y-auto max-h-[50vh] pb-4">
-        <div className="grid grid-cols-[80px_1fr_1fr] text-xs uppercase tracking-wider text-gray-400 px-4 py-2">
+        <div className="grid grid-cols-[80px_1fr_80px] md:grid-cols-[80px_1fr_240px] text-xs uppercase tracking-wider text-gray-400 px-4 py-2">
           <div>Place</div>
           <div>Player</div>
           <div>Time</div>

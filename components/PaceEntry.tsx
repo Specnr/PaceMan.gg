@@ -38,11 +38,13 @@ export default function PaceEntry(props: PaceEntryProps) {
 
   return (
     <>
-      <div className={`grid ${props.showVersion ? 'grid-cols-3 md:grid-cols-4' : 'grid-cols-3'} py-3 px-4 hover:bg-gray-700/30 transition-colors duration-150`}>
+      <div className={`grid ${props.showVersion
+        ? 'grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_auto_240px]'
+        : 'grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_240px]'} py-3 px-4 hover:bg-gray-700/30 transition-colors duration-150`}>
         {/* Player column */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 min-w-0 overflow-hidden">
           <button
-            className="transition-transform hover:scale-110 focus:outline-none hidden sm:block"
+            className="transition-transform hover:scale-110 focus:outline-none hidden sm:block flex-shrink-0"
             onClick={() => router.push(`/stats/player/${props.nickname}`)}
             aria-label={`View stats for ${props.nickname}`}
           >
@@ -61,12 +63,12 @@ export default function PaceEntry(props: PaceEntryProps) {
           {props.twitch ? (
             <Link
               link={`https://twitch.tv/${props.twitch}`}
-              className={`${qualityClasses} ${liveStreamClasses} font-medium truncate`}
+              className={`${qualityClasses} ${liveStreamClasses} font-medium truncate max-w-full`}
             >
               {props.nickname}
             </Link>
           ) : (
-            <span className={`${qualityClasses} font-medium truncate`}>{props.nickname}</span>
+            <span className={`${qualityClasses} font-medium truncate max-w-full`}>{props.nickname}</span>
           )}
         </div>
 
@@ -154,12 +156,14 @@ export default function PaceEntry(props: PaceEntryProps) {
           {props.eventList.map((e, index) => (
             <div
               key={`${props.uuid}-${e.name}-${index}`}
-              className={`grid ${props.showVersion ? 'grid-cols-3 md:grid-cols-4' : 'grid-cols-3'} px-4 py-1.5 border-b border-gray-600/20 last:border-0`}
+              className={`grid ${props.showVersion
+                ? 'grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_auto_240px]'
+                : 'grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_240px]'} px-4 py-1.5 border-b border-gray-600/20 last:border-0`}
             >
               <div></div>
-              <div className="text-gray-400 text-sm truncate -mx-2">{e.name}</div>
+              <div className="text-gray-400 text-sm truncate">{e.name}</div>
               {props.showVersion && <div className="hidden md:block"></div>}
-              <div className="text-gray-300 text-sm text-right sm:text-left">{msToTime(e.time)}</div>
+              <div className="text-gray-300 text-sm sm:text-left ml-2">{msToTime(e.time)}</div>
             </div>
           ))}
         </div>

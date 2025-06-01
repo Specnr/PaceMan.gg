@@ -27,7 +27,7 @@ export default function TrophyTableEntry({ trophyEntry, placement }: Props) {
     : "";
 
   return (
-    <div className="grid grid-cols-[80px_minmax(0,1fr)_100px] md:grid-cols-[80px_minmax(0,1fr)_100px_100px_100px] py-3 px-4 hover:bg-gray-700/30 transition-colors duration-150">
+    <div className="grid grid-cols-[80px_minmax(0,1fr)_60px] md:grid-cols-[80px_minmax(0,1fr)_100px_100px_100px] py-3 px-4 hover:bg-gray-700/30 transition-colors duration-150">
       {/* Placement column */}
       <div className="flex items-center">
         <span
