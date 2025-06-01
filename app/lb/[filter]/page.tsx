@@ -154,7 +154,7 @@ export default function LeaderboardPage({
                 }
                 className="bg-gray-900"
               >
-                <button className="text-gray-300 hover:text-white transition-all p-2 rounded-full hover:bg-gray-700/50 ml-auto">
+                <button className="text-gray-300 hover:text-white transition-all p-2 rounded-full hover:bg-gray-700/50 ml-auto hidden md:block">
                   <FontAwesomeIcon icon={faCircleInfo} size="lg" />
                 </button>
               </Tooltip>

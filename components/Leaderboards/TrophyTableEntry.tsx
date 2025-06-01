@@ -8,6 +8,9 @@ import { TrophyEntry } from "../interfaces/TrophyEntry";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Tooltip } from "@nextui-org/react";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrophy } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
   trophyEntry: TrophyEntry;
@@ -16,59 +19,95 @@ interface Props {
 
 export default function TrophyTableEntry({ trophyEntry, placement }: Props) {
   const router = useRouter();
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const placementStyle = {
-    color: placeToColor(placement),
-    fontWeight: "bold",
-    fontStyle: placement <= 3 ? "italic" : "",
-  };
+  // Style classes based on placement
+  const placementClasses = placement <= 3
+    ? "font-bold"
+    : "";
 
   return (
-    <tr className="bg-gray-800 border-gray-700">
-      <td className="pl-2 pr-6 py-4 font-medium w-1">
-        <button className="pl-4" style={placementStyle}>
-          {ordinalSuffix(placement)}
-        </button>
-      </td>
-      <td className="h-0 w-0 md:h-14 md:w-14 md:pl-6" scope="row" width={54}>
-        <button
-          className="pt-2"
-          onClick={() => router.push(`/stats/player/${trophyEntry.nickname}`)}
+    <div className="grid grid-cols-[80px_minmax(0,1fr)_100px] md:grid-cols-[80px_minmax(0,1fr)_100px_100px_100px] py-3 px-4 hover:bg-gray-700/30 transition-colors duration-150">
+      {/* Placement column */}
+      <div className="flex items-center">
+        <span
+          className={placementClasses}
+          style={{ color: placeToColor(placement) }}
         >
-          <Image
-            alt="avatar"
-            src={uuidToHead(trophyEntry.uuid)}
-            width={28}
-            height={28}
-            unoptimized
-          />
-        </button>
-      </td>
-      <td className="max-w-xs truncate px-6 py-4 font-medium">
+          {ordinalSuffix(placement)}
+        </span>
+      </div>
+
+      {/* Player column */}
+      <div className="flex items-center gap-3 min-w-0">
         <button
-          style={placementStyle}
+          className="transition-transform hover:scale-110 focus:outline-none hidden sm:block"
           onClick={() => router.push(`/stats/player/${trophyEntry.nickname}`)}
+          aria-label={`View stats for ${trophyEntry.nickname}`}
+        >
+          <div className="w-8 h-8 overflow-hidden">
+            <Image
+              alt={`${trophyEntry.nickname}'s avatar`}
+              src={uuidToHead(trophyEntry.uuid)}
+              width={32}
+              height={32}
+              unoptimized
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </button>
+
+        <span
+          className={`${placementClasses} truncate max-w-full`}
+          style={{ color: placeToColor(placement) }}
         >
           {trophyEntry.nickname}
-        </button>
-      </td>
-      <td className="px-6 py-4" style={placementStyle}>
+        </span>
+      </div>
+
+      {/* Score column */}
+      <div className="flex items-center">
         <Tooltip
-            showArrow
-            content={
-              <div className="text-left">
-                <p>{trophyEntry.score - trophyEntry.bonus} + {trophyEntry.bonus} Bonus</p>
+          showArrow
+          placement="top"
+          content={
+            <div className="px-2 py-1">
+              <div className="flex items-center gap-2 text-sm">
+                <FontAwesomeIcon icon={faTrophy} className="text-purple-400" />
+                <span>{trophyEntry.score - trophyEntry.bonus} + {trophyEntry.bonus} Bonus</span>
               </div>
-            }>
-          <span>{trophyEntry.score}</span>
+            </div>
+          }
+          className="bg-gray-900 border border-gray-700"
+        >
+          <span
+            className={placementClasses}
+            style={{ color: placeToColor(placement) }}
+          >
+            {trophyEntry.score}
+          </span>
         </Tooltip>
-      </td>
-      <td className="px-6 py-4" style={placementStyle}>
-        <span>{msToTime(trophyEntry.pb)}</span>
-      </td>
-      <td className="px-6 py-4" style={placementStyle}>
-        <span>{trophyEntry.daily}/{trophyEntry.weekly}/{trophyEntry.monthly}</span>
-      </td>
-    </tr>
+      </div>
+
+      {/* PB column - hidden on mobile */}
+      <div className="hidden md:flex items-center">
+        <span
+          className={placementClasses}
+          style={{ color: placeToColor(placement) }}
+        >
+          {msToTime(trophyEntry.pb)}
+        </span>
+      </div>
+
+      {/* D/W/M column - hidden on mobile */}
+      <div className="hidden md:flex items-center">
+        <span
+          className={placementClasses}
+          style={{ color: placeToColor(placement) }}
+        >
+          {trophyEntry.daily}/{trophyEntry.weekly}/{trophyEntry.monthly}
+        </span>
+      </div>
+    </div>
   );
 }
