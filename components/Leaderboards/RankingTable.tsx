@@ -1,9 +1,9 @@
 "use client";
 import { Ranking } from "@/components/interfaces/Completion";
-import { Spinner } from "@nextui-org/react";
 import RankingTableEntry from "./RankingTableEntry";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { MessageSpinner } from "../MessageSpinner";
 
 export default function RankingTable({
   rankings,
@@ -28,8 +28,7 @@ export default function RankingTable({
   if (isLoading || !rankings) {
     return (
       <div className="flex flex-col items-center justify-center py-16">
-        <Spinner color="secondary" size="lg" />
-        <p className="text-gray-400 mt-4">Loading ranking data...</p>
+        <MessageSpinner />
       </div>
     );
   }

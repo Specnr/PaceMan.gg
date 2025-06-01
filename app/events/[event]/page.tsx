@@ -9,12 +9,13 @@ import EventTable from "@/components/Events/EventTable";
 import { msToDate } from "@/public/functions/frontendConverters";
 import Title from "@/components/Title";
 import DateTimeListTooltip from "@/components/Events/DateTimeListTooltip";
-import { Select, SelectItem, Spinner } from "@nextui-org/react";
+import { Select, SelectItem } from "@nextui-org/react";
 import PaceLeaderboard from "@/components/Leaderboards/PaceLeaderboard";
 import WhitelistTable from "@/components/Events/WhitelistTable";
 import dayjs from "dayjs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt, faChartLine, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { MessageSpinner } from "@/components/MessageSpinner";
 
 export default function Events({ params }: { params: { event: string } }) {
   const {
@@ -57,12 +58,16 @@ export default function Events({ params }: { params: { event: string } }) {
   let msg = null;
   if (error || (!isLoading && !events)) msg = "failed to load";
   if (isLoadingEvent || isLoading || !events)
-    msg = <Spinner color="secondary" size="lg" />;
+    msg = (
+      <div className="flex flex-col items-center justify-center py-auto">
+        <MessageSpinner />
+      </div>
+    );
   if (!isLoading && !isLoadingEvent && !selectedEvent) msg = "invalid event id";
 
   if (msg !== null) {
     return (
-      <div className="container-height grid place-items-center">{msg}</div>
+      <div className="container-height grid place-items-center my-auto">{msg}</div>
     );
   }
 

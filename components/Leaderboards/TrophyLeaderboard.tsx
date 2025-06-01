@@ -1,12 +1,12 @@
 "use client";
 import useSWR from "swr";
-import { Spinner } from "@nextui-org/react";
 
 import { TrophyEntry } from "../interfaces/TrophyEntry";
 import TrophyTableEntry from "./TrophyTableEntry";
 import { fetcher } from "@/public/functions/converters";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { MessageSpinner } from "../MessageSpinner";
 
 export default function TrophyLeaderboard({ season }: { season: string }) {
   const { data, isLoading, error } = useSWR(
@@ -20,8 +20,7 @@ export default function TrophyLeaderboard({ season }: { season: string }) {
   if (isLoading || !trophyData) {
     return (
       <div className="flex flex-col items-center justify-center py-16">
-        <Spinner color="secondary" size="lg" />
-        <p className="text-gray-400 mt-4">Loading trophy data...</p>
+        <MessageSpinner />
       </div>
     );
   }

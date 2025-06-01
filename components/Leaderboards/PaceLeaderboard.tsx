@@ -1,12 +1,11 @@
 "use client";
-import TableHeader from "@/components/TableHeader";
-import { Spinner, Chip } from "@nextui-org/react";
 import PaceEntry from "../PaceEntry";
 import { Pace, PaceSettings } from "../interfaces/Pace";
 import useSWR from "swr";
 import { apiToPace, paceSort } from "@/public/functions/converters";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { MessageSpinner } from "../MessageSpinner";
 
 const fetcher = async (url: string) => {
   const data = await fetch(url).then((res) => res.json());
@@ -51,8 +50,7 @@ export default function PaceLeaderboard({
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center py-16">
-        <Spinner color="secondary" size="lg" />
-        <p className="text-gray-400 mt-4">Loading pace data...</p>
+        <MessageSpinner />
       </div>
     );
   }

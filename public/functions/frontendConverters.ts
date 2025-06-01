@@ -127,7 +127,41 @@ export const createDateFromInput = (date: dayjs.Dayjs) => {
   return newDate.valueOf();
 };
 
-export const fracToPerc = (frac: number) => `${Math.round(frac * 10000) / 100}%`;
+// Note: This function intentionally creates different content between server and client renders OCCATIONALLY.
+// It will cause a harmless hydration mismatch warning that can be ignored.
+export const getSemiRandomLoadingMessage = () => {
+  const timeIdx = Math.floor(Date.now() / 1000);
+
+  const messages = [
+    "Hitting a Pound-portal",
+    "Performing a one-shot",
+    "Changing the world",
+    "Hitting the zero",
+    "Getting caved",
+    "Resetting the world",
+    "Digging on 8 9",
+    "Pearling into lava",
+    "Hitting the crystal",
+    "Resetting a fastion",
+    "Hitting save & quit",
+    "Blinding at 150 150",
+    "Forgetting fire-res",
+    "Going 0/10 in Ranked",
+    "Buying a 5950x",
+    "Buying a 5090",
+    "Preparing a godseed",
+    "Getting treasure'd",
+    "Crafting 6 shears",
+    "Crafting 24 buttons",
+    "Crafting an iron hoe",
+    "Playing stronghold-first",
+    "Playing monument",
+    "Playing classic",
+    "Pacebaiting",
+  ];
+
+  return messages[timeIdx % messages.length] + "...";
+};
 
 export const gameVersions = [
   "All",

@@ -1,10 +1,10 @@
-import { Spinner } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { timeToMs, uuidToHead } from "@/public/functions/frontendConverters";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle, faUser } from "@fortawesome/free-solid-svg-icons";
+import { MessageSpinner } from "../MessageSpinner";
 
 interface PlayerData {
   uuid: string;
@@ -90,8 +90,7 @@ export default function WhitelistTable({ whitelist }: { whitelist: string[] }) {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center py-16">
-        <Spinner color="secondary" size="lg" />
-        <p className="text-gray-400 mt-4">Loading whitelist data...</p>
+        <MessageSpinner />
       </div>
     );
   }
