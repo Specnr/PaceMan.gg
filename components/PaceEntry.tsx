@@ -27,13 +27,13 @@ export default function PaceEntry(props: PaceEntryProps) {
   );
 
   // Style classes based on run quality
-  const qualityClasses = props.isHighQuality 
-    ? "font-bold text-white" 
+  const qualityClasses = props.isHighQuality
+    ? "font-bold text-white"
     : "text-gray-300";
-    
+
   // Style for live streamers
-  const liveStreamClasses = props.twitch 
-    ? "text-blue-400 hover:text-blue-300" 
+  const liveStreamClasses = props.twitch
+    ? "text-blue-400 hover:text-blue-300"
     : "";
 
   return (
@@ -57,9 +57,9 @@ export default function PaceEntry(props: PaceEntryProps) {
               />
             </div>
           </button>
-          
+
           {props.twitch ? (
-            <Link 
+            <Link
               link={`https://twitch.tv/${props.twitch}`}
               className={`${qualityClasses} ${liveStreamClasses} font-medium truncate`}
             >
@@ -69,7 +69,7 @@ export default function PaceEntry(props: PaceEntryProps) {
             <span className={`${qualityClasses} font-medium truncate`}>{props.nickname}</span>
           )}
         </div>
-        
+
         {/* Split column */}
         <div className="flex items-center gap-3">
           <div className="flex-shrink-0">
@@ -82,44 +82,38 @@ export default function PaceEntry(props: PaceEntryProps) {
               className="transition-transform hover:scale-110"
             />
           </div>
-          
+
           <Tooltip
             hidden={!props.itemEstimates}
             showArrow
             content={<ItemEstimateTooltipContent estimates={props.itemEstimates} />}
             className="bg-gray-900 border border-gray-700"
           >
-            <button 
+            <button
               onClick={() => setIsExpanded(!isExpanded)}
               className="flex items-center gap-1 focus:outline-none"
             >
               <span className={`${qualityClasses} truncate`}>{props.splitName}</span>
-              {props.eventList && props.eventList.length > 0 && (
-                <FontAwesomeIcon 
-                  icon={isExpanded ? faChevronUp : faChevronDown} 
-                  className="text-xs text-gray-500" 
-                />
-              )}
             </button>
           </Tooltip>
         </div>
-        
+
         {/* Version column */}
         {props.showVersion && (
           <div className="hidden md:flex items-center">
-            <Chip 
-              size="sm" 
-              variant="flat" 
-              color="secondary" 
+            <Chip
+              size="sm"
+              variant="flat"
+              color="secondary"
               className="bg-purple-900/30"
             >
               {props.gameVersion}
             </Chip>
           </div>
         )}
-        
+
         {/* Time column */}
-        <div className="flex items-center justify-end sm:justify-start">
+        <div className="flex items-center justify-start">
           <Tooltip
             showArrow
             placement="left"
@@ -138,21 +132,27 @@ export default function PaceEntry(props: PaceEntryProps) {
             }
             className="bg-gray-900 border border-gray-700"
           >
-            <button 
+            <button
               onClick={() => setIsExpanded(!isExpanded)}
               className={`${qualityClasses} focus:outline-none`}
             >
               {msToTime(props.time)}
+              {props.eventList && props.eventList.length > 0 && (
+                <FontAwesomeIcon
+                  icon={isExpanded ? faChevronUp : faChevronDown}
+                  className="text-xs text-gray-500 ml-2"
+                />
+              )}
             </button>
           </Tooltip>
         </div>
       </div>
-      
+
       {/* Expanded details */}
       {isExpanded && props.eventList && props.eventList.length > 0 && (
-        <div className="bg-gray-700/20 py-2 mx-2 mb-2 rounded-md">
+        <div className="bg-gray-900 py-2 mx-2 mb-2 rounded-md">
           {props.eventList.map((e, index) => (
-            <div 
+            <div
               key={`${props.uuid}-${e.name}-${index}`}
               className={`grid ${props.showVersion ? 'grid-cols-3 md:grid-cols-4' : 'grid-cols-3'} px-4 py-1.5 border-b border-gray-600/20 last:border-0`}
             >

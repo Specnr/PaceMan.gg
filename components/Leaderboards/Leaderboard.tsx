@@ -22,7 +22,7 @@ interface Props {
   date: number;
 }
 
-export default function EventTable({ filter, removeDupes, date }: Props) {
+export default function Leaderboard({ filter, removeDupes, date }: Props) {
   const { data, isLoading, error } = useSWR(
     `https://paceman.gg/api/cs/leaderboard?filter=${filterToId(filter)}&removeDuplicates=${+removeDupes}&date=${date}`,
     (url: string) => fetcher(url).then(data => data.sort(completionSort)),

@@ -22,7 +22,7 @@ export default function PaceLeaderboard({
   settings?: PaceSettings;
 }) {
   const isAllVersion = settings?.version === "All";
-  
+
   const { data, error, isLoading } = useSWR(
     `https://paceman.gg/api/ars/liveruns?gameVersion=${(settings?.version || "All").toLowerCase()}&liveOnly=${settings?.liveOnly || false}`,
     fetcher,
@@ -47,7 +47,7 @@ export default function PaceLeaderboard({
       </div>
     );
   }
-  
+
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center py-16">
@@ -56,7 +56,7 @@ export default function PaceLeaderboard({
       </div>
     );
   }
-  
+
   if (!eventPaces || eventPaces.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
@@ -75,7 +75,7 @@ export default function PaceLeaderboard({
           {isAllVersion && <div className="hidden md:block">Version</div>}
           <div>Time</div>
         </div>
-        
+
         {eventPaces.map((pace: Pace, idx: number) => (
           <div key={idx} className="border-b border-gray-700/50 last:border-0">
             <PaceEntry {...pace} showVersion={isAllVersion} />
