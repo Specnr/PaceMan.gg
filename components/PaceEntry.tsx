@@ -28,7 +28,7 @@ export default function PaceEntry(props: PaceEntryProps) {
 
   // Style classes based on run quality
   const qualityClasses = props.isHighQuality
-    ? "font-bold text-white"
+    ? "font-bold"
     : "text-gray-300";
 
   // Style for live streamers
