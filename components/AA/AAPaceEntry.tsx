@@ -103,7 +103,7 @@ export default function AAPaceEntry(props: AAPace) {
         </div>
 
         {/* Time column */}
-        <div className="flex items-center justify-end md:justify-center">
+        <div className="flex items-center justify-start">
           <Tooltip
             showArrow
             placement="left"
