@@ -148,6 +148,7 @@ export default function LeaderboardPage({
                     <p>• Sub-10 = 1 bonus point</p>
                     <p>• Sub-9 = 2 bonus point</p>
                     <p>• Sub-8 = 3 bonus point</p>
+                    <p>• Sub-7 = 4 bonus point</p>
                     <p>• World Record = 5 bonus point</p>
                     <p>• Personal Best is the tie breaker</p>
                   </div>
