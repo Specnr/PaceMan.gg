@@ -1,9 +1,11 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import localizedFormat from "dayjs/plugin/localizedFormat";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
+dayjs.extend(localizedFormat);
 
 export const timeToMs = (time: string) => {
   if (time === "Error" || time === "N/A") {
@@ -35,7 +37,12 @@ export const msToTime = (ms: number, keepMs = false): string => {
   return ret;
 };
 
-export const msToDate = (ms: number) => dayjs(ms * 1000).format("MM/DD/YYYY");
+export const msToDate = (ms: number) => dayjs(ms * 1000).format("L");
+
+
+export const dateToTimeFormat = (ms: number) => {
+  return dayjs(ms * 1000).format("L LT");
+};
 
 export const NETHER_ICON = "../images/nether.png"
 export const FORTRESS_ICON = "../images/fortress.png"
