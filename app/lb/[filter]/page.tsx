@@ -18,7 +18,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const filterTypes = new Set(["daily", "weekly", "monthly", "all", "trophy"]);
-const trophyOptions = ["current", "season 1", "season 2", "season 3", "season 4"]
+const trophyOptions = ["current", "season 1", "season 2", "season 3", "season 4", "season 5"]
 const filters = ["daily", "weekly", "monthly", "all", "trophy"];
 
 const filterToDisplayName = (filter: string) => {
