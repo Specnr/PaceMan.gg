@@ -1,4 +1,5 @@
 "use client"
+import { Suspense } from "react";
 import Title from "@/components/Title";
 import { Tooltip, Chip } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -37,16 +38,17 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col h-full fade-in">
-      <Title />
+    <Suspense fallback={<div className="container-height grid place-items-center">Loading...</div>}>
+      <div className="flex flex-col h-full fade-in">
+        <Title />
 
-      {showSettings && (
-        <div className="slide-in mb-4">
-          <SettingsTable settings={settings} setSettings={setSettings} />
-        </div>
-      )}
+        {showSettings && (
+          <div className="slide-in mb-4">
+            <SettingsTable settings={settings} setSettings={setSettings} />
+          </div>
+        )}
 
-      <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-xl shadow-xl overflow-hidden flex-1 max-w-5xl mx-auto w-full">
+        <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-xl shadow-xl overflow-hidden flex-1 max-w-5xl mx-auto w-full">
         <div className="p-3 bg-gray-800/50 border-b border-gray-700 flex items-center justify-between">
           <div className="flex items-center">
             <FontAwesomeIcon icon={faChartLine} className="text-purple-400 mr-2" />
@@ -117,5 +119,6 @@ export default function Home() {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 }
