@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, use, useEffect } from "react";
 
 import { Switch, Select, SelectItem, Tooltip, Input } from "@nextui-org/react";
 
@@ -29,19 +29,26 @@ const filterToDisplayName = (filter: string) => {
 export default function LeaderboardPage({
   params,
 }: {
-  params: { filter: string };
+  params: Promise<{ filter: string }>;
 }) {
   const router = useRouter();
+  const { filter } = use(params);
   const [showAll, setShowAll] = useState(false);
   const [season, setSeason] = useState(trophyOptions[0]);
   const [date, setDate] = useState(dayjs());
 
-  if (!filterTypes.has(params.filter)) {
-    return router.push("/lb/all");
+  useEffect(() => {
+    if (!filterTypes.has(filter)) {
+      router.push("/lb/all");
+    }
+  }, [filter, router]);
+
+  if (!filterTypes.has(filter)) {
+    return null;
   }
 
-  const isTrophy = params.filter === "trophy";
-  const isAll = params.filter === "all";
+  const isTrophy = filter === "trophy";
+  const isAll = filter === "all";
 
   return (
     <div className="flex flex-col h-full fade-in">
@@ -54,7 +61,7 @@ export default function LeaderboardPage({
               icon={isTrophy ? faTrophy : faRankingStar}
               className="text-purple-400 mr-2"
             />
-            <h2 className="text-xl font-medium">{filterToDisplayName(params.filter)} Leaderboard</h2>
+            <h2 className="text-xl font-medium">{filterToDisplayName(filter)} Leaderboard</h2>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
@@ -62,8 +69,8 @@ export default function LeaderboardPage({
               className="w-full sm:w-40"
               variant="bordered"
               size="sm"
-              defaultSelectedKeys={[params.filter]}
-              value={params.filter}
+              defaultSelectedKeys={[filter]}
+              value={filter}
               onChange={(e) =>
                 e.target.value !== "" && router.push(`/lb/${e.target.value}`)
               }
@@ -168,7 +175,7 @@ export default function LeaderboardPage({
             <TrophyLeaderboard season={season} />
           ) : (
             <Leaderboard
-              filter={params.filter}
+              filter={filter}
               removeDupes={!showAll}
               date={createDateFromInput(date)}
             />

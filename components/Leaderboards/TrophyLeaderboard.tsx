@@ -1,5 +1,6 @@
 "use client";
 import useSWR from "swr";
+import dayjs from "dayjs";
 
 import { TrophyEntry } from "../interfaces/TrophyEntry";
 import TrophyTableEntry from "./TrophyTableEntry";
@@ -9,6 +10,20 @@ import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import { MessageSpinner } from "../MessageSpinner";
 
 export default function TrophyLeaderboard({ season }: { season: string }) {
+  const getNextSeasonEndDate = () => {
+    const now = dayjs();
+    const year = now.year();
+
+    const dates = [
+      dayjs(`${year}-02-01`).endOf("month"),
+      dayjs(`${year}-06-01`).endOf("month"),
+      dayjs(`${year}-10-01`).endOf("month"),
+      dayjs(`${year + 1}-02-01`).endOf("month"),
+    ];
+
+    return dates.find((d) => d.isAfter(now)) || dates[0];
+  };
+
   const { data, isLoading, error } = useSWR(
     `https://paceman.gg/api/us/trophy?season=${season}`,
     fetcher,
@@ -48,6 +63,11 @@ export default function TrophyLeaderboard({ season }: { season: string }) {
 
   return (
     <div className="w-full">
+      {season === "current" && (
+        <div className="px-4 py-1 pb-3 text-sm text-gray-400 font-medium italic">
+          Season ends {getNextSeasonEndDate().format("MM/DD/YYYY")}
+        </div>
+      )}
       <div className="overflow-y-auto max-h-[50vh] pb-4">
         <div className="grid grid-cols-[80px_1fr_60px] md:grid-cols-[80px_1fr_100px_100px_100px] text-xs uppercase tracking-wider text-gray-400 px-4 py-2">
           <div>Place</div>
