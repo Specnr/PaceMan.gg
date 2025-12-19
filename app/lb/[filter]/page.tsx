@@ -29,10 +29,11 @@ const filterToDisplayName = (filter: string) => {
 export default function LeaderboardPage({
   params,
 }: {
-  params: Promise<{ filter: string }>;
+  params: { filter: string } | Promise<{ filter: string }>;
 }) {
   const router = useRouter();
-  const { filter } = use(params);
+  const resolvedParams = params instanceof Promise ? use(params) : params;
+  const { filter } = resolvedParams;
   const [showAll, setShowAll] = useState(false);
   const [season, setSeason] = useState(trophyOptions[0]);
   const [date, setDate] = useState(dayjs());
