@@ -55,7 +55,7 @@ export const CREDITS_ICON = "credits"
 export const splitToIcon = (splitId: number) => {
   switch (splitId) {
     case 0:
-      return PORTAL_ICON;
+      return NETHER_ICON;
     case 1:
       return BASTION_ICON;
     case 2:
