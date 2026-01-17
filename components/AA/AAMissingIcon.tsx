@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { AA_COMPLETED_ICON, missingEnumToText, nameToIcon } from "@/public/functions/aa";
+import { SpriteIcon } from "../Common/SpriteIcon";
 import { Tooltip } from "@nextui-org/react";
 
 interface Props {
@@ -36,22 +36,16 @@ export const AAMissingIcon = (props: Props) => {
       <div className="relative w-8 h-8 mx-0.5">
         {
           props.context.length === 0 &&
-          <Image
+          <SpriteIcon
             className="absolute h-full w-full z-10"
-            alt={`${props.icon}-completed-icon`}
-            src={AA_COMPLETED_ICON}
-            width={30}
-            height={30}
-            unoptimized
+            name={AA_COMPLETED_ICON}
+            size={32}
           />
         }
-        <Image
+        <SpriteIcon
           className="absolute h-full w-full"
-          alt={`${props.icon}-missing-icon`}
-          src={nameToIcon(props.icon)}
-          width={30}
-          height={30}
-          unoptimized
+          name={nameToIcon(props.icon)}
+          size={32}
         />
       </div>
     </Tooltip>

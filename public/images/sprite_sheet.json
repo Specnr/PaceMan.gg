@@ -1,0 +1,149 @@
+{
+  "sprites": [
+    {
+      "fileName": "aa_adventure.png",
+      "width": 32,
+      "height": 32,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "fileName": "aa_completed.png",
+      "width": 32,
+      "height": 32,
+      "x": 32,
+      "y": 0
+    },
+    {
+      "fileName": "aa_end.png",
+      "width": 32,
+      "height": 32,
+      "x": 64,
+      "y": 0
+    },
+    {
+      "fileName": "aa_endgame.png",
+      "width": 32,
+      "height": 32,
+      "x": 96,
+      "y": 0
+    },
+    {
+      "fileName": "aa_husbandry.png",
+      "width": 32,
+      "height": 32,
+      "x": 128,
+      "y": 0
+    },
+    {
+      "fileName": "aa_jungle.png",
+      "width": 32,
+      "height": 32,
+      "x": 0,
+      "y": 32
+    },
+    {
+      "fileName": "aa_mesa.png",
+      "width": 32,
+      "height": 32,
+      "x": 32,
+      "y": 32
+    },
+    {
+      "fileName": "aa_mushroom.png",
+      "width": 32,
+      "height": 32,
+      "x": 64,
+      "y": 32
+    },
+    {
+      "fileName": "aa_nether.png",
+      "width": 32,
+      "height": 32,
+      "x": 96,
+      "y": 32
+    },
+    {
+      "fileName": "aa_phantom.png",
+      "width": 32,
+      "height": 32,
+      "x": 128,
+      "y": 32
+    },
+    {
+      "fileName": "aa_snowy.png",
+      "width": 32,
+      "height": 32,
+      "x": 0,
+      "y": 64
+    },
+    {
+      "fileName": "aa_story.png",
+      "width": 32,
+      "height": 32,
+      "x": 32,
+      "y": 64
+    },
+    {
+      "fileName": "aa_thunder.png",
+      "width": 32,
+      "height": 32,
+      "x": 64,
+      "y": 64
+    },
+    {
+      "fileName": "bastion.png",
+      "width": 32,
+      "height": 32,
+      "x": 96,
+      "y": 64
+    },
+    {
+      "fileName": "credits.png",
+      "width": 32,
+      "height": 32,
+      "x": 128,
+      "y": 64
+    },
+    {
+      "fileName": "end.png",
+      "width": 32,
+      "height": 32,
+      "x": 0,
+      "y": 96
+    },
+    {
+      "fileName": "fortress.png",
+      "width": 32,
+      "height": 32,
+      "x": 32,
+      "y": 96
+    },
+    {
+      "fileName": "nether.png",
+      "width": 32,
+      "height": 32,
+      "x": 64,
+      "y": 96
+    },
+    {
+      "fileName": "portal.png",
+      "width": 32,
+      "height": 32,
+      "x": 96,
+      "y": 96
+    },
+    {
+      "fileName": "sh.png",
+      "width": 32,
+      "height": 32,
+      "x": 128,
+      "y": 96
+    }
+  ],
+  "packMode": "grid",
+  "padding": 0,
+  "backgroundColor": "rgba(0, 0, 0, 0)",
+  "spriteSheetWidth": 160,
+  "spriteSheetHeight": 128
+}

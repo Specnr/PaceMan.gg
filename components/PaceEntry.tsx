@@ -11,9 +11,9 @@ import { Tooltip, Chip } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import ItemEstimateTooltipContent from "./Leaderboards/ItemEstimateTooltipContent";
-import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp, faClock } from "@fortawesome/free-solid-svg-icons";
+import { SpriteIcon } from "./Common/SpriteIcon";
 
 interface PaceEntryProps extends Pace {
   showVersion?: boolean;
@@ -75,12 +75,9 @@ export default function PaceEntry(props: PaceEntryProps) {
         {/* Split column */}
         <div className="flex items-center gap-3 max-w-full">
           <div className="flex-shrink-0 hidden sm:block relative">
-            <Image
-              alt={`${props.splitName} icon`}
-              src={splitToIcon(props.split!)}
-              width={28}
-              height={28}
-              unoptimized
+            <SpriteIcon
+              name={splitToIcon(props.split!)}
+              size={28}
             />
           </div>
 

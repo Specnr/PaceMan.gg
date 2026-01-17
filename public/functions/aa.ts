@@ -1,20 +1,20 @@
 import { EndgameMissing, JungleMissing, MesaMissing, MushroomMissing, PhantomsMissing, SnowyMissing, ThunderMissing } from "@/components/interfaces/AAEnums";
 
-export const AA_STORY_ICON = "../images/aa_story.png";
-export const AA_HUSBANDRY_ICON = "../images/aa_husbandry.png";
-export const AA_ADVENTURE_ICON = "../images/aa_adventure.png";
-export const AA_NETHER_ICON = "../images/aa_nether.png";
-export const AA_END_ICON = "../images/aa_end.png";
+export const AA_STORY_ICON = "aa_story";
+export const AA_HUSBANDRY_ICON = "aa_husbandry";
+export const AA_ADVENTURE_ICON = "aa_adventure";
+export const AA_NETHER_ICON = "aa_nether";
+export const AA_END_ICON = "aa_end";
 
-export const AA_JUNGLE_ICON = "../images/aa_jungle.png";
-export const AA_MESA_ICON = "../images/aa_mesa.png";
-export const AA_SNOWY_ICON = "../images/aa_snowy.png";
-export const AA_MUSHROOM_ICON = "../images/aa_mushroom.png";
-export const AA_THUNDER_ICON = "../images/aa_thunder.png";
-export const AA_PHANTOM_ICON = "../images/aa_phantom.png";
-export const AA_ENDGAME_ICON = "../images/aa_endgame.png";
+export const AA_JUNGLE_ICON = "aa_jungle";
+export const AA_MESA_ICON = "aa_mesa";
+export const AA_SNOWY_ICON = "aa_snowy";
+export const AA_MUSHROOM_ICON = "aa_mushroom";
+export const AA_THUNDER_ICON = "aa_thunder";
+export const AA_PHANTOM_ICON = "aa_phantom";
+export const AA_ENDGAME_ICON = "aa_endgame";
 
-export const AA_COMPLETED_ICON = "../images/aa_completed.png";
+export const AA_COMPLETED_ICON = "aa_completed";
 
 export const advToIcon = (adv: string) => {
   const parent = adv.split("/")[0];
