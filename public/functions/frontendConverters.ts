@@ -44,18 +44,18 @@ export const dateToTimeFormat = (ms: number) => {
   return dayjs(ms * 1000).format("L LT");
 };
 
-export const NETHER_ICON = "../images/nether.png"
-export const FORTRESS_ICON = "../images/fortress.png"
-export const BASTION_ICON = "../images/bastion.png"
-export const PORTAL_ICON = "../images/portal.png"
-export const STRONGHOLD_ICON = "../images/sh.png"
-export const END_ICON = "../images/end.png"
-export const CREDITS_ICON = "../images/credits.png"
+export const NETHER_ICON = "nether"
+export const FORTRESS_ICON = "fortress"
+export const BASTION_ICON = "bastion"
+export const PORTAL_ICON = "portal"
+export const STRONGHOLD_ICON = "sh"
+export const END_ICON = "end"
+export const CREDITS_ICON = "credits"
 
 export const splitToIcon = (splitId: number) => {
   switch (splitId) {
     case 0:
-      return NETHER_ICON;
+      return PORTAL_ICON;
     case 1:
       return BASTION_ICON;
     case 2:

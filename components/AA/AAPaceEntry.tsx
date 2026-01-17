@@ -11,6 +11,7 @@ import AdvancementDetailsTooltipContent from "./AdvancementDetailsTooltipContent
 import { AAMissingIcon } from "./AAMissingIcon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp, faClock } from "@fortawesome/free-solid-svg-icons";
+import { SpriteIcon } from "../Common/SpriteIcon";
 
 export default function AAPaceEntry(props: AAPace) {
   const router = useRouter();
@@ -62,12 +63,9 @@ export default function AAPaceEntry(props: AAPace) {
         {/* Advancement column */}
         <div className="flex items-center gap-3 overflow-hidden max-w-full">
           <div className="flex-shrink-0 hidden sm:block">
-            <Image
-              alt="advancement icon"
-              src={advToIcon(props.completed[0].name)}
-              width={32}
-              height={32}
-              unoptimized
+            <SpriteIcon
+              name={advToIcon(props.completed[0].name)}
+              size={32}
             />
           </div>
 
