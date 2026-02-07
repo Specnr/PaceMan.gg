@@ -7,7 +7,7 @@ import {
 import { TrophyEntry } from "../interfaces/TrophyEntry";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip } from "@heroui/react";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrophy } from "@fortawesome/free-solid-svg-icons";

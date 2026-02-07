@@ -1,5 +1,5 @@
 import { gameVersions } from "@/public/functions/frontendConverters";
-import { Checkbox, Select, SelectItem, Card } from "@nextui-org/react";
+import { Checkbox, Select, SelectItem, Card } from "@heroui/react";
 import { PaceSettings } from "./interfaces/Pace";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGamepad, faFilter } from "@fortawesome/free-solid-svg-icons";
@@ -39,7 +39,7 @@ export default function SettingsTable({ settings, setSettings }: Props) {
               onChange={(e) => setAndUpdateSettings({ ...settings, version: e.target.value })}
             >
               {gameVersions.map((v) => (
-                <SelectItem key={v} value={v}>
+                <SelectItem key={v}>
                   {v}
                 </SelectItem>
               ))}

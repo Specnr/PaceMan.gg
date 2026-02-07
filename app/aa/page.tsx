@@ -1,7 +1,7 @@
 "use client";
 import { Suspense } from "react";
 import Title from "@/components/Title";
-import { Tooltip, Chip } from "@nextui-org/react";
+import { Tooltip, Chip } from "@heroui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo, faChartLine } from "@fortawesome/free-solid-svg-icons";
 import AAPaceLeaderboard from "@/components/Leaderboards/AAPaceLeaderboard";

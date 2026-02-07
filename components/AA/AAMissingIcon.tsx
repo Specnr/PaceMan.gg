@@ -1,6 +1,6 @@
 import { AA_COMPLETED_ICON, missingEnumToText, nameToIcon } from "@/public/functions/aa";
 import { SpriteIcon } from "../Common/SpriteIcon";
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip } from "@heroui/react";
 
 interface Props {
   icon: string;

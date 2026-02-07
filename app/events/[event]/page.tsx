@@ -1,7 +1,7 @@
 "use client";
 import { fetcher } from "@/public/functions/converters";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import useSWR from "swr";
 
 import Event from "@/components/interfaces/Event";
@@ -9,7 +9,7 @@ import EventTable from "@/components/Events/EventTable";
 import { msToDate } from "@/public/functions/frontendConverters";
 import Title from "@/components/Title";
 import DateTimeListTooltip from "@/components/Events/DateTimeListTooltip";
-import { Select, SelectItem } from "@nextui-org/react";
+import { Select, SelectItem } from "@heroui/react";
 import PaceLeaderboard from "@/components/Leaderboards/PaceLeaderboard";
 import WhitelistTable from "@/components/Events/WhitelistTable";
 import dayjs from "dayjs";
@@ -17,7 +17,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt, faChartLine, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { MessageSpinner } from "@/components/MessageSpinner";
 
-export default function Events({ params }: { params: { event: string } }) {
+export default function Events({ params }: { params: Promise<{ event: string }> }) {
+  const { event } = use(params);
   const {
     data: events,
     error,
@@ -32,8 +33,8 @@ export default function Events({ params }: { params: { event: string } }) {
   useEffect(() => {
     if (!error && !isLoading && events && !selectedEvent) {
       let foundEvent: Event[] = [];
-      if (params.event !== "latest") {
-        foundEvent = events.filter((e) => e.vanity === params.event);
+      if (event !== "latest") {
+        foundEvent = events.filter((e) => e.vanity === event);
       } else if (events.length > 0) {
         // Get the newest start date in the past
         let minEvent = events[events.length - 1];
@@ -53,7 +54,7 @@ export default function Events({ params }: { params: { event: string } }) {
       }
       setIsLoadingEvent(false);
     }
-  }, [params, error, events, isLoading, selectedEvent]);
+  }, [event, error, events, isLoading, selectedEvent]);
 
   let msg = null;
   if (error || (!isLoading && !events)) msg = "failed to load";
@@ -138,7 +139,7 @@ export default function Events({ params }: { params: { event: string } }) {
               }}
             >
               {eventList.map((e) => (
-                <SelectItem value={e.vanity} key={e.vanity}>
+                <SelectItem key={e.vanity}>
                   {e.name}
                 </SelectItem>
               ))}
@@ -153,13 +154,13 @@ export default function Events({ params }: { params: { event: string } }) {
                 trigger: "bg-gray-800/30"
               }}
             >
-              <SelectItem key="results" value="results">
+              <SelectItem key="results">
                 Results
               </SelectItem>
-              <SelectItem key="pace" value="pace">
+              <SelectItem key="pace">
                 Pace
               </SelectItem>
-              <SelectItem key="whitelist" value="whitelist">
+              <SelectItem key="whitelist">
                 Whitelist
               </SelectItem>
             </Select>

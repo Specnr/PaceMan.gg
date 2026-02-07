@@ -2,13 +2,13 @@
 import { useRouter } from "next/navigation";
 import { useState, use, useEffect } from "react";
 
-import { Switch, Select, SelectItem, Tooltip, Input } from "@nextui-org/react";
+import { Switch, Select, SelectItem, Tooltip, Input } from "@heroui/react";
 
 import Leaderboard from "@/components/Leaderboards/Leaderboard";
 import Title from "@/components/Title";
 import TrophyLeaderboard from "@/components/Leaderboards/TrophyLeaderboard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo, faTrophy, faRankingStar, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo, faTrophy, faRankingStar } from "@fortawesome/free-solid-svg-icons";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
@@ -29,14 +29,13 @@ const filterToDisplayName = (filter: string) => {
 export default function LeaderboardPage({
   params,
 }: {
-  params: { filter: string } | Promise<{ filter: string }>;
+  params: Promise<{ filter: string }>;
 }) {
   const router = useRouter();
-  const resolvedParams = params instanceof Promise ? use(params) : params;
-  const { filter } = resolvedParams;
+  const { filter } = use(params);
   const [showAll, setShowAll] = useState(false);
   const [season, setSeason] = useState(trophyOptions[0]);
-  const [date, setDate] = useState(dayjs());
+  const [date, setDate] = useState(dayjs().tz("America/Toronto"));
 
   useEffect(() => {
     if (!filterTypes.has(filter)) {
@@ -80,7 +79,7 @@ export default function LeaderboardPage({
               }}
             >
               {filters.map((filter) => (
-                <SelectItem value={filter} key={filter}>
+                <SelectItem key={filter}>
                   {filterToDisplayName(filter)}
                 </SelectItem>
               ))}
@@ -101,7 +100,7 @@ export default function LeaderboardPage({
                 }}
               >
                 {trophyOptions.map((to) => (
-                  <SelectItem value={to} key={to}>
+                  <SelectItem key={to}>
                     {to.charAt(0).toUpperCase() + to.slice(1)}
                   </SelectItem>
                 ))}
@@ -120,12 +119,11 @@ export default function LeaderboardPage({
                     type="date"
                     size="sm"
                     classNames={{
-                      base: "h-12 min-h-unit-12",
-                      inputWrapper: "h-12 shadow-sm border-medium border-default-200 data-[hover=true]:border-default-400 rounded-small py-1.5 px-3 bg-gray-800/30",
+                      inputWrapper: "shadow-sm border-medium border-default-200 data-[hover=true]:border-default-400 rounded-small py-1.5 px-3 bg-gray-800/30",
                       input: "text-small text-foreground-500"
                     }}
-                    value={date.tz(dayjs.tz.guess()).format("YYYY-MM-DD")}
-                    onChange={(e) => setDate(dayjs(e.target.value))}
+                    value={date.tz("America/Toronto").format("YYYY-MM-DD")}
+                    onChange={(e) => setDate(dayjs.tz(e.target.value, "America/Toronto"))}
                   />
                 </div>
               </Tooltip>
