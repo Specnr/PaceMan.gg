@@ -2,15 +2,15 @@
 import * as React from "react";
 import { Suspense } from "react";
 
-import { NextUIProvider } from "@nextui-org/react";
+import { HeroUIProvider } from "@heroui/react";
 import { Next13ProgressBar } from "next13-progressbar";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <NextUIProvider>
+      <HeroUIProvider>
         {children}
-      </NextUIProvider>
+      </HeroUIProvider>
       <Suspense fallback={null}>
         <Next13ProgressBar
           height="4px"

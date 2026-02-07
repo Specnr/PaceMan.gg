@@ -10,7 +10,7 @@ import {
 } from "@/public/functions/frontendConverters";
 import { EventItem } from "../interfaces/Completion";
 import { useState } from "react";
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp, faClock } from "@fortawesome/free-solid-svg-icons";

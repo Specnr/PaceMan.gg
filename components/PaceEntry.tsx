@@ -7,7 +7,7 @@ import {
 import { Pace } from "./interfaces/Pace";
 import Link from "./Link";
 import { useState } from "react";
-import { Tooltip, Chip } from "@nextui-org/react";
+import { Tooltip, Chip } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import ItemEstimateTooltipContent from "./Leaderboards/ItemEstimateTooltipContent";

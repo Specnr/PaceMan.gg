@@ -1,5 +1,5 @@
 import { getSemiRandomLoadingMessage } from "@/public/functions/frontendConverters"
-import { Spinner } from "@nextui-org/react"
+import { Spinner } from "@heroui/react"
 
 export const MessageSpinner = () => {
   return (
