@@ -35,7 +35,7 @@ export default function LeaderboardPage({
   const { filter } = use(params);
   const [showAll, setShowAll] = useState(false);
   const [season, setSeason] = useState(trophyOptions[0]);
-  const [date, setDate] = useState(dayjs());
+  const [date, setDate] = useState(dayjs().tz("America/Toronto"));
 
   useEffect(() => {
     if (!filterTypes.has(filter)) {
@@ -122,8 +122,8 @@ export default function LeaderboardPage({
                       inputWrapper: "shadow-sm border-medium border-default-200 data-[hover=true]:border-default-400 rounded-small py-1.5 px-3 bg-gray-800/30",
                       input: "text-small text-foreground-500"
                     }}
-                    value={date.tz(dayjs.tz.guess()).format("YYYY-MM-DD")}
-                    onChange={(e) => setDate(dayjs(e.target.value))}
+                    value={date.tz("America/Toronto").format("YYYY-MM-DD")}
+                    onChange={(e) => setDate(dayjs.tz(e.target.value, "America/Toronto"))}
                   />
                 </div>
               </Tooltip>
