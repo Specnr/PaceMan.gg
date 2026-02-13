@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 export default function NotFound() {
   return (
     <div className="container-height grid place-items-center">
