@@ -37,11 +37,23 @@ export const msToTime = (ms: number, keepMs = false): string => {
   return ret;
 };
 
-export const msToDate = (ms: number) => dayjs(ms * 1000).format("L");
+export const msToDate = (ms: number) => {
+  return new Date(ms * 1000).toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+};
 
 
 export const dateToTimeFormat = (ms: number) => {
-  return dayjs(ms * 1000).format("L LT");
+  return new Date(ms * 1000).toLocaleString(undefined, {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "numeric",
+    minute: "2-digit",
+  });
 };
 
 export const NETHER_ICON = "nether"

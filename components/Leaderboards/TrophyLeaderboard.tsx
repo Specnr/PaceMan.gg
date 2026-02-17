@@ -21,7 +21,11 @@ export default function TrophyLeaderboard({ season }: { season: string }) {
       dayjs(`${year + 1}-02-01`).endOf("month"),
     ];
 
-    return dates.find((d) => d.isAfter(now)) || dates[0];
+    return (dates.find((d) => d.isAfter(now)) || dates[0]).toDate().toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
   };
 
   const { data, isLoading, error } = useSWR(
@@ -65,7 +69,7 @@ export default function TrophyLeaderboard({ season }: { season: string }) {
     <div className="w-full">
       {season === "current" && (
         <div className="px-4 py-1 pb-3 text-sm text-gray-400 font-medium italic">
-          Season ends {getNextSeasonEndDate().format("MM/DD/YYYY")}
+          Season ends {getNextSeasonEndDate()}
         </div>
       )}
       <div className="overflow-y-auto max-h-[50vh] pb-4">
