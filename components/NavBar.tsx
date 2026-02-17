@@ -33,6 +33,7 @@ export default function NavBar() {
           <div key={item.path} className="flex items-center">
             <Link
               href={item.path}
+              prefetch={false}
               className={`px-4 py-2 rounded-md transition-colors duration-200 text-lg ${pathname === item.path
                 ? "text-purple-400 font-medium"
                 : "text-gray-300 hover:text-white hover:bg-gray-800"
@@ -54,6 +55,7 @@ export default function NavBar() {
             <Link
               key={item.path}
               href={item.path}
+              prefetch={false}
               className={`block px-4 py-2 rounded-md transition-colors duration-200 ${pathname === item.path
                 ? "text-purple-400 bg-gray-800 font-medium"
                 : "text-gray-300 hover:text-white hover:bg-gray-800"
