@@ -88,7 +88,7 @@ export const splitToIcon = (splitId: number) => {
 };
 
 export const uuidToHead = (uuid: string): string => {
-  const endpoint = "https://api.mineatar.io/face/";
+  const endpoint = "https://mc-heads.net/avatar/";
   return `${endpoint}${uuid}`;
 };
 
